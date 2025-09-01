@@ -1,0 +1,29 @@
+\begin{table*}[t]
+\centering
+\renewcommand\arraystretch{0.2}
+\begin{tabular}{l|c|l|l}
+\toprule
+Datasets          & \#QA  & Image Types                          & Tasks \\ 
+\midrule
+MP-DocVQA~\cite{tito2023mpdocvqa}         & 46K   & PDF Documents 
+& VQA \\
+\midrule
+DUDE~\cite{van2023document}              & 41K   & PDF Documents 
+& \makecell[tl]{VQA} \\
+\midrule
+MP-DocStruct1M~\cite{hu2024mplugdocowl2}    & 1M    & PDF Documents 
+& \makecell[tl]{Text Parsing, Text Lookup} \\
+\midrule
+MP-DocReason51K~\cite{hu2024mplugdocowl2}   & 51K   & \makecell[tl]{PDF Documents, \\ Infographics, Webpages, \\ Charts, Natural images}
+& VQA \\
+\midrule
+DocGenome~\cite{xia2024docgenome}         & N/A   & \makecell[tl]{PDF Documents}
+& \makecell[tl]{Layout Detection, Document Transformation} \\
+\midrule
+\dataname (ours)  & 758K  & \makecell[tl]{PDF documents, \\ Charts, Tables} 
+& \makecell[tl]{VQA, Abstract Writing, Paper Titling, \\ Caption Writing, Experiment Writing, \\ Translation, Review, Reply }    \\ 
+\bottomrule
+\end{tabular}
+\caption{\textbf{Comparison with other document-level datasets. }}
+\label{tab:addi_dataset_comparison}
+\end{table*}

@@ -1,0 +1,317 @@
+[
+    {
+        "question": "How does the ChuLo framework use unsupervised keyphrase extraction to enhance chunk representations for long document understanding, and what algorithmic steps are involved in this process?",
+        "evidence": "We propose ChuLo, a novel chunk representation method that enhances long document understanding by reducing input length while preserving semantic content. Unlike existing approaches like truncation and standard chunking, ChuLo minimizes information loss and maintains contextual dependencies. The method segments documents into non-overlapping chunks, integrates key semantic information using unsupervised keyphrase extraction, and assigns higher weights to keyphrase tokens in chunk representations. These enriched chunks train a Transformer-based chunk attention module, enabling efficient processing of long documents while retaining global and local context. Further details are provided in subsequent subsections, with the framework illustrated in Figure [Ref id=\"fig:framework\"].",
+        "score": 0.7703772783279419
+    },
+    {
+        "question": "How does the ChuLo framework use unsupervised keyphrase extraction to enhance chunk representations for long document understanding, and what algorithmic steps are involved in this process?",
+        "evidence": "The fundamental reason for extracting keyphrases from the chunks, as defined in the document chunking step, is to maintain the integrity of the document's semantic content while reducing input length. During chunking, the document is divided into smaller segments, which can inadvertently distribute important semantic information unevenly across chunks or even cause it to be diluted. Simply treating each chunk equally may lead to overlooking critical context essential for accurate document classification and token-level understanding. Identifying and highlighting critical phrases within these chunks ensures that the most relevant information is preserved and emphasized, allowing the model to focus on the core content even within a limited input space. This compensates for the information fragmentation caused by chunking and guides the Transformer’s attention mechanism to prioritize the most informative parts of the text, enhancing the model’s ability to capture the document’s overall meaning and relationships. Thus, extracting keyphrases from chunks is crucial for bridging the gap between document segmentation and semantic coherence, ultimately improving the effectiveness of the chunk-based representation for long document understanding.",
+        "score": 0.6294460892677307
+    },
+    {
+        "question": "How does the ChuLo framework use unsupervised keyphrase extraction to enhance chunk representations for long document understanding, and what algorithmic steps are involved in this process?",
+        "evidence": "To achieve this, we extract semantically important keyphrases to identify the core content of the entire document. Since document understanding, such as document classification or token classification, inherently involves semantic understanding, it is crucial to highlight the most informative parts of the text to create meaningful chunk representations. By making the extracted keyphrases more salient, we can effectively emphasize the content that contributes most to the document’s overall meaning. Hence, we employ unsupervised keyphrase extraction methods, ensuring our approach remains adaptable across diverse domains without requiring annotated data. Building on the principles of PromptRank <cit.>, we adapt and enhance its template-based approach to prioritize keyphrases that are contextually significant across the entire document. Our modified strategy, the Semantic Keyphrase Prioritization (SKP) Algorithm, leverages prompts to assess the importance of each candidate keyphrase, ensuring that semantically crucial information is highlighted for downstream document understanding. The details of this process are provided in Appendix [Ref id=\"app:algorithm\"].",
+        "score": 0.6095887422561646
+    },
+    {
+        "question": "How does the ChuLo framework use unsupervised keyphrase extraction to enhance chunk representations for long document understanding, and what algorithmic steps are involved in this process?",
+        "evidence": "We employ the Semantic Keyphrase Prioritization (SKP) algorithm to extract keyphrases that encapsulate the key semantic information of the entire document. The detailed are shown in Algorithm [Ref id=\"alg:algorithm\"]. While PromptRank uses prompts to rank keyphrases across the first segment of the document determined by its encoder model, our SKP applies this concept at the entire document level to ensure that each chunk can preserve the most informative content for the entire document. After obtaining the sorted phrases set $K_s$, we select top-n phrases as the keyphrases of the document, which can be regarded as ranked phrases according to their contextual significance within the entire document.",
+        "score": 0.550173819065094
+    },
+    {
+        "question": "How does the ChuLo framework use unsupervised keyphrase extraction to enhance chunk representations for long document understanding, and what algorithmic steps are involved in this process?",
+        "evidence": "Input: A tokenized document $D$, an encoder-decoder pretrained model represented by $ℱ_E$ and $ℱ_D$, a POS tagger $ℱ_{POS}$, a regular expression $ℱ_{REG} = ⟨NN.∗ |JJ⟩∗⟨NN.∗⟩$. Parameter: Experimentally determined $α$, $γ$. Output: Sorted keyphrases set $K_s$. Let $S=∅$, $K_s=∅$, $i=0$, $j=0$. Get the candidate phrases set: $K=ℱ_{REG}(ℱ_{POS}(D))={k_0, k_1, …, k_{n-1}}$. Split $D$ into segments $S={D_0, D_1, …, D_{m-1}}$ to meet the input requirement of $ℱ_E$. For each candidate phrase $k_i$: Calculate the position penalty $r_i=L_c/l_d + γ/(l_d)^3$, where $L_c$ is the first occurrence position of $k_i$ in the document, $l_d$ is the length of the document. Construct the prompt $P$ “The * mainly discusses $k_i$” and tokenize, * is the category of the document. For each document segment $D_j$: Calculate the probability $p_{ij}$ of the phrase $k_i$: $p_{ij} = 1/(l_P)^α∑_{g=h}^{h+l_k-1}log p(t_g | t_{<g})$, $p(t_g | t_{<g})=ℱ_D(ℱ_E(D_j), t_{<g})$. Calculate the final score of $k_i$: $s_i=r_i×∑_{j=0}^{j<m}p_{ij}$. Return $K_s=Sort(K, s)$.",
+        "score": 0.5170965194702148
+    },
+    {
+        "question": "In what ways does ChuLo address the limitations of traditional truncation, sparse attention, and chunking strategies in Transformer-based models for long document processing? Summarize the comparative advantages and supporting experimental evidence.",
+        "evidence": "To address this challenge, several approaches have been proposed for applying Transformer-based models to long documents while managing computational resources. One of them is truncating, where the model discards content exceeding a predefined input length. For instance, BERT <cit.> processes up to 512 tokens, and LLaMa <cit.> handles up to 2048 tokens, with any additional content being ignored. Another one is sparse self-attention, which reduces computational complexity by restricting each query token to attend only to a subset of key tokens <cit.>. Lastly, chunking divides long documents into smaller, manageable segments that are processed independently by the model <cit.>.",
+        "score": 0.7668079137802124
+    },
+    {
+        "question": "In what ways does ChuLo address the limitations of traditional truncation, sparse attention, and chunking strategies in Transformer-based models for long document processing? Summarize the comparative advantages and supporting experimental evidence.",
+        "evidence": "While these methods enable Transformer-based models to process long documents, they have limitations. Truncation risks discarding important information that falls beyond the maximum input length. Although more efficient, Sparse attention reduces each token's receptive field, leading to potential information loss from the neglected tokens. Similarly, chunking breaks the input into isolated segments, which can disrupt long-range dependencies critical for a comprehensive understanding of the document. Preserving all tokens is particularly important in tasks that require fine-grained token-level understanding, such as token classification. In such tasks, dropping tokens can severely impact the accuracy of fine-grained annotations, which often depend on the full context of the document. Therefore, there is a need for methods that can handle long documents efficiently while retaining all key information from the input.",
+        "score": 0.6679879426956177
+    },
+    {
+        "question": "In what ways does ChuLo address the limitations of traditional truncation, sparse attention, and chunking strategies in Transformer-based models for long document processing? Summarize the comparative advantages and supporting experimental evidence.",
+        "evidence": "We propose ChuLo, a novel chunk representation method that enhances long document understanding by reducing input length while preserving semantic content. Unlike existing approaches like truncation and standard chunking, ChuLo minimizes information loss and maintains contextual dependencies. The method segments documents into non-overlapping chunks, integrates key semantic information using unsupervised keyphrase extraction, and assigns higher weights to keyphrase tokens in chunk representations. These enriched chunks train a Transformer-based chunk attention module, enabling efficient processing of long documents while retaining global and local context.",
+        "score": 0.7352312207221985
+    },
+    {
+        "question": "In what ways does ChuLo address the limitations of traditional truncation, sparse attention, and chunking strategies in Transformer-based models for long document processing? Summarize the comparative advantages and supporting experimental evidence.",
+        "evidence": "Our method demonstrates clear superiority on three of the four datasets, achieving a significant improvement of 6.43While our model delivers competitive results on the HP dataset, it trails behind Longformer by a slight margin of 0.0031 in accuracy. This marginal difference corresponds to only one additional correctly classified instance out of a total of 65 test samples.",
+        "score": 0.5343790650367737
+    },
+    {
+        "question": "In what ways does ChuLo address the limitations of traditional truncation, sparse attention, and chunking strategies in Transformer-based models for long document processing? Summarize the comparative advantages and supporting experimental evidence.",
+        "evidence": "Interestingly, for the other datasets, Longformer underperforms compared to models like BERT variants or CogLTX, which use the first 512 tokens and focus on selecting key sentences. This observation indicates that unfiltered additional content can introduce noise, negatively impacting classification accuracy. In contrast, ChuLo expands the input content and strategically emphasizes key semantic elements during chunk representation. This approach mitigates noise interference, ensuring that only the most relevant information is retained and highlighted.",
+        "score": 0.6798620820045471
+    },
+    {
+        "question": "In what ways does ChuLo address the limitations of traditional truncation, sparse attention, and chunking strategies in Transformer-based models for long document processing? Summarize the comparative advantages and supporting experimental evidence.",
+        "evidence": "Overall, the results confirm that ChuLo consistently outperforms standard PLM baselines and existing chunking methods in long document classification tasks. Its ability to retain and emphasize key semantic content, while efficiently handling long inputs, makes it a robust solution for various document classification challenges.",
+        "score": 0.6782382726669312
+    },
+    {
+        "question": "How does ChuLo’s chunk-based representation perform in token-level tasks such as Named Entity Recognition (NER) for long documents, especially compared to state-of-the-art Transformer baselines and Large Language Models? Summarize key findings with reference to experimental results and visual analyses.",
+        "evidence": "To further demonstrate the effectiveness of our chunk representation method, we evaluated it on a token-level classification task—specifically, Named Entity Recognition (NER) using long documents. We compared our model against two state-of-the-art long-document pre-trained models, Longformer <cit.> and BigBird <cit.>, as well as newly released large language models, GPT-4o and Gemini 1.5 Pro. As shown in Table [Ref id=\"tab:overal_performance_token_cls_comparison\"], our model consistently outperforms Longformer, BigBird and LLM models on the NER tasks, particularly on the CoNLL, where document lengths often exceed the input limitations of these baseline models. To leverage the broader context captured by our chunk representation, we integrate a BERT-decoder module that utilizes the enhanced chunk embeddings to predict token labels more accurately. This configuration allows the model to maintain a global understanding of the document while focusing on the local dependencies necessary for precise token classification.",
+        "score": 0.7974730730056763
+    },
+    {
+        "question": "How does ChuLo’s chunk-based representation perform in token-level tasks such as Named Entity Recognition (NER) for long documents, especially compared to state-of-the-art Transformer baselines and Large Language Models? Summarize key findings with reference to experimental results and visual analyses.",
+        "evidence": "All baselines struggle with these longer inputs due to their limited capacity for handling extensive sequences. In contrast, our method’s ability to encode the entire document’s context through keyphrase-based chunk representations enables it to achieve higher accuracy in recognizing and classifying named entities. This is particularly evident in cases where long-distance dependencies and contextual nuances play a critical role in determining the correct labels. Overall, the results indicate that our model's chunk representation not only enhances performance on document-level classification tasks but also proves highly effective for token-level tasks such as NER, validating its application in downstream tasks that require a detailed and comprehensive understanding of long document tokens.",
+        "score": 0.7087047696113586
+    },
+    {
+        "question": "How does ChuLo’s chunk-based representation perform in token-level tasks such as Named Entity Recognition (NER) for long documents, especially compared to state-of-the-art Transformer baselines and Large Language Models? Summarize key findings with reference to experimental results and visual analyses.",
+        "evidence": "We further analyze the NER performance across different document length ranges. As presented in Table [Ref id=\"tab:Conll Microf1 length intervals\"] and Table [Ref id=\"tab:Gum Microf1 length intervals\"], we report the number of documents exceeding specific length thresholds and their corresponding performance metrics. On the CoNLL, as document lengths exceed the maximum input capacities of Longformer and BigBird, both models exhibit significant performance drops to 31.56Figures [Ref id=\"fig:conll_results\"] and [Ref id=\"fig:gum_results\"] visualize the performance breakdown across varying length ranges. For the CoNLL, our model maintains high performance in all length intervals, while Longformer and BigBird exhibit comparable performance within the [1k-2k) range but degrade significantly for longer texts, even for documents that do not exceed their maximum input length. This discrepancy suggests that the uneven distribution of document lengths in their pretraining corpora may lead to inconsistent performance on longer sequences. In contrast, our model’s ability to compress the entire document into 512-length chunks for the decoder enables it to leverage complete contextual information, resulting in better stability and accuracy even on longer documents.",
+        "score": 0.6031643748283386
+    },
+    {
+        "question": "How does ChuLo’s chunk-based representation perform in token-level tasks such as Named Entity Recognition (NER) for long documents, especially compared to state-of-the-art Transformer baselines and Large Language Models? Summarize key findings with reference to experimental results and visual analyses.",
+        "evidence": "For the token classification task, our model can also correctly classify more tokens than each baseline across the shown cases.",
+        "score": 0.4978974461555481
+    },
+    {
+        "question": "How does ChuLo’s chunk-based representation perform in token-level tasks such as Named Entity Recognition (NER) for long documents, especially compared to state-of-the-art Transformer baselines and Large Language Models? Summarize key findings with reference to experimental results and visual analyses.",
+        "evidence": "These results underscore the effectiveness of our chunk representation, which emphasizes keyphrase information, for coarse-grained document classification and fine-grained token-level classification tasks like NER. The ability to maintain performance across varying document lengths highlights the importance of incorporating global contextual information in NER tasks—a largely underexplored aspect. Additionally, off-the-shelf LLMs such as GPT-4o and Gemini 1.5 Pro show suboptimal performance on NER tasks without fine-tuning, and their performance deteriorates further as document length increases. This indicates that, despite their advancements, LLMs still require substantial optimization for effective long document understanding.",
+        "score": 0.6871325373649597
+    },
+    {
+        "question": "How does ChuLo’s chunk-based representation perform in token-level tasks such as Named Entity Recognition (NER) for long documents, especially compared to state-of-the-art Transformer baselines and Large Language Models? Summarize key findings with reference to experimental results and visual analyses.",
+        "evidence": "In this section, we will present several prompt and output samples for the long documents from the LUN (Figures [Ref id=\"fig:case1\"] and  [Ref id=\"fig:case2\"]) and Hyperpartisan (Figures [Ref id=\"fig:case3\"] and  [Ref id=\"fig:case4\"]) datasets for document classification, as well as GUM (Figures [Ref id=\"case5\"], [Ref id=\"case6\"] and  [Ref id=\"case7\"]) and CoNLL (Figures [Ref id=\"case8\"],  [Ref id=\"case9\"],  [Ref id=\"case10\"] and  [Ref id=\"case11\"]) datasets for NER task. Documents with various lengths are randomly selected to see the comparison of our model against GPT-4, Gemini1.5pro and Longformer. ... For the token classification task, our model can also correctly classify more tokens than each baseline across the shown cases.",
+        "score": 0.6027534008026123
+    },
+    {
+        "question": "What are the effects of different keyphrase extraction strategies and sentence embeddings on the performance of ChuLo, according to the ablation studies? Provide a summary supported by experimental findings.",
+        "evidence": "We performed a few ablation studies on the HP and LUN  to assess the impact of various components within our model. First, we analyzed the effectiveness of different keyphrase extraction methods and the effect of using average chunk representations. As shown in Table [Ref id=\"tab:keyphrase ablation\"], the PromptRank-based method yields the highest performance across both datasets, outperforming alternatives like YAKE-based. This improvement can be attributed to PromptRank’s ability to extract higher-quality keyphrases by considering semantic relationships within the document, whereas YAKE relies primarily on statistical features such as phrase frequency, resulting in less semantically rich keyphrases.",
+        "score": 0.6762893199920654
+    },
+    {
+        "question": "What are the effects of different keyphrase extraction strategies and sentence embeddings on the performance of ChuLo, according to the ablation studies? Provide a summary supported by experimental findings.",
+        "evidence": "Then, we explored the effect of incorporating sentence embeddings into the chunk representations to introduce global sentence-level context. Surprisingly, as shown in Table [Ref id=\"tab:sent emb ablation\"], the results indicate a performance drop when sentence embeddings are included. We hypothesize that adding sentence-level information at the initial representation stage may cause chunk embeddings within the same sentence to become too similar, hindering the model’s ability to learn distinctive patterns and reducing overall classification performance.",
+        "score": 0.5989517569541931
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "While current retrieval-augmented generation (RAG) methods offer partial solutions, they suffer from issues, such as fragmented retrieval contexts, multi-stage error accumulation, and extra time costs of retrieval. ... Building on the dataset, we develop a native multimodal model—Docopilot, which can accurately handle document-level dependencies without relying on RAG. Experiments demonstrate that Docopilot achieves superior coherence, accuracy, and efficiency in document understanding tasks and multi-turn interactions, setting a new baseline for document-level multimodal understanding.",
+        "score": 0.725314736366272
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "Another research approach aims to reduce context size by leveraging retrieval augmented generation (RAG), where only the most relevant passages are retrieved and fed into the generation model. However, this retrieval-based approach can disrupt the coherence of the semantic chain, particularly in complex reasoning tasks, due to fragmented information flow. In this work, we integrate the above engineering techniques into MLLMs and demonstrate that a model fine-tuned on a high-quality, long-context training corpus is a strong baseline, achieving superior performance compared to its RAG counterpart.",
+        "score": 0.42702412605285645
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "Our model architecture leverages the widely-adopted ViT-MLP-LLM structure, consisting of a pre-trained Vision Transformer (ViT), a two-layer MLP projector, and a pre-trained Language Model (LLM). This combination provides a strong baseline for multimodal document analysis, effectively integrating visual and textual information within a unified framework.",
+        "score": 0.4790269136428833
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "To address these issues, we have implemented the following strategies: (1) Multimodal Data Packing ... (2) Ring Attention ... (3) Liger Kernel ... Leveraging the Liger Kernel thus enables higher training throughput and addresses memory limitations, allowing for efficient scaling of large multimodal models.",
+        "score": 0.36253830790519714
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "As illustrated in Table [Ref id=\"tab:multi_page_qa\"], our model achieves consistent improvements on multi-page QA benchmarks, outperforming previous document-level MLLMs. Notably, our Docopilot-8B surpasses Gemini-1.5-Pro on MMLongBench-Doc, positioning it as the closest open-source model to GPT-4o. In comparison to RAG-based methods, our model demonstrates advantages in multi-page scenarios. For example, in the Multi-Page QA of DocGenome benchmark, the RAG method shows a performance decline due to the disruption of document continuity while our Docopilot exhibits a significantly stable improvement compared to the baseline, with Docopilot-8B showing an increase of 12.6.",
+        "score": 0.7643932104110718
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "Baselines. We compare our Docopilot with a series of open-source document-level MLLMs that supports multi-image input and proprietary MLLMs, including Gemini-1.5-pro, GPT-4o. For comparison with the commonly used RAG method ... RAG methods exhibit slower processing speeds due to their two-stage inference process, making them less efficient than document MLLMs for handling multimodal long documents.",
+        "score": 0.7673830986022949
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "Latency Analysis. To compare the latency in inference between RAG methods and our Docopilot, we conducted a latency analysis on MMLongBench-Doc, as reported in Table [Ref id=\"tab:latency\"]. While RAG reduces the document length input to the MLLM, its own time cost remains non-negligible. For instance, InternVL2-2B + RAG is 130 ...",
+        "score": 0.7033603191375732
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "We also proposed a retrieval-free long-document understanding model that effectively integrates multi-page information, reducing reliance on external retrieval systems. Experimental results show that our model achieves state-of-the-art performance across several document-level QA benchmarks, underscoring its strength in multi-page integration and complex reasoning.",
+        "score": 0.6234949827194214
+    },
+    {
+        "question": "What are the main processes and design considerations in generating the Doc-750K dataset for document-level multimodal understanding, including data extraction formats, QA pair construction, task coverage, and quality controls?",
+        "evidence": "In this section, we begin by introducing the details of the data engine. Following this, we provide a comprehensive overview of the dataset—Doc-750K.",
+        "score": 0.668256402015686
+    },
+    {
+        "question": "What are the main processes and design considerations in generating the Doc-750K dataset for document-level multimodal understanding, including data extraction formats, QA pair construction, task coverage, and quality controls?",
+        "evidence": "The data engine operates primarily through two steps: document content extraction and question-answer (QA) pair construction. Specifically, we first extract multimodal content, including both text and images, from the documents. Based on this extracted content, we then create question-answer pairs. ... In the following, we will provide a detailed explanation of the two key steps: document content extraction and QA pair construction.",
+        "score": 0.6434268355369568
+    },
+    {
+        "question": "What are the main processes and design considerations in generating the Doc-750K dataset for document-level multimodal understanding, including data extraction formats, QA pair construction, task coverage, and quality controls?",
+        "evidence": "Document Content Extraction. ... we process each document into two formats as follows: (1) Interleaved Text-Image Format. Using the document content extractor MinerU, we segment the document content into interleaved text and image annotations ... This format captures the document’s textual content, making it easier to construct question-answer pairs. (2) Multi-Image Format. In this format, a document with $n$ pages is rendered as $n$ images, with each image corresponding to a single page. The structure ... preserves the original layout, enabling the model to learn the overall pagination and visual layout of the document.",
+        "score": 0.5928105115890503
+    },
+    {
+        "question": "What are the main processes and design considerations in generating the Doc-750K dataset for document-level multimodal understanding, including data extraction formats, QA pair construction, task coverage, and quality controls?",
+        "evidence": "Question-Answer Pairs Construction. In this step, we create question-and-answer pairs tailored to the source, content features, and formatting structure of each document. This process is divided into the following main categories:(1) For documents with reliable QA annotations, like the review and reply in OpenReview, we extract the QA pairs and organize them into conversation format. ... (2) For documents with a clear textual structure, such as well-structured papers from Sci-Hub and Arxiv, we convert them to text and segment them, while the model is instructed to generate contents for each segment, including abstracts, experiment descriptions, and captions for figures and tables. ... (3) For other documents ... we can input text interspersed with images into MLLMs to obtain QA pairs. To ensure high-quality generated data, we use the state-of-the-art model GPT-4o.",
+        "score": 0.6196029186248779
+    },
+    {
+        "question": "What are the main processes and design considerations in generating the Doc-750K dataset for document-level multimodal understanding, including data extraction formats, QA pair construction, task coverage, and quality controls?",
+        "evidence": "As stated in Section [Ref id=\"sec:data_engine\"], documents in Doc-750K can be extracted in two formats: Interleaved Text-Image Format and rendered Multi-Image Format. The interleaved format utilizes an external PDF parser to extract text directly, avoiding OCR errors. However, this approach sacrifices some layout information. The multi-image format, commonly used in screenshot-based QA scenarios, preserves the complete layout but relies on the model's built-in OCR capabilities, which may introduce errors. Each format has its advantages and is suitable for different applications. By leveraging both formats, the model can develop complementary capabilities, enhancing its robustness across diverse input types.",
+        "score": 0.6490496397018433
+    },
+    {
+        "question": "What are the main processes and design considerations in generating the Doc-750K dataset for document-level multimodal understanding, including data extraction formats, QA pair construction, task coverage, and quality controls?",
+        "evidence": "Prompt. The prompt used to generate question-answer pairs from GPT-4o is shown below. ... Please design about 3 to 5 question-answer pairs based on the paper. All questions should require as much text as possible to answer and it is better to ask about the images in the papers. ... Please try to analyze the asked image in the answer.",
+        "score": 0.4403948187828064
+    },
+    {
+        "question": "What are the main processes and design considerations in generating the Doc-750K dataset for document-level multimodal understanding, including data extraction formats, QA pair construction, task coverage, and quality controls?",
+        "evidence": "Quality Evaluation. The quality of Doc-750K is ensured through the following measures: (1) Human-Originated Data: QA pairs from OpenReview are derived from human-written discussions, providing high contextual quality. (2) Structured Tasks: Tasks like abstract writing and paper titling are constructed based on document metadata, following deterministic rules to ensure reliability. (3) Synthetic QA: We randomly sample and manually review 500 training QA pairs across tasks and 498 of 500 (over 99%) are high quality.",
+        "score": 0.7533553838729858
+    },
+    {
+        "question": "What are the main processes and design considerations in generating the Doc-750K dataset for document-level multimodal understanding, including data extraction formats, QA pair construction, task coverage, and quality controls?",
+        "evidence": "We provide additional comparisons of Doc-750K with various document-level datasets in terms of image types and task coverage, as shown in Table [Ref id=\"tab:addi_dataset_comparison\"]. Compared to these datasets, Doc-750K exhibits greater diversity in proxy tasks and ranks among the largest datasets in terms of QA pair count.",
+        "score": 0.7836042642593384
+    },
+    {
+        "question": "What strategies are used to optimize the memory and computational efficiency of Docopilot for handling long multimodal documents, and how do these strategies contribute to its ability to process extended contexts?",
+        "evidence": "The training efficiency of MLLMs is hindered by two key challenges: (1) Inconsistent Sample Lengths. Samples with different context lengths will result in excessive padding and lower training throughput; and (2) Limited GPU Memory. As the model scale and context length increase, GPU memory consumption becomes increasingly unsustainable. To address these issues, we have implemented the following strategies:(1) Multimodal Data Packing. ... We implement a multimodal data-packing strategy. The key idea is to concatenate multiple samples into long sequences to fully utilize the model's input capacity ... This strategy optimizes resource utilization and ensures balanced computational workloads. The detailed pseudo-code can be found in the supplementary materials.(2) Ring Attention. We implement the Ring Attention mechanism to alleviate memory constraints associated with processing long sequences. By partitioning sequences into blocks and distributing computation across multiple devices, Ring Attention allows the model to accommodate larger contexts ... thereby enhancing parallel processing efficiency. Consequently, Ring Attention improves the model's capacity to handle extended context lengths without exceeding memory limits.(3) Liger Kernel. To further improve memory and computational efficiency, we integrate the Liger Kernel, a specialized kernel library optimized for large-scale model training. The Liger Kernel enhances throughput and reduces memory consumption by employing techniques like kernel fusion, in-place operations, and input chunking. Leveraging the Liger Kernel thus enables higher training throughput and addresses memory limitations, allowing for efficient scaling of large multimodal models.",
+        "score": 0.472199946641922
+    },
+    {
+        "question": "What strategies are used to optimize the memory and computational efficiency of Docopilot for handling long multimodal documents, and how do these strategies contribute to its ability to process extended contexts?",
+        "evidence": "In this section, we provide a detailed description of our packing algorithm. The main workflow is outlined in Algorithm [Ref id=\"alg:packed_dataset\"]. Specifically, our algorithm constructs the packed dataset by combining individual samples drawn from the original dataset. ... The packing operation involves four steps: (1) Check Sample ... (2) Find Buffer ... (3) Pack Samples ... (4) Maintain Buffer List ... each token can only attend to other tokens within the same original sample. Tokens from other samples packed together remain inaccessible. ... After generating a packed sample, we check if its number of images or tokens meets the specified thresholds. If so, the sample is added to the output; otherwise, it is reinserted into the buffer list for potential future packing.",
+        "score": 0.251293420791626
+    },
+    {
+        "question": "What strategies are used to optimize the memory and computational efficiency of Docopilot for handling long multimodal documents, and how do these strategies contribute to its ability to process extended contexts?",
+        "evidence": "By partitioning sequences into blocks and distributing computation across multiple devices, Ring Attention allows the model to accommodate larger contexts. ... Ring Attention improves the model's capacity to handle extended context lengths without exceeding memory limits.",
+        "score": 0.4685097336769104
+    },
+    {
+        "question": "In what ways does the dual use of interleaved text-image format and multi-image format in Doc-750K enhance multimodal model robustness, and what limitations or trade-offs are associated with each format?",
+        "evidence": "As stated in Section [Ref id=\"sec:data_engine\"], documents in Doc-750K can be extracted in two formats: Interleaved Text-Image Format and rendered Multi-Image Format. The interleaved format utilizes an external PDF parser to extract text directly, avoiding OCR errors. However, this approach sacrifices some layout information. The multi-image format, commonly used in screenshot-based QA scenarios, preserves the complete layout but relies on the model's built-in OCR capabilities, which may introduce errors. Each format has its advantages and is suitable for different applications. By leveraging both formats, the model can develop complementary capabilities, enhancing its robustness across diverse input types. Examples of each format are shown in Figure [Ref id=\"fig:multi-image\"] and Figure [Ref id=\"fig:interleaved-image_text\"], respectively.",
+        "score": 0.739798903465271
+    },
+    {
+        "question": "How does the M-DocSum-Bench benchmark address the limitations of previous document understanding benchmarks in evaluating models' ability to comprehend and summarize interleaved image-text in long scientific documents?",
+        "evidence": "Existing benchmarks primarily feature text-only outputs and focus on Visual Question-Answering (VQA) tasks, limiting their applicability in complex scenarios and failing to sufficiently assess the capability of interleaved image-text processing <cit.>.",
+        "score": 0.5936436653137207
+    },
+    {
+        "question": "How does the M-DocSum-Bench benchmark address the limitations of previous document understanding benchmarks in evaluating models' ability to comprehend and summarize interleaved image-text in long scientific documents?",
+        "evidence": "To investigate this critical issue and bridge this gap, we introduce a novel and challenging Multimodal Document Summarization Benchmark (M-DocSum-Bench), a reference-based generation task, which requires generating interleaved image-text summaries with reference-based images directly from long documents.",
+        "score": 0.800190269947052
+    },
+    {
+        "question": "How does the M-DocSum-Bench benchmark address the limitations of previous document understanding benchmarks in evaluating models' ability to comprehend and summarize interleaved image-text in long scientific documents?",
+        "evidence": "Through these efforts, M-DocSum-Bench offers two key advantages over previous work: (1) Clarity and intuitiveness: The reference-based multimodal generation output format intuitively reflects the model's overall understanding of interleaved image-text information. ... (2) Comprehensive coverage: The summary encompasses all critical key points from the beginning to the end of the document, including both images and text. This rigorously evaluates the comprehensive capabilities of the models such as understanding, reasoning, locating and summarization, enabling in-depth analysis of its performance in handling long-range dependencies, multimodal integration, and global coherence.",
+        "score": 0.8265659213066101
+    },
+    {
+        "question": "How does the M-DocSum-Bench benchmark address the limitations of previous document understanding benchmarks in evaluating models' ability to comprehend and summarize interleaved image-text in long scientific documents?",
+        "evidence": "Most benchmarks have been limited to single-page documents... Our proposed DocSum output format addresses this by reflecting the model's overall understanding of interleaved image-text information and comprehensively covers all critical information.",
+        "score": 0.7891762256622314
+    },
+    {
+        "question": "How does the M-DocSum-Bench benchmark address the limitations of previous document understanding benchmarks in evaluating models' ability to comprehend and summarize interleaved image-text in long scientific documents?",
+        "evidence": "The input comprises two modalities, first, the textual information of the scientific article is parsed into complex markdown format, preserving not only the main body of the text but also critical elements like tables and image captions. Second, the accompanying images within the article are parsed into image format, retaining their original visual information. ... This output format not only demands strong text summarization skills from the model but also requires accurate identification and referencing of key images, demonstrating a comprehensive understanding of multimodal information.",
+        "score": 0.6459600329399109
+    },
+    {
+        "question": "What are the key methodological steps involved in constructing the M-DocSum-Bench interleaved summaries, and how is the quality of generated data ensured?",
+        "evidence": "As shown in Figure [Ref id=\"fig-main\"](a), to create a high-quality benchmark, we design a meticulous automated framework for generating summary texts and selecting referenced images. Initially, we extract key points for each summary paragraph from the original text, adhering to specific rules: ensuring no repetition of information, maintaining atomicity so each point is an independent, indivisible unit, verifying that each point is traceable back to the original text, and limiting the number of key points per paragraph to no more than 10. Once these key points are confirmed, we utilize advanced LLM like GPT-4o to synthesize them into coherent and comprehensive paragraph summaries.",
+        "score": 0.5367015600204468
+    },
+    {
+        "question": "What are the key methodological steps involved in constructing the M-DocSum-Bench interleaved summaries, and how is the quality of generated data ensured?",
+        "evidence": "For image referencing, we provide the extracted key points, original images, and image captions to a powerful LVLM. The model first determines if an image is necessary to aid understanding of the summary paragraph. If deemed necessary, it selects the most suitable image based on criteria such as high relevance to the paragraph's content, providing crucial visual support that complements textual information, and ensuring that only one image is referenced per paragraph and each image is used only once.",
+        "score": 0.43982934951782227
+    },
+    {
+        "question": "What are the key methodological steps involved in constructing the M-DocSum-Bench interleaved summaries, and how is the quality of generated data ensured?",
+        "evidence": "As shown in Figure [Ref id=\"fig-main\"](right), we introduce Multi-roll Data Verification, a semi-automatic quality control process combining LLMs and human expertise to ensure high benchmark quality. Initially, LLMs perform two rounds of validation: Round 1 checks for necessary key fields and at least one image reference in the summary format, while Round 2 ensures semantic integrity by identifying repetitive or invalid content. Summaries failing these checks are iteratively regenerated.",
+        "score": 0.5387256741523743
+    },
+    {
+        "question": "What are the key methodological steps involved in constructing the M-DocSum-Bench interleaved summaries, and how is the quality of generated data ensured?",
+        "evidence": "Following LLM validation, domain experts conduct thorough reviews, spending at least 20 minutes on each document to correct any hallucinations or semantic distortions. They also refine image references to align with human reading habits. Additionally, annotators cross-check each other’s work, with primary reviewer resolving any disagreements to maintain consistency. This rigorous process ensures a high-quality, reliable benchmark for advancing multimodal document understanding.",
+        "score": 0.47697508335113525
+    },
+    {
+        "question": "What evaluation metrics are introduced by M-DocEval to comprehensively assess LVLMs' performance in interleaved document summarization, and how does each metric contribute to holistic evaluation?",
+        "evidence": "To provide a comprehensive and objective assessment of the performance in generating interleaved summaries, we design a multifaceted set of evaluation metrics. These metrics cover textual quality, image referencing appropriateness, and instruction-following capability, ensuring a holistic evaluation of the model abilities.",
+        "score": 0.6830170750617981
+    },
+    {
+        "question": "What evaluation metrics are introduced by M-DocEval to comprehensively assess LVLMs' performance in interleaved document summarization, and how does each metric contribute to holistic evaluation?",
+        "evidence": "Textual Content Evaluation. The text summary evaluation focuses on two primary aspects: (1) Completeness (Com) measures the proportion of essential information captured from the original text using a benchmark set of key points, generated and verified by human experts. (2) Accuracy (Acc) assesses the correctness of the summary by comparing each sentence to the original content, rewarding matches and penalizing hallucinations, repetitions, or semantic distortions. We compute the Text Score (TS) as the F1 score of completeness and accuracy.",
+        "score": 0.6026700735092163
+    },
+    {
+        "question": "What evaluation metrics are introduced by M-DocEval to comprehensively assess LVLMs' performance in interleaved document summarization, and how does each metric contribute to holistic evaluation?",
+        "evidence": "Visual Reference Evaluation. For image referencing, we evaluate the model's ability to determine image necessity and select appropriate images correctly. (1) None Accuracy (NonAcc) assesses the correct identification of paragraphs needing no image. (2) Image Accuracy (ImgAcc) measures precise image matching for paragraphs requiring images. (3) Overall Matching Rate (OMatch) provides an overall assessment of correct image decisions across all paragraphs. (4) Jaccard Similarity (JacSim) evaluates the similarity between the model's referenced images and the correct set, excluding “None\" cases, offering insight into image selection accuracy regardless of placement. The Image Score (IS) is computed as the weighted average of Overall Matching Rate and Jaccard Similarity.",
+        "score": 0.4672310948371887
+    },
+    {
+        "question": "What evaluation metrics are introduced by M-DocEval to comprehensively assess LVLMs' performance in interleaved document summarization, and how does each metric contribute to holistic evaluation?",
+        "evidence": "Instruction Following Capability. Given that open-source multimodal models may not always generate content that fully adheres to the given instructions, we introduce an Instruction Following Capability (IF) metric. This metric evaluates how well the model follows instructions by assessing whether it produces appropriate summary texts and image references as specified.",
+        "score": 0.47821831703186035
+    },
+    {
+        "question": "What evaluation metrics are introduced by M-DocEval to comprehensively assess LVLMs' performance in interleaved document summarization, and how does each metric contribute to holistic evaluation?",
+        "evidence": "To obtain a final, comprehensive evaluation of each sample, we integrate the TS, IS, and IF using a weighted average: ... This weighting scheme ensures that while instruction adherence is important, the quality of the textual and visual content remains the primary focus.",
+        "score": 0.47256630659103394
+    },
+    {
+        "question": "Based on the quantitative and ablation analyses, what are the main challenges LVLMs face in interleaved image-text document summarization, particularly regarding context length, image quantity, and robustness to image order?",
+        "evidence": "Figures [Ref id=\"fig:analysis\"](c) and (d) illustrate a clear trend: as the context length increases, both text and image scores decrease. Notably, the decline in image scores is more precipitous than that of text scores. This disparity suggests that longer contexts disproportionately challenge the models' ability to accurately reference and integrate relevant images, likely stemming from the increased difficulty of localizing the correct visual information within extensive, multi-page documents.",
+        "score": 0.6240713596343994
+    },
+    {
+        "question": "Based on the quantitative and ablation analyses, what are the main challenges LVLMs face in interleaved image-text document summarization, particularly regarding context length, image quantity, and robustness to image order?",
+        "evidence": "Figure [Ref id=\"fig:analysis\"](e) reveals a significant decrease in image referencing scores across all models as the number of images per document increases. This highlights the challenge models face in selecting pertinent images for summarization in image-rich contexts. The highest scores are observed with documents containing only 1-3 images, suggesting that correct image selection is facilitated in these less visually complex scenarios.",
+        "score": 0.590467631816864
+    },
+    {
+        "question": "Based on the quantitative and ablation analyses, what are the main challenges LVLMs face in interleaved image-text document summarization, particularly regarding context length, image quantity, and robustness to image order?",
+        "evidence": "Conversely, open-source models, along with certain closed-source models, show a deterioration in text quality as the number of images grows, suggesting limitations in their multimodal integration capabilities, potentially attributable to constraints in model size and training data.",
+        "score": 0.540302038192749
+    },
+    {
+        "question": "Based on the quantitative and ablation analyses, what are the main challenges LVLMs face in interleaved image-text document summarization, particularly regarding context length, image quantity, and robustness to image order?",
+        "evidence": "In our ablation study, we test the robustness of LVLMs by shuffling the order of images and removing the original abstract, observing the performance under this out-of-distribution (OOD) condition. ... If a model accurately captures these semantic relationships, its performance should remain stable even when the image order is changed; conversely, it indicates the model may merely have learned specific patterns. ... overall, closed-source models or larger models exhibit lower sensitivity to image position, with performance decline rates all below 17.7In contrast, smaller open-source models, such as Qwen2-VL-7B, demonstrate the poorest robustness.",
+        "score": 0.6992037296295166
+    },
+    {
+        "question": "Based on the quantitative and ablation analyses, what are the main challenges LVLMs face in interleaved image-text document summarization, particularly regarding context length, image quantity, and robustness to image order?",
+        "evidence": "This discrepancy underscores a common challenge in current vision-language tasks: models often struggle to accurately capture fine-grained correspondences between images and text. Furthermore, the case studies clearly illustrate that existing models are prone to confusion when dealing with images that are semantically similar but possess distinct visual details, leading to inaccurate reasoning results.",
+        "score": 0.5644485950469971
+    },
+    {
+        "question": "How does the proposed M-DocSum-7B training regime (instruction-tuning and Direct Preference Optimization) contribute to improved robustness and state-of-the-art performance in interleaved multimodal summarization compared to other models?",
+        "evidence": "During this stage, our primary goal is to enhance the accuracy and comprehensiveness of the model in extracting key points for summary generation, while ensuring that the referenced images are appropriate and well-structured. ... We train the model for one epoch on the training set using 64 H800 GPUs, configuring all components except the ViT to be trainable.",
+        "score": 0.49701637029647827
+    },
+    {
+        "question": "How does the proposed M-DocSum-7B training regime (instruction-tuning and Direct Preference Optimization) contribute to improved robustness and state-of-the-art performance in interleaved multimodal summarization compared to other models?",
+        "evidence": "In this stage, we introduce a novel method for constructing preference data. By conducting a second-stage DPO training on this data, we can further enhance the performance and robustness of the model. ... The modifications include: (1) Shuffling Image Order: Altering the order of images without providing image indices. (2) Adding Constraints: Requiring each paragraph to include an image reference, disallowing no selection. (3) Reducing Information: Providing only the abstract and introduction paragraphs of the original article. These perturbations increase task complexity while reducing input information.",
+        "score": 0.5126949548721313
+    },
+    {
+        "question": "How does the proposed M-DocSum-7B training regime (instruction-tuning and Direct Preference Optimization) contribute to improved robustness and state-of-the-art performance in interleaved multimodal summarization compared to other models?",
+        "evidence": "As shown in Table [Ref id=\"tab:main\"], M-DocSum-7B outperforms all open-source models in both text and image overall evaluations. Notably, in image referencing, M-DocSum-7B even surpasses advanced closed-source models, with its Image Score exceeding Gemini-Pro by 24It is also the only model where both Overall Matching and Jaccard Similarity scores exceed 60Some notable results include the exceptional performance in text generation completeness and accuracy for Gemini Pro.",
+        "score": 0.6353176832199097
+    },
+    {
+        "question": "How does the proposed M-DocSum-7B training regime (instruction-tuning and Direct Preference Optimization) contribute to improved robustness and state-of-the-art performance in interleaved multimodal summarization compared to other models?",
+        "evidence": "overall, closed-source models or larger models exhibit lower sensitivity to image position, with performance decline rates all below 17.7In contrast, smaller open-source models, such as Qwen2-VL-7B, demonstrate the poorest robustness. After the first stage of training, while overall performance improves, decline rates are reduced, indicating an enhanced understanding of interleaved image-text information, but not eliminating the dependence on image order. With the second stage of training, M-DocSum-7B exhibits even greater robustness. Furthermore, experimental results demonstrate that effective first-stage training is essential, if second-stage training is conducted directly, the model's decline rates actually increase.",
+        "score": 0.6158830523490906
+    },
+    {
+        "question": "How does the proposed M-DocSum-7B training regime (instruction-tuning and Direct Preference Optimization) contribute to improved robustness and state-of-the-art performance in interleaved multimodal summarization compared to other models?",
+        "evidence": "Finally, a strong summarization baseline, M-DocSum-7B, is developed using a progressive two-stage training approach (instruction-tuning and DPO). This model achieves state-of-the-art performance among various models, demonstrating the potential of LVLMs for enhanced interleaved image-text understanding.",
+        "score": 0.7007776498794556
+    }
+]

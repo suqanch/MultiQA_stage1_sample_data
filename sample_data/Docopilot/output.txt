@@ -1,0 +1,824 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{CVPR}
+2025{2025}
+
+
+
+
+
+
+{Docopilot}
+-750K{Doc-750K}
+
+
+
+
+
+
+
+{UTF8}{gbsn} 
+{Docopilot: Improving Multimodal Models for Document-Level Understanding}
+    {{0.91}{Yuchen Duan$^{1,2*}$, Zhe Chen$^{3, 1*}$, Yusong Hu$^{4,1*}$, Weiyun Wang$^{*5,1}$, Shenglong Ye$^1$, Botian Shi$^1$,} 
+
+
+
+{0.91}{ Lewei Lu$^7$, Qibin Hou$^4$, Tong Lu$^{3,1}$, Hongsheng Li$^{2,1}$, Jifeng Dai$^{6,1}$, Wenhai Wang$^{2,1}$} 
+
+{0.91}{ $^1$Shanghai AI Laboratory, $^2$The Chinese University of Hong Kong, $^3$Nanjing University,} 
+
+{0.91}{ $^4$Nankai University, $^5$Fudan University, $^6$Tsinghua University, $^7$SenseTime Research}
+
+
+}
+    August 27, 2025
+===============================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+
+
+{* Equal contribution; 
+   Corresponding author: wangwenhai@pjlab.org.cn}
+
+
+Despite significant progress in multimodal large language models (MLLMs), their performance on complex, multi-page document comprehension remains inadequate, largely due to the lack of high-quality, document-level datasets.
+While current retrieval-augmented generation (RAG) methods offer partial solutions, they suffer from issues, such as fragmented retrieval contexts, multi-stage error accumulation, and extra time costs of retrieval. 
+In this work, we present a high-quality document-level dataset, Doc-750K, designed to support in-depth understanding of multimodal documents.
+This dataset includes diverse document structures, extensive cross-page dependencies, and real question-answer pairs derived from the original documents.
+Building on the dataset, we develop a native multimodal model—Docopilot, which can accurately handle document-level dependencies without relying on RAG.
+Experiments demonstrate that Docopilot achieves superior coherence, accuracy, and efficiency in document understanding tasks and multi-turn interactions, setting a new baseline for document-level multimodal understanding. 
+Data, code, and models are released at <https://github.com/OpenGVLab/Docopilot>.
+
+
+
+
+
+
+
+§ INTRODUCTION
+
+[Label id="sec:intro"]
+In recent years, multimodal large language models (MLLMs) <cit.> have rapidly developed, achieving remarkable performance in various visual understanding tasks <cit.>, particularly image-level tasks, such as image captioning <cit.>, optical character recognition (OCR) <cit.>, and visual question answering (VQA) <cit.>.
+Despite these advances, current MLLMs still face significant challenges in document-level understanding <cit.>, where models are required to identify and integrate key information across multi-page documents, setting high expectations for their long-context processing capabilities of MLLMs.
+
+
+
+    {[Graphic src="figure/teaser.pdf"]}
+    [Caption]{Accuracy v.s inference latency on MM-NIAH. 
+    The proposed Docopilot-8B shows a notable improvement over baseline models <cit.>, achieving a +19.9    [Label id="fig:teaser"]
+    
+
+
+
+Current research on long-content understanding primarily focuses on text-only models <cit.>, targeting specific retrieval tasks such as “Needle in a Haystack” (NIAH) <cit.>.
+However, existing open-source MLLMs <cit.> are primarily trained on image-level data, lacking the long-context understanding capacity required for document-level understanding.
+Retrieval-augmented generation (RAG) methods <cit.> attempt to address this by retrieving key information to fit within the limited context windows of MLLMs, but they still encounter the following challenges in document-level tasks.
+(1) Fragmented Retrieval Contexts. Retrieved information is fragmented, lacking the overall structure of the document; 
+(2) Multi-Stage Error Accumulation. Incorrect retrieval results can affect subsequent responses, leading to errors or omissions of critical details, especially in multi-turn or complex tasks;
+(3) Extra Time Costs. The retrieval step increases the latency of the QA system, limiting the scalability of RAG in time-sensitive scenarios.
+
+
+
+To address these problems, two primary challenges need to be considered.
+(1) High-Quality Multimodal Document Dataset. While extensive datasets <cit.> exist for long-context, text-only tasks, high-quality document-level question-answering datasets remain scarce. This shortage is largely attributed to the high costs associated with annotation and the lack of streamlined construction pipelines.
+(2) Native Document-Level MLLMs. Although RAG-based methods <cit.> provide some relief, native multimodal models with long-context processing abilities are crucial. However, training native MLLMs specifically for document-level understanding is constrained by current hardware limitations.
+
+In this work, we introduce a new multimodal document dataset that supports document-level understanding tasks. Compared to counterparts <cit.>, this dataset has the following features:
+(1) Large Scale. It includes a total of 758K question-answer samples, containing 5.2B text tokens and 3.1M images. It encompasses content from various sources, such as Sci-Hub, Arxiv, and OpenReview, covering a wide range of topics and document layouts.
+(2) High Quality. Unlike existing datasets that insert irrelevant questions into documents, we collect real, in-depth question-answer pairs and construct single-page and cross-page questions based on document structure. Such high-quality question-answer data accounts for 31.6(3) Multimodal. For the document content, we provide not only the conventional interleaved text-image context but also purely rendered image inputs, catering to the needs of different models.
+
+
+Building upon this dataset, we developed a native baseline model for document-level multimodal understanding–Docopilot.
+Unlike existing approaches <cit.> that rely on RAG, our model achieves efficient document-level training and testing through simple engineering optimizations, such as multimodal data packing, Ring Attention <cit.>, and Liger Kernel <cit.>.
+Leveraging the proxy tasks carefully designed within the dataset, Docopilot can directly handle long-distance dependencies and cross-page information integration without external retrieval support.
+As shown in Figure [Ref id="fig:teaser"], this approach not only enhances coherence and accuracy compared to RAG methods but also significantly reduces the response time of the entire question-answering system, delivering superior real-time performance in multi-turn interactions.
+
+The main contributions are summarized as follows:
+
+(1) We develop the first large-scale, high-quality dataset for document-level multimodal understanding, consisting of 758K QA pairs from 3 sources, supporting 9 types of proxy tasks. This dataset includes 31.6
+(2) Based on the dataset, we implement Docopilot, a native MLLM designed for document-level understanding without relying on retrieval mechanisms. 
+This approach greatly improves its ability to integrate and comprehend information across multi-page documents.
+
+(3) Through extensive experiments on multiple document-level benchmarks, our method demonstrates performance significantly superior to existing approaches, proving its effectiveness and generality. 
+As shown in Figure [Ref id="fig:teaser"], Docopilot-8B achieves a score of 61.8 on MM-NIAH <cit.>, outperforming InternVL2-8B by 19.9 points and surpassing InternVL2-26B with less than 31We hope this work could provide a baseline for future advancements in MLLMs for document-level tasks.
+
+
+
+
+§ RELATED WORK
+
+
+
+
+ §.§ Multimodal Large Language Models
+
+
+Multimodal large language models (MLLMs) have demonstrated impressive capabilities in processing image and text information, opening up new directions for applications such as visual question answering and image captioning.
+Early models <cit.> trained with contrastive learning methods excelled in recognizing and understanding open-world semantics within an image-text matching framework. However, their limited generative abilities restricted their applicability.
+To leverage the powerful generation abilities of large language models (LLMs), subsequent works <cit.> introduced a connector to align the embedding spaces of vision encoders and LLMs, allowing encoded image embeddings to serve as soft prompts for LLMs. 
+Another series of works <cit.> extended LLMs by integrating additional visual experts, reducing reliance on standalone vision encoders.
+More recently, models capable of both understanding and generating images have also made notable progress <cit.>, leveraging the insight that image generation can enhance image understanding.
+Despite these advancements, current MLLMs still face challenges with long-context multimodal inputs. For instance, InternVL 2.0 <cit.> performs optimally within a token range of up to 8192, constraining its effectiveness in document-level applications.
+
+
+
+    {[Graphic src="figure/data_engine.pdf"]}
+    [Caption]{
+    Multimodal document dataset generation pipeline. 
+    This pipeline involves three main stages: 
+    (1) Raw Data Collection: Documents are gathered from sources like Sci-Hub, arXiv, and OpenReview, available in PDF and HTML formats. 
+    (2) Document Content Extraction: Multimodal content is processed in two formats: interleaved text-image format and multi-image format. 
+    (3) Question-Answer Pairs Construction: QA pairs are generated based on the document structure or constructed using GPT-4o.
+    }
+    [Label id="fig:data_pipeline"]
+    
+
+
+
+
+
+
+ §.§ Document Understanding Models
+
+
+Extracting key information from documents is crucial for industries and academic research.
+OCR-model-driven methods <cit.> represent one of the primary technical approaches. These methods extract text, layout, and bounding box information from external systems and integrate it with another model. However, they are prone to error propagation and high processing times due to their reliance on multiple components.
+Benefitting from the rapid advancements in LLMs, OCR-free methods have also achieved great progress. Donut <cit.> is the first end-to-end training framework based on a Transformer without requiring OCR engines or APIs. 
+Subsequent works <cit.> propose diverse modifications in model architectures and training algorithms.
+However, these models are designed for specific tasks and lack general abilities.
+
+
+
+
+ §.§ Long-Context Large Language Models
+
+
+With advancements in engineering, architecture, and algorithms, long-context large language models have made substantial progress. Techniques such as Flash Attention <cit.> and Ring Attention <cit.> have notably reduced GPU memory usage for training on extended contexts. Additionally, various sparse attention mechanisms—including Shifted Sparse Attention <cit.>, Dilated Attention <cit.>, and Attention Sinks <cit.>—have enabled efficient scaling to handle larger contexts. 
+New positional embedding methods, like ALiBi <cit.>, xPOS <cit.>, and RoPE <cit.>, further enhance the models’ generalization capabilities in length extrapolation.
+However, these advancements remain largely confined to natural language processing, and methods to extend the context size of MLLMs are still under-explored.
+Another research approach aims to reduce context size by leveraging retrieval augmented generation (RAG) <cit.>, where only the most relevant passages are retrieved and fed into the generation model. However, this retrieval-based approach can disrupt the coherence of the semantic chain, particularly in complex reasoning tasks, due to fragmented information flow.
+In this work, we integrate the above engineering techniques into MLLMs and demonstrate that a model fine-tuned on a high-quality, long-context training corpus is a strong baseline, achieving superior performance compared to its RAG counterpart.
+
+
+
+    {[Graphic src="figure/example.pdf"]}
+    [Caption]{Visualization of an example from {Doc-750K}. The left side presents the interleaved text-image format data obtained through Document Content Extraction, while the right side showcases the annotations generated via Question-Answer Pairs Construction.}
+    [Label id="fig:data_example"]
+    
+
+
+
+
+
+
+§ MULTIMODAL DOCUMENT DATASET GENERATION
+
+
+In this section, we begin by introducing the details of the data engine.
+Following this, we provide a comprehensive overview of the dataset—Doc-750K.
+
+
+
+
+ §.§ Data Engine
+ 
+[Label id="sec:data_engine"]
+The data engine operates primarily through two steps: document content extraction and question-answer (QA) pair construction.
+Specifically, we first extract multimodal content, including both text and images, from the documents. Based on this extracted content, we then create question-answer pairs. The document content and these constructed pairs are combined to produce conversational-style training data. The format is outlined as: 
+
+
+
+
+{
+{0.95}{
+
+}
+}
+
+
+
+Here, the , , and  are the placeholder for extracted document content, the generated questions and answer, respectively. In the following, we will provide a detailed explanation of the two key steps: document content extraction and QA pair construction.
+
+
+
+Document Content Extraction.
+In practical applications, different documents have varying page layouts and content types, which poses significant challenges for content extraction. To enhance the efficiency of multimodal models, it is necessary to organize documents into a unified format for streamlined processing.
+In this work, we process each document into two formats as follows:
+
+(1) Interleaved Text-Image Format. Using the document content extractor MinerU <cit.>, we segment the document content into interleaved text and image annotations, for example, 
+“”
+This format captures the document’s textual content, making it easier to construct question-answer pairs. 
+
+
+(2) Multi-Image Format. In this format, a document with $n$ pages is rendered as $n$ images, with each image corresponding to a single page. The structure follows the pattern “”. This format preserves the original layout, enabling the model to learn the overall pagination and visual layout of the document.
+
+After processing the document into contexts in interleaved text-image and paginated image formats, we can not only use these contexts for next-token prediction training but also leverage the document's content, hierarchical structure, and layout features to flexibly and precisely generate high-quality question-answer pairs.
+
+
+Question-Answer Pairs Construction.
+In this step, we create question-and-answer pairs tailored to the source, content features, and formatting structure of each document. This process is divided into the following main categories:
+
+(1) For documents with reliable QA annotations, like the review and reply in OpenReview, we extract the QA pairs and organize them into conversation format.
+
+
+    {[Graphic src="figure/data.pdf"]}
+    [Caption]{
+        Data distribution of our dataset.
+        The outer circle shows the distribution of all data categories and the inner circle shows the distribution of data subsets.
+        Left: Data distribution of {Doc-750K}.
+        Right: Data distribution of our complete SFT training dataset. 
+        Note that the number reported in the figure represents the number of samples. “MT” is short for multi-turn.
+    }
+    [Label id="fig:data_distribution"]
+    
+
+
+
+(2) For documents with a clear textual structure, such as well-structured papers from Sci-Hub and Arxiv, we convert them to text and segment them, while the model is instructed to generate contents for each segment, including abstracts, experiment descriptions, and captions for figures and tables. The details of each task for structural papers are illustrated in Table [Ref id="tab:task_format"]. 
+
+(3) For other documents, in addition to using them directly for NTP pretraining, we can input text interspersed with images into MLLMs to obtain QA pairs. To ensure high-quality generated data, we use the state-of-the-art model GPT-4o <cit.>. 
+
+
+Through our pipeline, most data has been processed into high-quality document-level question-answering data, while the remaining data is converted to plain text and used for next-token prediction tasks. Our pipelines are meticulously designed to ensure high data quality across all generated context. Each LLM-generated sample is explicitly marked in the metadata as model-generated. Across the entire dataset, only 4.8
+[Table]
+[TableHeader] Tasks                 1c{Questions}
+[Caption]{Questions format for different tasks.
+For documents with a clear textual structure, we design several proxy tasks. All tasks leverage the inherent structure of the documents, with answers directly sourced from the original text.
+}
+[Label id="tab:task_format"]
+
+
+
+
+
+
+
+
+ §.§ Multimodal Document Dataset
+
+
+Data Source. 
+The composition and distribution of our training data are detailed in Figure [Ref id="fig:data_distribution"]. Specifically, our dataset predominantly consists of academic papers, which constitute approximately 32.6
+Dataset Statistics.
+In our {Doc-750K} dataset, the majority of the data consists of reliably annotated entries, with OpenReview and Arxiv collectively accounting for 75.4Our dataset ultimately consists of 251K conversations, comprising a total of 758K questions. Additional statistical details are provided in Table [Ref id="tab:dataset_analysis"]. Compared to previous datasets, {Doc-750K} contains a larger number of images, with an average of four images per conversation segment. Further comparisons with other datasets are shown in Table [Ref id="tab:dataset_comparison"].
+
+
+
+
+
+
+ §.§ Data Recipe for Supervised Fine-Tuning
+
+
+Although Doc-750K effectively covers multimodal document QA scenarios, using it directly may lead to model over-fitting on a specific document domain. Therefore, we combine it with several open-source datasets to create a mixed dataset for SFT training.
+As shown in Figure [Ref id="fig:data_distribution"](b), these datasets are organized into 4 categories as follows:
+
+ (1) For multi-page document QA, Doc-750K serves as the core dataset, specifically curated to address complex, multi-page document comprehension. Additional datasets such as MP-Docmatix <cit.>, MP-DocVQA <cit.>, DUDE <cit.>, and Taesiri-ArxivQA <cit.>
+offer valuable multi-page scenarios requiring inter-page reasoning and contextual retention across sequences. 
+
+ (2) For multi-image general QA, MMDU-45K <cit.> offers a comprehensive dataset encompassing diverse real-world scenarios, such as natural environments and everyday contexts. It emphasizes multi-turn dialogues and integration of multiple images, supporting the development of systems capable of generating coherent and accurate responses from complex, lengthy inputs.
+
+(3) For single-page document QA, We introduce DocVQA <cit.>, DocReason <cit.>, InfoVQA <cit.>, and ChartQA <cit.> to further enhance the diversity of the SFT dataset.
+These datasets focus on individual pages with complex layouts, rich textual information, and, in some cases, graphical data interpretation.
+
+(4) For pure-text QA, we add datasets including LongAlpaca <cit.>, LongAlpaca-16K-Length <cit.>, LongQLoRA <cit.>, LongCite <cit.>, LongAlign <cit.>, and LongReward <cit.> to support the assessment of the model's capabilities in QA tasks requiring long-range dependencies.
+
+
+This expanded dataset provides a balanced foundation for training and evaluating multimodal document understanding models, enhancing robustness and adaptability across diverse document-related VQA tasks.
+
+
+
+
+
+§ ENHANCED BASELINE FOR DOCUMENT-LEVEL MULTIMODAL UNDERSTANDING
+
+
+
+
+ §.§ Model Architecture
+
+Our model architecture leverages the widely-adopted ViT-MLP-LLM structure <cit.>, consisting of a pre-trained Vision Transformer (ViT), a two-layer MLP projector, and a pre-trained Language Model (LLM). This combination provides a strong baseline for multimodal document analysis, effectively integrating visual and textual information within a unified framework.
+
+
+
+
+
+ §.§ Optimizing Training Efficiency
+
+
+The training efficiency of MLLMs is hindered by two key challenges: (1) Inconsistent Sample Lengths. Samples with different context lengths will result in excessive padding and lower training throughput; and (2) Limited GPU Memory. 
+As the model scale and context length increase, GPU memory consumption becomes increasingly unsustainable. To address these issues, we have implemented the following strategies:
+
+(1) Multimodal Data Packing. To balance the computational load between the vision model (ViT) and the language model (LLM) while minimizing resource waste caused by padding, we implement a multimodal data-packing strategy. The key idea is to concatenate multiple samples into long sequences to fully utilize the model's input capacity. 
+Specifically, thresholds $T_{ img}$ and $T_{ tok}$ are set for the number of images and tokens, respectively. Samples are managed using a priority queue, sorted in descending order by the number of images and total tokens. A new sample \(s\) attempts to combine with the sample at the front of the priority queue. If the combination meets the thresholds (, $T_{ img}$, $T_{ tok}$), the combined sample is pushed back into the priority queue. If \(s\) cannot match with any existing sample in the queue, it is directly added to the queue. When the image number and total token number of the front sample reach one of the thresholds or the number of samples exceeds the maximum limit \(M\), the front sample is dequeued, padded as needed, and sent for training. This strategy optimizes resource utilization and ensures balanced computational workloads. The detailed pseudo-code can be found in the supplementary materials. 
+
+
+(2) Ring Attention. We implement the Ring Attention mechanism  <cit.> to alleviate memory constraints associated with processing long sequences. By partitioning sequences into blocks and distributing computation across multiple devices, Ring Attention allows the model to accommodate larger contexts. This approach enables overlapping communication between key-value blocks and attention computations, thereby enhancing parallel processing efficiency. Consequently, Ring Attention improves the model's capacity to handle extended context lengths without exceeding memory limits.
+
+(3) Liger Kernel. To further improve memory and computational efficiency, we integrate the Liger Kernel <cit.>, a specialized kernel library optimized for large-scale model training. The Liger Kernel enhances throughput and reduces memory consumption by employing techniques like kernel fusion, in-place operations, and input chunking. Leveraging the Liger Kernel thus enables higher training throughput and addresses memory limitations, allowing for efficient scaling of large multimodal models.
+
+
+
+
+
+
+§ EXPERIMENTS
+
+
+
+
+
+
+
+ §.§ Experimental Setup
+
+
+
+
+Training Details.
+Our model is available in two sizes: Docopilot-2B and Docopilot-8B, both of which are based on the InternVL2 <cit.> and fine-tuned for one epoch using the data recipe that includes Doc-750K. 
+The training uses a batch size of 128, the AdamW optimizer with a learning rate of 1e-5, weight decay of 0.01 for the 2B variant, and 0.05 for the 8B variant, along with a cosine learning rate schedule.
+To speed up training, we apply multimodal data packing to reduce padding and a dynamic high-resolution strategy <cit.> to enhance OCR for document understanding. 
+The maximum number of tiles for multimodal data is limited to 24, and the maximum sequence length is set to 32k tokens.
+
+Baselines.
+We compare our Docopilot with a series of open-source document-level MLLMs <cit.> that supports multi-image input and proprietary MLLMs, including Gemini-1.5-pro <cit.>, GPT-4o <cit.>. For comparison with the commonly used RAG method for handling long documents, we selected the latest multimodal RAG methods VisRAG <cit.>, InternVL + RAG <cit.>, and M3DocRAG <cit.>. To compare with more long-context large language models, we use InternVL2-8B as the OCR model to extract texts from the documents and images and feed the parsed documents to long-context LLMs <cit.>.
+
+
+
+
+
+
+
+
+
+ §.§ Multi-Page VQA
+
+
+Benchmarks. For the multi-page VQA task, we evaluate our model on three benchmarks:
+(1) MP-DocVQA <cit.>, 
+which is designed to evaluate the ability to handle complex questions across multiple scanned document pages.
+(2) MMLongbench-Doc <cit.>, a benchmark for evaluating the performance of MLLMs on multi-modal documents.
+(3) DocGenome <cit.>, a large-scale benchmark for the evaluation of scientific document comprehension.
+
+
+Results.
+As illustrated in Table [Ref id="tab:multi_page_qa"], our model achieves consistent improvements on multi-page QA benchmarks, outperforming previous document-level MLLMs.
+Notably, our Docopilot-8B surpasses Gemini-1.5-Pro <cit.> on MMLongBench-Doc, positioning it as the closest open-source model to GPT-4o. 
+In comparison to RAG-based methods <cit.>, our model demonstrates advantages in multi-page scenarios.
+For example, in the Multi-Page QA of DocGenome benchmark, the RAG method shows a performance decline due to the disruption of document continuity while our Docopilot exhibits a significantly stable improvement compared to the baseline, with Docopilot-8B showing an increase of 12.6
+
+
+ §.§ Interleaved Long-Context QA
+
+
+Benchmarks.
+For the interleaved long-context QA task, we evaluate our models on MM-NIAH <cit.>, a benchmark designed for long multimodal document comprehension.
+
+Results.
+The right side of Table [Ref id="tab:multi_page_qa"] presents the results of MM-NIAH across context lengths ranging from 1K to 64K. We categorize the context lengths into "Short," "Medium," and "Long" based on the context window of InternVL2 (8K) and Docopilot (32K). Our Docopilot demonstrates exceptional performance in both medium- and long-context scenarios, while maintaining high accuracy in short-context situations. Notably, for QA tasks with context lengths in the range of $(32K, 64K]$, Docopilot-2B outperforms InternVL2-2B by 110
+
+
+ §.§ Single-Page VQA
+
+
+Benchmarks.
+For single-page VQA tasks, we evaluate our model on three benchmarks:
+(1) DocVQA <cit.>, a benchmark for the evaluation of extracting key information from an image of the given document.
+(2) ChartQA <cit.>, a benchmark for evaluating the reasoning abilities for chart images.
+(3) InfoVQA <cit.>, a benchmark for infographic image comprehension.
+
+Results.
+As shown in Table [Ref id="tab:single_page_qa"], our model achieves 
+comparable performance to baseline models. 
+Across the three benchmarks, Docopilot-2B and InternVL2-2B exhibit comparable results, while Docopilot-8B outperforms InternVL2-8B by 0.4 points in DocVQA. These results demonstrate that Doc-750K effectively enhances the model's long-context modeling capabilities without compromising its performance on shorter documents.
+
+
+
+
+ §.§ Ablation Study
+
+
+Effect of Doc-750K.
+
+We conducted ablation studies on MMLongBench-Doc <cit.> to analyze the impact of our Doc-750K. We divided Doc-750K into 3 parts according to the source of the data: (1) Sci-Hub data; (2) Arxiv data; and (3) OpenReview data. We demonstrate the effects of incorporating each part of the data into the SFT process, reported in Table [Ref id="tab:data_effect"]. 
+We observed that with the inclusion of different parts of Doc-750K, the model's performance improves continuously. Utilizing only open-source data results in an inferior F1 score.
+
+
+
+Latency Analysis.
+To compare the latency in inference between RAG methods and our Docopilot, we conducted a latency analysis on MMLongBench-Doc <cit.>, as reported in Table [Ref id="tab:latency"]. While RAG reduces the document length input to the MLLM, its own time cost remains non-negligible. For instance, InternVL2-2B + RAG is 130
+
+
+
+
+§ CONCLUSIONS
+
+
+
+This work introduced a diverse document-level question-answering dataset that covers complex structures and cross-page dependencies, providing a robust foundation for training and evaluating document understanding models. We also proposed a retrieval-free long-document understanding model that effectively integrates multi-page information, reducing reliance on external retrieval systems. Experimental results show that our model achieves state-of-the-art performance across several document-level QA benchmarks, underscoring its strength in multi-page integration and complex reasoning. Future work will focus on improving computational efficiency, extending the model to larger multimodal tasks, and adapting it to broader applications for enhanced practicality and generalization.
+
+
+
+§ ACKNOWLEDGMENTS
+
+This project was supported by the National Key R&D Program of China (No. 2022ZD0161300, 2022ZD0160101), the National Natural Science Foundation of China (No. 62376134, 62372223). Zhe Chen is supported by the Youth PhD Student Research Project under the National Natural Science Foundation (No. 623B2050).
+
+{
+    {ieeenat_fullname}
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+§ DETAILS OF DATA CONSTRUCTION
+
+
+
+ §.§ Document Data Format
+
+As stated in Section [Ref id="sec:data_engine"], documents in Doc-750K can be extracted in two formats: Interleaved Text-Image Format and rendered Multi-Image Format. The interleaved format utilizes an external PDF parser to extract text directly, avoiding OCR errors. However, this approach sacrifices some layout information. The multi-image format, commonly used in screenshot-based QA scenarios, preserves the complete layout but relies on the model's built-in OCR capabilities, which may introduce errors. Each format has its advantages and is suitable for different applications. By leveraging both formats, the model can develop complementary capabilities, enhancing its robustness across diverse input types. Examples of each format are shown in Figure [Ref id="fig:multi-image"] and Figure [Ref id="fig:interleaved-image_text"], respectively.
+
+
+
+    {[Graphic src="figure/multi-image_format.pdf"]}
+    [Caption]{
+    An example of multi-image format document. Each page of the document is rendered as an image.
+    }
+    [Label id="fig:multi-image"]
+
+
+
+
+
+
+    {[Graphic src="figure/interleaved_example.pdf"]}
+    [Caption]{
+    An example of interleaved text-image format document. We capture the documents' textual content and construct them into interleaved images and text. 
+    }
+    [Label id="fig:interleaved-image_text"]
+
+
+
+
+
+ §.§ Image Types and Tasks Coverage
+
+We provide additional comparisons of Doc-750K with various document-level datasets in terms of image types and task coverage, as shown in Table [Ref id="tab:addi_dataset_comparison"]. Compared to these datasets, Doc-750K exhibits greater diversity in proxy tasks and ranks among the largest datasets in terms of QA pair count.
+
+
+
+
+
+ §.§ Question-Answer Pairs Generation
+
+Prompt. The prompt used to generate question-answer pairs from GPT-4o is shown below.
+
+{Please read the paper and first check if this is an English paper. If it is not an English paper, don't do any other things. If it is an English paper, please design about 3 to 5 question-answer pairs based on the paper. All questions should require as much text as possible to answer and it is better to ask about the images in the papers. All images in the questions should be represented as the mentioned title in the paper like Figure 1/Figure 2 or Table 1/ Table 2 and they must be mentioned in the questions. The question should be specific enough that it can only be answered with the paper. The question should also be interesting and intellectual enough that a curious reader of the paper would ask about it. The answer of the QA pair must start with "According to the original text ......”, first give the relevant original text in the reference content, and then answer the question in detail. Please try to analyze the asked image in the answer. Please directly output a list of the QA pairs without any other outputs. Here is the paper: 
+
+<paper>
+}
+
+Examples. In Section [Ref id="sec:data_engine"], we propose diverse question-answer formats tailored to data from different sources. To fully utilize the webpage structure of OpenReview, we develop tasks focused on review writing and replies within its review-reply framework. For Sci-Hub and Arxiv, we use their well-defined writing structures to create tasks such as writing and translating various sections. We provide examples of these various QA formats in Figure [Ref id="fig:qa_example"].  
+
+Quality Evaluation. The quality of Doc-750K is ensured through the following measures: 
+(1) Human-Originated Data: QA pairs from OpenReview are derived from human-written discussions, providing high contextual quality.
+(2) Structured Tasks: Tasks like abstract writing and paper titling are constructed based on document metadata, following deterministic rules to ensure reliability.
+(3) Synthetic QA: We randomly sample and manually review 500 
+training QA pairs across tasks and 498 of 500 (over 99
+
+  {
+    {.95}
+  }
+  [Caption]{The examples of different formats of the QA pairs. All tasks leverage the inherent structure of the documents.}
+  [Label id="fig:qa_example"]
+
+
+
+
+
+
+§ EVALUATION DETAILS
+
+
+
+
+ §.§ Benchmark Metrics
+
+
+
+We report the metrics of benchmarks used in the evaluation in Table [Ref id="tab:benchmark_metrics"]. 
+For DocVQA <cit.>, InfoVQA <cit.>, and MP-DocVQA <cit.>, we employ ANLS to evaluate the similarity between model responses and ground truth answers, while ChartQA <cit.> uses Relaxed Exact Match (Relaxed EM). For open-ended QA tasks in MMLongbench-Doc <cit.> and DocGenome <cit.>, we utilize GPT-4o to assess the correctness of answers and calculate GPT Accuracy. Other tasks in DocGenome follow their official evaluation metrics.
+
+
+
+ §.§ Evaluation Settings
+
+
+For single-page benchmarks such as DocVQA, ChartQA, and InfoVQA, we conduct the evaluation using a unified prompt as follows:
+
+{<image> 
+ 
+<question> 
+ 
+Answer the question using a single word or phrase.}
+
+
+For multi-page benchmarks, we discuss them case by case. We employed image concatenation for multi-page VQA benchmarks like MP-DocVQA, MMLongBench-Doc, and DocGenome to reduce the excessive input patches. Adjacent pages were vertically concatenated into a single image, with a maximum total image count limit of 18.
+
+(1) For MPDocVQA, we use the prompt for a $N$ concatenated page document as follows:
+
+{Image-1: <concat-page 1> 
+ 
+Image-2: <concat-page 2> 
+ 
+... 
+ 
+Image-N: <concat-page N> 
+ 
+<question> 
+
+Answer the question using a single word or phrase.
+}
+
+(2) For MMLongBench-Doc and DocGenome, we use the official prompt in their open-sourced code base for response generation and extract the correctness of the answer using GPT-4o.
+
+(3) For MM-NIAH, we use the original interleaved data format and calculate the accuracy by their official judgment function.
+
+Evaluation of LLMs on Multimodal Document Benchmarks.
+We utilized the InternVL2-8B as the OCR model to extract text from each image of the document, followed by post-processing to remove redundant responses. The text extraction prompt is as follows:
+
+{Image-1: <image> 
+
+Please extract the text from Image-1, while retaining as much of the original formatting and structured information (such as headings, paragraphs, lists, tables, charts, etc.) as possible. If the document is not in PDF format, provide a caption for Image-1. Present the extracted information directly without additional explanations.
+}
+
+We concatenated the extracted texts to replace the original document images for the language models:
+
+
+{Page 1: 
+
+<text 1>  
+
+Page 2: 
+
+<text 2> 
+
+... 
+
+Page N: 
+
+<text N>
+}
+
+For the image-text interleaved data, we replaced the images with the captions as the input.
+
+
+Implementation Details of Multimodel RAG.
+VisRAG <cit.> uses their proposed retrieval model VisRet to calculate scores for each image and text segment based on the query. InternVL-RAG <cit.> utilizes InternVL-14B, a CLIP-like model, to compute the similarity between images and text. For multi-paged VQA benchmarks, we select the top-3 retrieved documents for generation. For interleaved VQA, we choose up to 8K tokens for the generation.
+
+
+
+
+§ TRAINING DETAILS
+
+
+
+ §.§ Hyperparameters
+
+We report the models and training hyperparameters of Docopilot-2B and Docopilot-8B in Table [Ref id="tab:hyperparam"].
+
+
+
+
+
+ §.§ Multimodal Packed Dataset
+
+
+In this section, we provide a detailed description of our packing algorithm. The main workflow is outlined in Algorithm [Ref id="alg:packed_dataset"]. Specifically, our algorithm constructs the packed dataset by combining individual samples drawn from the original dataset. The packing operation involves four steps:
+
+(1) Check Sample: Given an individual sample, we first verify whether the number of images exceeds the image threshold $T_i$ or the number of tokens exceeds the token threshold $T_t$. If either condition is met, the sample is truncated into $N$ parts. The first $N-1$ parts contain exactly $T_i$ images or $T_t$ tokens and are immediately added to the output. The remaining part is passed to the subsequent steps for further processing.
+
+(2) Find Buffer: For the remaining part of the sample, we attempt to find a suitable buffer from the buffer list to pack it together with the sample. The combined result must not exceed the thresholds $T_i$ for images or $T_t$ for tokens, while maximizing the total number of images and tokens in the packed sample. To speed up this process, the buffer list is organized as a priority queue.
+
+(3) Pack Samples: The given sample and the selected buffer are packed together. Notably, during the training process, each token can only attend to other tokens within the same original sample. Tokens from other samples packed together remain inaccessible.
+
+(4) Maintain Buffer List: After generating a packed sample, we check if its number of images or tokens meets the specified thresholds. If so, the sample is added to the output; otherwise, it is reinserted into the buffer list for potential future packing.
+Note that we omit numerous edge cases for brevity.
+
+
+	[Caption]{Multimodal Packed Dataset} 
+	[Label id="alg:packed_dataset"] 
+
+    {Dataset $𝒟$, buffer list $ℬ$, Token Threshold $T_t$, Image Threshold $T_i$}
+    {Packed Dataset $𝒟_packed$}
+
+    {data_sample $d$ in $𝒟$}{
+
+        $b  (d, B)$ 
+
+        $b_p(d, b)$
+
+        {$b_p$ contains more than $T_i$ images or $T_t$ tokens}{
+             $b_{packed}$
+        }
+        {
+            $(b_{packed}, B)$
+        }
+    }
+
+
+
+
+
+
+§ QUALITATIVE EXAMPLES
+
+
+In this section, we show a series of qualitative examples to illustrate the effectiveness of our Docopilot in handling complex multi-page documents. Each figure highlights a specific capability of the model in addressing various tasks.
+
+Figure [Ref id="fig:good_sample1"] demonstrates the model's ability to accurately retrieve relevant information from a multi-page document, showcasing its capability to perform robust cross-page retrieval tasks.
+
+In Figure [Ref id="fig:good_sample2"], we illustrate the model's proficiency in performing backward queries, where context must be traced across pages in reverse order to locate relevant content.
+
+Figure [Ref id="fig:good_sample3"] highlights the consistency of answers when the model is queried across multiple pages. This example demonstrates that the model maintains coherence and accuracy even when information is distributed across different parts of the document.
+
+Figure [Ref id="fig:good_sample4"] presents an example of counting across pages, showcasing the model's ability to integrate numerical information from disparate locations in a document. 
+
+Lastly, Figure [Ref id="fig:good_sample5"] demonstrates the model's capability to pinpoint specific information within a designated section of a super-long document, emphasizing its fine-grained retrieval capabilities.
+
+These examples collectively highlight the robustness and adaptability of our approach in understanding and processing multi-page documents effectively.
+
+
+
+§ LIMITATIONS
+
+The objective of Doc-750K is to develop a large-scale, multi-task, multimodal document-level QA dataset that efficiently trains MLLMs for document understanding. Sourced primarily from open academic platforms, the dataset focuses on tasks like multi-page QA, reasoning, and translation, with some academic-specific tasks such as titling and summarization. 
+A key limitation of Doc-750K is its current domain restriction to academic documents. We plan to expand the dataset’s coverage to a broader range of document types and enhance the generalizability of proxy tasks, ensuring wider applicability across diverse domains.
+
+
+    {[Graphic src="figure/sample1.pdf"]}
+    [Caption]{A qualitative example of retrieval in a multi-page document.}
+    [Label id="fig:good_sample1"]
+
+
+
+    {[Graphic src="figure/sample2.pdf"]}
+    [Caption]{A qualitative example of backward query in a multi-page document.}
+    [Label id="fig:good_sample2"]
+
+
+
+    {[Graphic src="figure/sample3.pdf"]}
+    [Caption]{A qualitative example of consistency of answers in multi pages.}
+    [Label id="fig:good_sample3"]
+
+
+
+    {[Graphic src="figure/sample4.pdf"]}
+    [Caption]{A qualitative example of counting across pages.}
+    [Label id="fig:good_sample4"]
+
+
+
+    {[Graphic src="figure/sample5.pdf"]}
+    [Caption]{A qualitative example of retrieval in a specific section of a super-long document.}
+    [Label id="fig:good_sample5"]
+
+
+
+[Table]
+
+[TableHeader] Datasets              #QA      Image Types                              Tasks
+[Caption]{Comparison with other document-level datasets. }
+[Label id="tab:addi_dataset_comparison"]
+
+
+
+[Table]
+
+[TableHeader] Layout        Benchmark           Description                                 Metric
+[Caption]{Evaluation benchmarks and metrics for document understanding.
+This table summarizes key benchmarks used in document understanding tasks across three layout types: single-page, multi-page, and interleaved. 
+}
+[Label id="tab:benchmark_metrics"]
+
+
+
+[Table]
+[TableHeader] Dataset             #Images      #QA Pairs      #Tokens
+[Caption]{
+Comparison with popular VQA datasets.
+}
+[Label id="tab:dataset_comparison"]
+
+
+
+
+
+
+
+[Table]
+
+[TableHeader] Models                                                    Acc        F1
+    [Caption]{Ablation study on the data recipe.
+    We evaluate the effectiveness of the training data from different sources on MMLongBench-Doc. Our Doc-750K can consistently enhance the ability of the model to understand multi-page documents.}
+    [Label id="tab:data_effect"]
+
+
+
+[Table]
+[TableHeader] Statistics     1c{Number}
+[Caption]{Key statistics of the {Doc-750K} datasets.
+It comprises 758K questions, 3.1M images, and 251K conversations, including 87K multi-turn and 164K single-turn questions. With an average of 11,245 text tokens and 6,178 image tokens, it highlights the dataset’s richness and diversity for multimodal research.
+}
+[Label id="tab:dataset_analysis"]
+
+
+
+
+
+
+
+[Table]
+
+[TableHeader] 2{c|}{Settings}                  Docopilot-2B         Docopilot-8B
+[Caption]{Training settings and hyperparameters for Docopilot models. Key configurations for Docopilot-2B and Docopilot-8B, including model architectures and training parameters.}
+[Label id="tab:hyperparam"]
+
+
+
+[Table]
+
+[TableHeader] Models                                        Latency                   Acc       F1
+    [Caption]{Latency analysis. We evaluate the average token output latency of model outputs on MMLongBench-Doc <cit.>. 
+    RAG-based methods <cit.> exhibit slower processing speeds due to their two-stage inference process, making them less efficient than document MLLMs for handling multimodal long documents.
+    }
+    [Label id="tab:latency"]
+
+
+
+[Table]
+=3.3pt
+
+    [TableHeader] 2*{Models}
+    [Caption]{
+    Evaluation on multi-page and interleaved VQA benchmarks. 
+    We report the metrics on MP-DocVQA <cit.> (MP-Doc), MMLongbench-Doc <cit.> (MMLong-Doc), DocGenome <cit.>, and MM-NIAH <cit.>.
+    Our model outperforms document-level MLLMs and multimodal RAG methods on multi-page, medium, and long-context QA. 
+    The “Short”, “Medium”, and “Long” in MM-NIAH refer to input length in ${[0,8k]}$, ${(8k, 32k]}$, ${( 32k, 64k]}$, respectively. “$†$” denotes input documents are parsed by OCR models.}
+    [Label id="tab:multi_page_qa"]
+    
+
+
+
+
+[Table]
+
+[TableHeader] Models     DocVQA     ChartQA     InfoVQA
+    
+
+    [Caption]{Results on single-page VQA benchmarks.
+    Our Docopilot models perform comparably to baselines <cit.>, demonstrating enhanced long-context modeling without loss on shorter tasks.
+    }
+    [Label id="tab:single_page_qa"]
+    
+
+
+}

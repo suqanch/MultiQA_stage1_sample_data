@@ -1,0 +1,228 @@
+[
+    {
+        "question": "Summarize the Doc-750K data engine and dataset: What are the two document formats used to preserve both text and layout, how are question–answer pairs constructed across different sources (OpenReview, arXiv/Sci-Hub, and GPT-4o synthesis), and what measures are taken to ensure data quality? Please reference the described pipeline and examples where relevant.",
+        "intent": [
+            "Descriptive",
+            "Procedural",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§.§ Data Engine",
+                "type": "paragraph",
+                "content": "The data engine operates primarily through two steps: document content extraction and question-answer (QA) pair construction. Specifically, we first extract multimodal content, including both text and images, from the documents. Based on this extracted content, we then create question-answer pairs."
+            },
+            {
+                "section": "§.§ Data Engine",
+                "type": "paragraph",
+                "content": "In practical applications, different documents have varying page layouts and content types, which poses significant challenges for content extraction. To enhance the efficiency of multimodal models, it is necessary to organize documents into a unified format for streamlined processing."
+            },
+            {
+                "section": "§.§ Data Engine",
+                "type": "paragraph",
+                "content": "(1) Interleaved Text-Image Format. Using the document content extractor MinerU <cit.>, we segment the document content into interleaved text and image annotations, for example,  This format captures the document’s textual content, making it easier to construct question-answer pairs."
+            },
+            {
+                "section": "§.§ Data Engine",
+                "type": "paragraph",
+                "content": "(2) Multi-Image Format. In this format, a document with $n$ pages is rendered as $n$ images, with each image corresponding to a single page. The structure follows the pattern “”. This format preserves the original layout, enabling the model to learn the overall pagination and visual layout of the document."
+            },
+            {
+                "section": "§.§ Data Engine",
+                "type": "paragraph",
+                "content": "(1) For documents with reliable QA annotations, like the review and reply in OpenReview, we extract the QA pairs and organize them into conversation format."
+            },
+            {
+                "section": "§.§ Data Engine",
+                "type": "paragraph",
+                "content": "(2) For documents with a clear textual structure, such as well-structured papers from Sci-Hub and Arxiv, we convert them to text and segment them, while the model is instructed to generate contents for each segment, including abstracts, experiment descriptions, and captions for figures and tables."
+            },
+            {
+                "section": "§.§ Data Engine",
+                "type": "paragraph",
+                "content": "(3) For other documents, in addition to using them directly for NTP pretraining, we can input text interspersed with images into MLLMs to obtain QA pairs. To ensure high-quality generated data, we use the state-of-the-art model GPT-4o <cit.>."
+            },
+            {
+                "section": "§.§ Document Data Format",
+                "type": "paragraph",
+                "content": "The interleaved format utilizes an external PDF parser to extract text directly, avoiding OCR errors. However, this approach sacrifices some layout information. The multi-image format, commonly used in screenshot-based QA scenarios, preserves the complete layout but relies on the model's built-in OCR capabilities, which may introduce errors. Each format has its advantages and is suitable for different applications. By leveraging both formats, the model can develop complementary capabilities, enhancing its robustness across diverse input types."
+            },
+            {
+                "section": "§.§ Question-Answer Pairs Generation",
+                "type": "paragraph",
+                "content": "The quality of Doc-750K is ensured through the following measures: (1) Human-Originated Data: QA pairs from OpenReview are derived from human-written discussions, providing high contextual quality."
+            },
+            {
+                "section": "§.§ Question-Answer Pairs Generation",
+                "type": "paragraph",
+                "content": "(2) Structured Tasks: Tasks like abstract writing and paper titling are constructed based on document metadata, following deterministic rules to ensure reliability."
+            }
+        ]
+    },
+    {
+        "question": "What engineering optimizations allow Docopilot to process long multimodal documents without relying on RAG, and how do these strategies (multimodal data packing, Ring Attention, and Liger Kernel) address memory/efficiency constraints and system latency compared to RAG-based pipelines?",
+        "intent": [
+            "Descriptive",
+            "Procedural",
+            "Causal",
+            "Evaluative",
+            "Verificative"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "Unlike existing approaches <cit.> that rely on RAG, our model achieves efficient document-level training and testing through simple engineering optimizations, such as multimodal data packing, Ring Attention <cit.>, and Liger Kernel <cit.>."
+            },
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "As shown in Figure [Ref id=\"fig:teaser\"], this approach not only enhances coherence and accuracy compared to RAG methods but also significantly reduces the response time of the entire question-answering system, delivering superior real-time performance in multi-turn interactions."
+            },
+            {
+                "section": "§.§ Optimizing Training Efficiency",
+                "type": "paragraph",
+                "content": "The training efficiency of MLLMs is hindered by two key challenges: (1) Inconsistent Sample Lengths. Samples with different context lengths will result in excessive padding and lower training throughput; and (2) Limited GPU Memory. As the model scale and context length increase, GPU memory consumption becomes increasingly unsustainable."
+            },
+            {
+                "section": "§.§ Optimizing Training Efficiency",
+                "type": "paragraph",
+                "content": "(1) Multimodal Data Packing. To balance the computational load between the vision model (ViT) and the language model (LLM) while minimizing resource waste caused by padding, we implement a multimodal data-packing strategy. The key idea is to concatenate multiple samples into long sequences to fully utilize the model's input capacity. This strategy optimizes resource utilization and ensures balanced computational workloads."
+            },
+            {
+                "section": "§.§ Optimizing Training Efficiency",
+                "type": "paragraph",
+                "content": "(2) Ring Attention. We implement the Ring Attention mechanism  <cit.> to alleviate memory constraints associated with processing long sequences. By partitioning sequences into blocks and distributing computation across multiple devices, Ring Attention allows the model to accommodate larger contexts. This approach enables overlapping communication between key-value blocks and attention computations, thereby enhancing parallel processing efficiency. Consequently, Ring Attention improves the model's capacity to handle extended context lengths without exceeding memory limits."
+            },
+            {
+                "section": "§.§ Optimizing Training Efficiency",
+                "type": "paragraph",
+                "content": "(3) Liger Kernel. To further improve memory and computational efficiency, we integrate the Liger Kernel <cit.>, a specialized kernel library optimized for large-scale model training. The Liger Kernel enhances throughput and reduces memory consumption by employing techniques like kernel fusion, in-place operations, and input chunking. Leveraging the Liger Kernel thus enables higher training throughput and addresses memory limitations, allowing for efficient scaling of large multimodal models."
+            },
+            {
+                "section": "§.§ Long-Context Large Language Models",
+                "type": "paragraph",
+                "content": "With advancements in engineering, architecture, and algorithms, long-context large language models have made substantial progress. Techniques such as Flash Attention <cit.> and Ring Attention <cit.> have notably reduced GPU memory usage for training on extended contexts."
+            },
+            {
+                "section": "§.§ Long-Context Large Language Models",
+                "type": "paragraph",
+                "content": "Another research approach aims to reduce context size by leveraging retrieval augmented generation (RAG) <cit.>, where only the most relevant passages are retrieved and fed into the generation model. However, this retrieval-based approach can disrupt the coherence of the semantic chain, particularly in complex reasoning tasks, due to fragmented information flow."
+            },
+            {
+                "section": "§.§ Experimental Setup",
+                "type": "paragraph",
+                "content": "To speed up training, we apply multimodal data packing to reduce padding and a dynamic high-resolution strategy <cit.> to enhance OCR for document understanding."
+            },
+            {
+                "section": "§.§ Latency Analysis",
+                "type": "paragraph",
+                "content": "To compare the latency in inference between RAG methods and our Docopilot, we conducted a latency analysis on MMLongBench-Doc <cit.>, as reported in Table [Ref id=\"tab:latency\"]. While RAG reduces the document length input to the MLLM, its own time cost remains non-negligible."
+            }
+        ]
+    },
+    {
+        "question": "How does Docopilot perform relative to document-level MLLMs, multimodal RAG methods, and proprietary models across multi-page (MP-DocVQA, MMLongBench-Doc, DocGenome) and interleaved long-context (MM-NIAH) benchmarks, and what overall trends are highlighted (including the accuracy-vs-latency characterization mentioned for the teaser figure)?",
+        "intent": [
+            "Comparative",
+            "Evaluative",
+            "Verificative"
+        ],
+        "evidence": [
+            {
+                "section": "§.§ Multi-Page VQA",
+                "type": "paragraph",
+                "content": "As illustrated in Table [Ref id=\"tab:multi_page_qa\"], our model achieves consistent improvements on multi-page QA benchmarks, outperforming previous document-level MLLMs."
+            },
+            {
+                "section": "§.§ Multi-Page VQA",
+                "type": "paragraph",
+                "content": "Notably, our Docopilot-8B surpasses Gemini-1.5-Pro <cit.> on MMLongBench-Doc, positioning it as the closest open-source model to GPT-4o."
+            },
+            {
+                "section": "§.§ Multi-Page VQA",
+                "type": "paragraph",
+                "content": "In comparison to RAG-based methods <cit.>, our model demonstrates advantages in multi-page scenarios."
+            },
+            {
+                "section": "§.§ Interleaved Long-Context QA",
+                "type": "paragraph",
+                "content": "The right side of Table [Ref id=\"tab:multi_page_qa\"] presents the results of MM-NIAH across context lengths ranging from 1K to 64K. We categorize the context lengths into \"Short,\" \"Medium,\" and \"Long\" based on the context window of InternVL2 (8K) and Docopilot (32K). Our Docopilot demonstrates exceptional performance in both medium- and long-context scenarios, while maintaining high accuracy in short-context situations."
+            },
+            {
+                "section": "§.§ Single-Page VQA",
+                "type": "paragraph",
+                "content": "As shown in Table [Ref id=\"tab:single_page_qa\"], our model achieves comparable performance to baseline models. Across the three benchmarks, Docopilot-2B and InternVL2-2B exhibit comparable results, while Docopilot-8B outperforms InternVL2-8B by 0.4 points in DocVQA. These results demonstrate that Doc-750K effectively enhances the model's long-context modeling capabilities without compromising its performance on shorter documents."
+            },
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "As shown in Figure [Ref id=\"fig:teaser\"], this approach not only enhances coherence and accuracy compared to RAG methods but also significantly reduces the response time of the entire question-answering system, delivering superior real-time performance in multi-turn interactions."
+            },
+            {
+                "section": "§ CONCLUSIONS",
+                "type": "paragraph",
+                "content": "Experimental results show that our model achieves state-of-the-art performance across several document-level QA benchmarks, underscoring its strength in multi-page integration and complex reasoning."
+            },
+            {
+                "section": "§.§ Long-Context Large Language Models",
+                "type": "paragraph",
+                "content": "Another research approach aims to reduce context size by leveraging retrieval augmented generation (RAG) <cit.>, where only the most relevant passages are retrieved and fed into the generation model. However, this retrieval-based approach can disrupt the coherence of the semantic chain, particularly in complex reasoning tasks, due to fragmented information flow."
+            }
+        ]
+    },
+    {
+        "question": "Describe the evaluation setup for handling multi-page and interleaved multimodal documents: How are pages concatenated and prompts structured, how is MM-NIAH evaluated, how are OCR-extracted texts used to evaluate text LLMs, and what retrieval settings are used for multimodal RAG baselines?",
+        "intent": [
+            "Procedural",
+            "Descriptive"
+        ],
+        "evidence": [
+            {
+                "section": "§.§ Evaluation Settings",
+                "type": "paragraph",
+                "content": "For single-page benchmarks such as DocVQA, ChartQA, and InfoVQA, we conduct the evaluation using a unified prompt as follows:"
+            },
+            {
+                "section": "§.§ Evaluation Settings",
+                "type": "paragraph",
+                "content": "For multi-page benchmarks, we discuss them case by case. We employed image concatenation for multi-page VQA benchmarks like MP-DocVQA, MMLongBench-Doc, and DocGenome to reduce the excessive input patches. Adjacent pages were vertically concatenated into a single image, with a maximum total image count limit of 18."
+            },
+            {
+                "section": "§.§ Evaluation Settings",
+                "type": "paragraph",
+                "content": "(1) For MPDocVQA, we use the prompt for a $N$ concatenated page document as follows:"
+            },
+            {
+                "section": "§.§ Evaluation Settings",
+                "type": "paragraph",
+                "content": "(2) For MMLongBench-Doc and DocGenome, we use the official prompt in their open-sourced code base for response generation and extract the correctness of the answer using GPT-4o."
+            },
+            {
+                "section": "§.§ Evaluation Settings",
+                "type": "paragraph",
+                "content": "(3) For MM-NIAH, we use the original interleaved data format and calculate the accuracy by their official judgment function."
+            },
+            {
+                "section": "§.§ Evaluation Settings",
+                "type": "paragraph",
+                "content": "Evaluation of LLMs on Multimodal Document Benchmarks. We utilized the InternVL2-8B as the OCR model to extract text from each image of the document, followed by post-processing to remove redundant responses."
+            },
+            {
+                "section": "§.§ Evaluation Settings",
+                "type": "paragraph",
+                "content": "We concatenated the extracted texts to replace the original document images for the language models:"
+            },
+            {
+                "section": "§.§ Evaluation Settings",
+                "type": "paragraph",
+                "content": "For the image-text interleaved data, we replaced the images with the captions as the input."
+            },
+            {
+                "section": "§.§ Evaluation Settings",
+                "type": "paragraph",
+                "content": "Implementation Details of Multimodel RAG. VisRAG <cit.> uses their proposed retrieval model VisRet to calculate scores for each image and text segment based on the query. InternVL-RAG <cit.> utilizes InternVL-14B, a CLIP-like model, to compute the similarity between images and text. For multi-paged VQA benchmarks, we select the top-3 retrieved documents for generation. For interleaved VQA, we choose up to 8K tokens for the generation."
+            }
+        ]
+    }
+]

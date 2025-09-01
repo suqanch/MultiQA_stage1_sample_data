@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\setlength{\tabcolsep}{10pt}
+\footnotesize
+    \begin{tabular}{lrrr}
+    \toprule
+    Models                                    & Latency               & Acc   & F1   \\
+    \midrule
+    MiniCPM-V2.6~\cite{yao2024minicpm_v}      &  225.4ms              & 16.9  & 15.4 \\
+    VisRAG-12B~\cite{yu2024visrag}            &  288.3ms              & 18.8  & 18.3 \\
+    \midrule
+    InternVL2-2B~\cite{chen2024far}           &   35.9ms              & 10.5  &  10.8 \\
+    InternVL2-2B + RAG~\cite{wang2024needle}&   82.9ms              & 17.2  &  16.7 \\
+    \rowcolor{gray!15}
+    \modelname-2B (ours)                      &   35.9ms              & 21.8  &  16.0 \\
+    \midrule
+    InternVL2-8B~\cite{chen2024far}           &   81.0ms              & 17.4  &  16.5 \\
+    InternVL2-8B + RAG~\cite{wang2024needle}&  113.4ms              & 24.2  &  24.5 \\
+    \rowcolor{gray!15}
+    \modelname-8B (ours)                      &   81.0ms              & 28.8  &  23.0 \\
+    \bottomrule
+    \end{tabular}
+    \caption{\textbf{Latency analysis.} We evaluate the average token output latency of model outputs on MMLongBench-Doc~\cite{ma2024mmlong}. 
+    RAG-based methods~\cite{wang2024needle, yu2024visrag} exhibit slower processing speeds due to their two-stage inference process, making them less efficient than document MLLMs for handling multimodal long documents.
+    }
+    \label{tab:latency}
+\end{table}

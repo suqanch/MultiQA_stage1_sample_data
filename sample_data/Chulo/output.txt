@@ -1,0 +1,1110 @@
+
+
+=1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{ChuLo: Chunk-Level Key Information Representation 
+for Long Document Understanding}
+    {Yan Li$^1$, Soyeon Caren Han$^2${Corresponding Author}, Yue Dai$^3$, Feiqi Cao$^1$, 
+
+$^1$The University of Sydney, $^2$The University of Melbourne,
+ $^3$The University of Western Australia 
+
+$^1$, $^2$, 
+ $^3$
+
+}
+    August 27, 2025
+==========================================================================================================================================================================================================================
+
+
+
+
+Transformer-based models have achieved remarkable success in various Natural Language Processing (NLP) tasks, yet their ability to handle long documents is constrained by computational limitations. Traditional approaches, such as truncating inputs, sparse self-attention, and chunking, attempt to mitigate these issues, but they often lead to information loss and hinder the model's ability to capture long-range dependencies. In this paper, we introduce ChuLo, a novel chunk representation method for long document understanding that addresses these limitations. Our ChuLo groups input tokens using unsupervised keyphrase extraction, emphasizing semantically important keyphrase based chunks to retain core document content while reducing input length. This approach minimizes information loss and improves the efficiency of Transformer-based models. Preserving all tokens in long document understanding, especially token classification tasks, is important to ensure that fine-grained annotations, which depend on the entire sequence context, are not lost. We evaluate our method on multiple long document classification tasks and long document token classification tasks, demonstrating its effectiveness through comprehensive qualitative and quantitative analysis. Our implementation is open-sourced on GitHub[<https://github.com/adlnlp/Chulo>].
+
+
+
+
+§ INTRODUCTION
+
+Transformer-based models <cit.>, including LLMs <cit.>, have achieved remarkable success across a wide range of Natural Language Processing (NLP) tasks, including Machine Translation, Text Summarization, Text Generation, and Text Classification. A key factor behind their success is the self-attention mechanism, which allows the model to capture long-range dependencies by computing the similarity between any two tokens and aggregating information accordingly. However, this mechanism incurs a quadratic computational cost in terms of both time and space, relative to input length. This computational burden makes it difficult for Transformer-based models to scale to long documents, limiting their application to real-world data with unrestricted document lengths.
+To address this challenge, several approaches have been proposed for applying Transformer-based models to long documents while managing computational resources. One of them is truncating, where the model discards content exceeding a predefined input length. For instance, BERT <cit.> processes up to 512 tokens, and LLaMa <cit.> handles up to 2048 tokens, with any additional content being ignored. Another one is sparse self-attention, which reduces computational complexity by restricting each query token to attend only to a subset of key tokens <cit.>. Lastly, chunking divides long documents into smaller, manageable segments that are processed independently by the model <cit.>. 
+
+While these methods enable Transformer-based models to process long documents, they have limitations. Truncation risks discarding important information that falls beyond the maximum input length. Although more efficient, Sparse attention reduces each token's receptive field, leading to potential information loss from the neglected tokens. Similarly, chunking breaks the input into isolated segments, which can disrupt long-range dependencies critical for a comprehensive understanding of the document.
+Preserving all tokens is particularly important in tasks that require fine-grained token-level understanding, such as token classification. In such tasks, dropping tokens can severely impact the accuracy of fine-grained annotations, which often depend on the full context of the document. Therefore, there is a need for methods that can handle long documents efficiently while retaining all key information from the input.
+
+In this paper, we introduce ChuLo, a novel chunk-level key information representation method that addresses these challenges in long document classification and token classification. Our method reduces input length while minimizing information loss by strategically grouping tokens using unsupervised keyphrase extraction. By identifying and emphasizing semantically important tokens, ChuLo ensures that each chunk retains the core content of the document. The resulting chunk representation is used for training Transformer models, with more weight assigned to keyphrases to make them more salient in each chunk. We evaluate ChuLo on various long document classification tasks and long document token classification tasks, demonstrating its effectiveness through competitive results and thorough analysis.
+
+
+
+
+
+The key contributions of this paper are as follows: 
+1) Novel Chunk Representation Method: We introduce ChuLo, a chunk representation method for long document understanding that leverages unsupervised keyphrase extraction to prioritize semantically important information, effectively reducing input length while preserving core content.
+2) Enhanced Document and Token Classification: Our proposed method is designed to handle both document-level and token-level tasks, addressing the limitations of existing models in retaining fine-grained annotations and global context in long documents.
+3) Scalable and Efficient Solution: ChuLo offers a scalable and efficient approach for long document understanding, making it suitable for various NLP tasks where handling long-range dependencies and context preservation is critical.
+
+
+
+
+§ RELATED WORK
+
+
+
+
+ §.§ Long Document Understanding
+
+
+Document understanding involves global understanding (e.g., classification) and token-level tasks (e.g., named entity recognition). Transformer-based models face performance issues with long inputs, addressed through input processing and architecture optimization. Input processing methods include truncating tokens beyond the input limit <cit.> and chunking, as seen in Hierarchical Transformer <cit.> and RoR <cit.>, though these often neglect full document context. Architecture optimizations improve efficiency using sparse attention <cit.> or approximations <cit.>. Other approaches incorporate RNN concepts, such as cache memory <cit.>. These methods balance performance and efficiency, highlighting the need to reduce input length effectively.
+
+For document NER, text length is less studied, with recent work addressing low-resource languages <cit.>, complex domains <cit.>, prompt-based methods <cit.>, and multimodal data <cit.>. Our work tackles these challenges[The summary of Long Document Understanding related works can be found in Appendix [Ref id="app:related_works"]] with a novel chunk representation that preserves semantic information while reducing input length, enhancing both classification and token-level tasks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ §.§ Unsupervised Keyphrase Extraction
+
+Unsupervised keyphrase extraction identifies representative phrases to summarize content without labelled data <cit.>. Methods include statistics-based (e.g., TfIdf <cit.>, co-occurrence <cit.>, and context statistics <cit.>), graph-based (e.g., TextRank <cit.> and its variants <cit.>), and embedding-based approaches (e.g., EmbedRank <cit.>, SIFRank <cit.>, and PromptRank <cit.>). While effective, these methods prioritize phrase extraction and ranking over improving downstream tasks. Our work integrates keyphrase extraction with chunk representation to enhance long document understanding.
+
+
+
+
+
+
+
+
+
+[Graphic src="images/framework_2.png"]
+
+
+[Caption]{The Overall ChuLo Framework proposed in this paper. Each chunk is surrounded by a pink box. $C_1$ ... $C_n$ represents the chunk representation.}
+[Label id="fig:framework"]
+
+
+
+
+
+
+§ CHULO
+
+We propose ChuLo, a novel chunk representation method that enhances long document understanding by reducing input length while preserving semantic content. Unlike existing approaches like truncation and standard chunking, ChuLo minimizes information loss and maintains contextual dependencies. The method segments documents into non-overlapping chunks, integrates key semantic information using unsupervised keyphrase extraction, and assigns higher weights to keyphrase tokens in chunk representations. These enriched chunks train a Transformer-based chunk attention module, enabling efficient processing of long documents while retaining global and local context. Further details are provided in subsequent subsections, with the framework illustrated in Figure [Ref id="fig:framework"].
+
+
+
+
+
+ §.§ Document Input Chunking
+
+To effectively manage long document inputs, we employ a chunking strategy that reduces input length while preserving all relevant information.
+
+
+Common approaches to long document processing, such as truncation and sparse attention, either disregard parts of the document<cit.> or restrict the receptive field of individual tokens <cit.>, resulting in potential information loss.
+Our approach mitigates these issues by segmenting the document into non-overlapping chunks before feeding them into the model. It enables complete self-attention among chunks, ensuring that all information is retained and enabling the model to process larger portions of the document context. Specifically, we first tokenize the document $D = (t_0, t_1, …, t_{l_D-1})$ and divide it into fixed-length chunks $C_D = (C_0, C_1, …, C_{m-1})$, where $l_D$ is the number of the tokens, each chunk $C$ consists of $n$ tokens, and $m= ⌈{l_D/n}⌉$ is the number of chunks. The incomplete chunks will be padded with the [PAD] tokens. The chunk size $n$ is a hyper-parameter controlling the degree of input length reduction. By grouping tokens this way, we maintain the integrity of the input content while alleviating the computational burden associated with processing long sequences.
+
+
+
+
+ §.§ Semantic Key Information Extraction
+
+The fundamental reason for extracting keyphrases from the chunks, as defined in the document chunking step, is to maintain the integrity of the document's semantic content while reducing input length. During chunking, the document is divided into smaller segments, which can inadvertently distribute important semantic information unevenly across chunks or even cause it to be diluted. Simply treating each chunk equally may lead to overlooking critical context essential for accurate document classification and token-level understanding.
+Identifying and highlighting critical phrases within these chunks ensures that the most relevant information is preserved and emphasized, allowing the model to focus on the core content even within a limited input space. This compensates for the information fragmentation caused by chunking and guides the Transformer’s attention mechanism to prioritize the most informative parts of the text, enhancing the model’s ability to capture the document’s overall meaning and relationships. Thus, extracting keyphrases from chunks is crucial for bridging the gap between document segmentation and semantic coherence, ultimately improving the effectiveness of the chunk-based representation for long document understanding.
+To achieve this, we extract semantically important keyphrases to identify the core content of the entire document. Since document understanding, such as document classification or token classification, inherently involves semantic understanding, it is crucial to highlight the most informative parts of the text to create meaningful chunk representations. By making the extracted keyphrases more salient, we can effectively emphasize the content that contributes most to the document’s overall meaning. Hence, we employ unsupervised keyphrase extraction methods, ensuring our approach remains adaptable across diverse domains without requiring annotated data. Building on the principles of PromptRank <cit.>, we adapt and enhance its template-based approach to prioritize keyphrases that are contextually significant across the entire document. Our modified strategy, the Semantic Keyphrase Prioritization (SKP) Algorithm, leverages prompts to assess the importance of each candidate keyphrase, ensuring that semantically crucial information is highlighted for downstream document understanding. The details of this process are provided in Appendix [Ref id="app:algorithm"]. In this way, our method emphasizes keyphrases during chunk representation, making critical semantic information more salient. Consequently, our method bridges the gap between document segmentation and semantic coherence by ensuring that key content is preserved and highlighted within the entire document, despite input length constraints.
+
+
+
+
+
+
+
+
+ §.§ Chunk Representation Production
+
+
+After extracting the semantically significant keyphrases, we construct a chunk representation that preserves and highlights this key information, ensuring that the chunk retains the core semantic content of the document. While chunking helps reduce the input length, it may also result in an uneven distribution of meaningful content across chunks. Thus, it is crucial to re-emphasize the importance of these keyphrases within the chunk to maintain semantic integrity. Our approach dynamically adjusts the representation of each chunk by assigning greater importance to keyphrase tokens, enabling the model to focus on the most relevant content during downstream processing.
+To achieve this, we label the tokens corresponding to the extracted keyphrases in the original text as keyphrase tokens $T_k$, while other tokens are labelled as non-keyphrase tokens $T_{nk}$. Then, we feed these chunked tokens $t$ into the embedding layer to obtain their embeddings. The chunk embedding $c$ is then computed using a weighted average of these token embeddings, as defined in Formula [Ref id="equ:chunkemb"]:
+
+
+
+\begin{equation}
+w_t = 
+        a, t is $T_k$
+b, t is $T_{nk}$
+c = ∑{w_t*t}/∑{w_t}[Label id="equ:chunkemb"]
+\end{equation}
+
+
+
+Here, $w_t$ represents the weight assigned to each token $t$ in the chunk, where $a$ and $b$ are hyperparameters with $a > b.$
+$t$ denotes the embedding of token $t$, and $c$ is the resulting chunk embedding that captures the weighted importance of keyphrase and non-keyphrase tokens. By assigning a higher weight $a$ to keyphrase tokens, we ensure that the resulting chunk representation emphasizes the most critical information while maintaining a compact input length.
+Finally, the chunk embeddings are fed into the Transformer-based model, allowing it to effectively leverage the enhanced chunk representations during long document classification or token-level classification tasks. This method not only preserves the semantic coherence of the document but also allows the model to retain meaningful context and relationships, ultimately enhancing its performance on long document tasks.
+
+
+
+ §.§ Chunk Representation Training
+
+In this final step, we train a Transformer-based model using our keyphrase-enhanced chunk representations to effectively incorporate the core semantic content of the document. We selected BERT-base according to Table [Ref id="tab:backbone ablation"]. By emphasizing key information in the chunk embeddings, we ensure that the model can focus on the most relevant aspects of the text, thereby improving its ability to handle long document inputs without losing critical context.
+We leverage a Transformer-based backbone model, which is used to initialize the weights of the chunk attention module, as illustrated in Figure [Ref id="fig:framework"]. This chunk attention module is designed to capture the intricate contextual relationships among chunks while retaining the influence of keyphrases. By doing so, the module can better understand local and global semantic patterns, enabling the model to perform robustly across various long document tasks. The chunk embeddings are processed through the chunk attention module to produce refined contextual representations, which are then fed into a classification head to generate the final predictions.
+Our framework, ChuLo, is adaptable to any transformer-based architecture, from pretrained to large language models, making it versatile for tasks involving long document understanding. Through integrating keyphrase-enhanced chunk representations, the model achieves superior performance in both document classification and token-level tasks, highlighting the effectiveness of our approach in leveraging semantic information to tackle the challenges associated with long document processing.
+
+
+
+
+§ EXPERIMENTS SET-UP
+
+We evaluate ChuLo on document and token classification tasks to highlight our motivation. While document classification primarily requires global contextual understanding, token classification tasks test the model's ability to retain and utilize detailed token-level information within long documents. We compare it with BERT <cit.> and BERT variants <cit.>, Longformer <cit.>, ToBERT <cit.>, CogLTX <cit.>, ChunkBERT <cit.>, and instructions with LLMs, GPT4o[<https://openai.com/index/hello-gpt-4o/>] and Gemini1.5pro[<https://deepmind.google/technologies/gemini/pro/>]. Baselines Details are listed in Appendix [Ref id="app:baseline models"].
+
+Datasets:  We conduct experiments using three(3) datasets for long document classification and two(2) for long document token classification. For document classification, we use HP<cit.>, LUN <cit.>, and Eurlex57k <cit.>. These datasets vary in average document length from 707 to 1147 tokens, enabling us to assess performance on documents of different lengths and complexities. Further details on dataset statistics and splits are available in Appendix [Ref id="sec:Appendix:Dataset statistics"]. 
+1) HP (Hyperpartisan News Detection) evaluates the classification of news articles based on hyperpartisan argumentation <cit.>. We use the ‘byarticle’ version, which contains 238 hyperpartisan and 407 non-hyperpartisan articles. The same train-test split as in <cit.> is adopted.
+2) LUN uses for unreliable news source classification, this dataset includes 17,250 articles from satire, propaganda, and hoaxes <cit.>. Our goal is to predict the source type for each article.
+3) Eurlex57k consists of 47,000 English EU legislative documents with 4,271 EUROVOC concepts. We also include a simulated Inverted-Eurlex57k version, where the header and recitals are moved to the end, compelling the model to read the entire document for key information.
+For token classification, we use GUM and CoNLL-2012 for Named Entity Recognition (NER) tasks:
+1) GUM (Georgetown University Multilayer) is a richly annotated collection of 235 documents across various genres such as academic texts, news, fiction, and interviews <cit.>. GUM’s various linguistic styles and structures make it an excellent benchmark for assessing token-level understanding in lengthy documents, ensuring that the model captures complex entity relationships over extended contexts.
+2) CoNLL-2012 originally designed for coreference resolution, and is adapted for NER in our work <cit.>. We convert the data to a document-level format and select the top-k longest documents in each split, emphasizing the model’s ability to process extended text sequences for token classification tasks.
+
+Metrics and Implementation:  For the HP and LUN datasets, we use accuracy as the evaluation metric, while for Eurlex57k, Inverted Eurlex57k, GUM, and CoNLL-2012, we adopt micro F1. These metrics are chosen to maintain consistency with prior work and facilitate direct comparison.
+Regarding implementation, we provide key details here, with the complete setup in Appendix [Ref id="app:imp. details"]. We use CrossEntropy loss for training on the Hyperpartisan, LUN, CoNLL and GUM datasets, and Binary CrossEntropy loss for the Eurlex57k and Inverted Eurlex57k datasets. All models are optimized using the AdamW optimizer, and training employs early stopping based on the respective validation metric, with a patience threshold set to 10 epochs. A learning rate search is conducted for each experiment to ensure optimal model performance for comparison. Top-n value is set to 15[We tested with different n values, but 15 was generally better in most datasets].
+
+
+
+
+§ RESULTS
+
+
+
+ §.§ Document Classification
+
+We evaluate the effectiveness of our ChuLo by comparing it with fine-tuned PLMs and previously published baselines <cit.> on several benchmark datasets: HP, LUN, EURLEX57K, and Inverted EURLEX57K. The comparative results are summarized in Table [Ref id="tab:overal_performance_comparison"], with input configurations provided in Table [Ref id="tab:usage_of_input"] and detailed descriptions available in Appendix [Ref id="app: baseline input"]. 
+Our method demonstrates clear superiority on three of the four datasets, achieving a significant improvement of 6.43While our model delivers competitive results on the HP dataset, it trails behind Longformer by a slight margin of 0.0031 in accuracy. This marginal difference corresponds to only one additional correctly classified instance out of a total of 65 test samples. 
+
+
+[Table]
+[TableHeader] {height 0.8pt}
+[Caption]{Document classification Result. Following previous work, we use accuracy for HP and LUN, and micro F1 for other datasets. Results for LUN are obtained by our own experiment based on provided baseline codes and methods, while baseline results for the other datasets are from previous work<cit.>. $^†$ are the BERT variants proposed by <cit.>. The best performance for each dataset is bolded while the second best is underscored, and we can see that our final model, a BERT-based backbone, generally outperforms other baselines across all datasets by achieving the best or second-best.}
+
+[Label id="tab:overal_performance_comparison"]
+
+
+
+
+
+
+[Table]
+
+
+
+
+[TableHeader] {height 0.8pt}
+[Caption]{The usage of the input content in the experiments.“F-512“ and “F-4096“ means the first 512 tokens and the first 4096 tokens, “S-512“ means the selected 512 tokens.}
+[Label id="tab:usage_of_input"]
+
+
+
+
+Interestingly, for the other datasets, Longformer underperforms compared to models like BERT variants or CogLTX, which use the first 512 tokens and focus on selecting key sentences. This observation indicates that unfiltered additional content can introduce noise, negatively impacting classification accuracy. In contrast, ChuLo expands the input content and strategically emphasizes key semantic elements during chunk representation. This approach mitigates noise interference, ensuring that only the most relevant information is retained and highlighted. 
+
+Overall, the results confirm that ChuLo consistently outperforms standard PLM baselines and existing chunking methods in long document classification tasks. Its ability to retain and emphasize key semantic content, while efficiently handling long inputs, makes it a robust solution for various document classification challenges.
+
+
+
+
+
+
+
+
+
+
+ §.§ Longer Document Classification
+
+To further validate the robustness of our model, we evaluate its classification performance across various document length ranges, with a particular focus on longer documents. For this analysis, we consider the documents with more than 1024 tokens and more than 2048 tokens in the test set. 
+
+We use Longformer 
+
+
+and off-the-shelf LLMs, GPT4o and Gemini1.5 pro for comparison. 
+As shown in Table [Ref id="tab:Accuracy length intervals"], our model consistently outperforms others on longer documents in the LUN dataset. Specifically, for documents exceeding 2,048 tokens, ChuLo maintains a higher accuracy compared to all baselines, demonstrating its capacity to handle lengthy inputs effectively. This performance gain can be attributed to our chunk representation’s emphasis on keyphrases, which preserves crucial semantic content even when document length increases.
+On the HP dataset, ChuLo and Longformer achieve perfect accuracy (1.0) for documents longer than 2,048 tokens. However, for shorter documents (more than 1,024 tokens), ChuLo surpasses Longformer. This improvement is likely due to our chunk representation strategy, which selectively highlights key content rather than averaging information across the entire document. As a result, ChuLo maintains high semantic fidelity, leading to better overall performance even with condensed text inputs.
+
+[Table]
+
+[TableHeader] {height 0.8pt}
+    [Caption]{LUN dataset}
+
+
+ 
+[TableHeader] {height 0.8pt}
+    [Caption]{HP dataset}
+
+
+
+[Caption]{Document classification results for comparison on documents of different lengths: all documents in the test set, the subset of documents longer than 1024 tokens, and longer than 2048 tokens respectively. Values in brackets indicate the number of documents for each specific document set. The best performance (Accuracy) for each document set is bolded.}
+[Label id="tab:Accuracy length intervals"]
+
+
+
+
+We also benchmarked against newly released LLMs, GPT-4o and Gemini 1.5 Pro, using longer document inputs for both the LUN and HP datasets. On LUN, GPT-4o achieved an accuracy of 0.7143 and Gemini 1.5 Pro scored 0.6531, both surpassing Longformer. However, ChuLo achieved the highest accuracy of 0.7959, showcasing its superiority in handling long documents with diverse content. On the HP dataset, GPT-4o (0.8889) and Gemini 1.5 Pro (0.7778) performed worse than Longformer and ChuLo, both of which achieved a perfect accuracy of 1.0 on the longer documents. This highlights ChuLo’s robustness and consistency in classifying documents with varying length, even compared to advanced language models. The prompt and response samples are in Section [Ref id="sec:prompt"] and [Ref id="app:cases"]. Overall, these results demonstrate that ChuLo not only outperforms standard PLM baselines and chunking methods on long documents but also remains competitive against the latest large language models. By prioritizing key semantic elements and managing document length, ChuLo maintains stable performance across varying input lengths.
+
+
+[Table]
+
+
+
+[TableHeader] {height 0.8pt}
+[Caption]{Results on token classification tasks. The best performance for each dataset is bolded, and our model achieves the best on both datasets.}
+[Label id="tab:overal_performance_token_cls_comparison"]
+
+
+
+
+
+
+ §.§ Token Classification
+
+To further demonstrate the effectiveness of our chunk representation method, we evaluated it on a token-level classification task—specifically, Named Entity Recognition (NER) using long documents. We compared our model against two state-of-the-art long-document pre-trained models, Longformer <cit.> and BigBird <cit.>, as well as newly released large language models, GPT-4o and Gemini 1.5 Pro. 
+As shown in Table [Ref id="tab:overal_performance_token_cls_comparison"], our model consistently outperforms Longformer, BigBird and LLM models on the NER tasks, particularly on the CoNLL, where document lengths often exceed the input limitations of these baseline models. To leverage the broader context captured by our chunk representation, we integrate a BERT-decoder module that utilizes the enhanced chunk embeddings to predict token labels more accurately. This configuration allows the model to maintain a global understanding of the document while focusing on the local dependencies necessary for precise token classification.
+
+All baselines struggle with these longer inputs due to their limited capacity for handling extensive sequences. In contrast, our method’s ability to encode the entire document’s context through keyphrase-based chunk representations enables it to achieve higher accuracy in recognizing and classifying named entities. This is particularly evident in cases where long-distance dependencies and contextual nuances play a critical role in determining the correct labels.
+Overall, the results indicate that our model's chunk representation not only enhances performance on document-level classification tasks but also proves highly effective for token-level tasks such as NER, 
+
+validating its application in downstream tasks that require a detailed and comprehensive understanding of long document tokens.
+
+
+
+
+
+
+
+
+
+
+[Table]
+
+    [TableHeader] {height 0.8pt}
+    [Caption]{Results on CoNLL dataset.}
+    [Label id="tab:Conll Microf1 length intervals"]
+
+
+
+    [TableHeader] {height 0.8pt}
+    [Caption]{Results on GUM dataset.
+    }
+    [Label id="tab:Gum Microf1 length intervals"]
+    
+
+
+[Caption]{NER results for comparison on documents of different lengths. >number represents the documents longer than the number, with the values in brackets indicating the corresponding counts for the documents. The best performance (Micro F1) is bolded and the second best is underscored, and our model consistently outperforms all the baselines for each document set.}
+
+
+
+
+
+
+    [b]{0.47}   
+        [Graphic src="images/output_conll.png"] 
+        [Caption]{CoNLL Performance (Range: 1798 to 9778)}
+        [Label id="fig:conll_results"]
+    
+    [b]{0.47}  
+        [Graphic src="images/output_gum.png"] 
+        [Caption]{GUM Performance (Range: 628 to 1281)}
+        [Label id="fig:gum_results"]
+    
+    [Caption]{Comparison of performance in different length ranges for CoNLL and GUM datasets. Values of brackets includes the min and max length of each dataset.}
+    [Label id="fig:combined_results"]
+    
+
+
+
+
+
+ §.§ Token Classification in Longer Documents
+
+We further analyze the NER performance across different document length ranges. As presented in Table [Ref id="tab:Conll Microf1 length intervals"] and Table [Ref id="tab:Gum Microf1 length intervals"], we report the number of documents exceeding specific length thresholds and their corresponding performance metrics. On the CoNLL, as document lengths exceed the maximum input capacities of Longformer and BigBird, both models exhibit significant performance drops to 31.56Figures [Ref id="fig:conll_results"] and [Ref id="fig:gum_results"] visualize the performance breakdown across varying length ranges. For the CoNLL, our model maintains high performance in all length intervals, while Longformer and BigBird exhibit comparable performance within the [1k-2k) range but degrade significantly for longer texts, even for documents that do not exceed their maximum input length. This discrepancy suggests that the uneven distribution of document lengths in their pretraining corpora may lead to inconsistent performance on longer sequences. In contrast, our model’s ability to compress the entire document into 512-length chunks for the decoder enables it to leverage complete contextual information, resulting in better stability and accuracy even on longer documents.
+For the GUM, where document lengths are shorter (up to 1.3k tokens), our model consistently outperforms Longformer and BigBird in all intervals. The stable performance of all models on GUM aligns with the results on CoNLL, further confirming that our approach’s chunk representation is particularly effective when documents reach lengths that exceed the standard input capacities of the baselines.
+These results underscore the effectiveness of our chunk representation, which emphasizes keyphrase information, for coarse-grained document classification and fine-grained token-level classification tasks like NER. The ability to maintain performance across varying document lengths highlights the importance of incorporating global contextual information in NER tasks—a largely underexplored aspect. Additionally, off-the-shelf LLMs such as GPT-4o and Gemini 1.5 Pro show suboptimal performance on NER tasks without fine-tuning, and their performance deteriorates further as document length increases. This indicates that, despite their advancements, LLMs still require substantial optimization for effective long document understanding.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ §.§ Prompt Method
+
+[Label id="sec:prompt"]
+We employed zero-shot prompting with large language models (LLMs), specifically Gemini 1.5 Pro and GPT4o, in our experiments. The prompts used for each dataset are detailed in Table [Ref id="tab:app_prompts_doc_c"] and [Ref id="tab:app_prompts_token_c"]:
+
+[Table]
+
+
+[TableHeader] {height 0.8pt}
+[Caption]{The prompt we used for each dataset in our experiments.}
+[Label id="tab:app_prompts_doc_c"]
+
+
+[Table]
+
+
+[TableHeader] {height 0.8pt}
+[Caption]{The prompt we used for each dataset in our experiments.}
+[Label id="tab:app_prompts_token_c"]
+
+
+Table [Ref id="tab:Accuracy length intervals"] shows that LLMs outperform Longformer in the document classification task with zero-shot prompt tuning. However, their performance drops significantly in the NER task in Table [Ref id="tab:Conll Microf1 length intervals"] and Table [Ref id="tab:Gum Microf1 length intervals"]. For instance, in Figure [Ref id="case9"], both GPT4o and Gemini1.5pro only predicted a single correct label, “O”. Moreover, the models often fail to predict a sufficient number of token labels for longer inputs, or they repeatedly predict all “O” labels or redundant label sequences. These inconsistencies suggest that LLMs struggle to generate outputs matching the input length in token classification, highlighting substantial room for improvement in this area.
+
+
+    [b]{1.0}   
+        [Graphic src="images/case9_prompt.png"] 
+    
+    
+
+    [b]{1.0}  
+        [Graphic src="images/case9_ans.png"]
+    
+    [Caption]{Prompt and output for a sample document of length 3038 in CoNLL dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.}
+    [Label id="case9"]
+
+
+
+
+ §.§ Ablation Studies
+
+We conducted more ablation studies, including 1) keyphrase extraction methods, 2) sentence embedding approaches, and 3) backbone model analysis, shown in Appendix [Ref id="app:ablation study"].
+
+
+
+ §.§ Qualitative Analysis
+
+We performed a qualitative analysis by visualizing each sample document from different datasets, comparing the outputs of Longformer, GPT-4o, Gemini 1.5 Pro, and our ChuLo. ChuLo captures the context and semantic patterns of the document, providing accurate predictions, whereas the other models struggle to maintain coherence and consistency. We have more examples in Appendix [Ref id="app:cases"].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+§ CONCLUSION
+
+We introduced ChuLo, a novel chunk representation method that enhances the performance of Transformer-based models on long document classification and token-level classification tasks. By utilizing unsupervised keyphrase extraction, ChuLo effectively reduces input length while preserving critical information, addressing the limitations of truncation and sparse attention. Extensive experiments demonstrate that ChuLo outperforms existing methods by maintaining both global context and high accuracy, even for lengthy inputs. Our research results highlight the effectiveness of ChuLo as a robust solution for long document understanding, enabling processing of complex texts in NLP applications.
+
+
+
+§ LIMITATION
+
+There are several opportunities for future work, including extending the chunk representation to generative tasks such as long text generation, where chunk representation may extend the LLM's context range limitation and enhance generation quality. However, the performance of the keyphrase extraction method poses a potential risk, as its quality directly affects the overall effectiveness of the approach. We believe this work offers valuable insights into long text understanding and lays a foundation for advancements in related tasks.
+
+
+
+§ ACKNOWLEDGMENTS
+
+This study was supported by funding from the Google Award for Inclusion Research Program (G222897).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+§ APPENDIX
+
+
+
+ §.§ Related Works
+
+[Label id="app:related_works"]
+
+As shown in Table [Ref id="tab:related_work"], most of the previous works addressing the problem of processing long documents cannot fully utilize all the content. Those methods either reduce input length via truncation or focus on local context learning to improve efficiency by applying sparse attention, approximated attention or RNN integration. Such approaches will lead to a certain level of information loss, unlike our chunking approach which can take all the content into consideration.
+Hierarchical Transformer <cit.> splits documents into non-overlapping chunks and computes chunk representations. RoR <cit.> generates regional answers from chunks, which are combined for the final answer. However, neither considers the entire document context when chunking.
+In addition, previous works applying the chunking method for processing long document context only focus on a single task, either document classification or token classification, while our framework can be applied to both tasks to guarantee both document-level and token-level understanding.
+
+
+
+ §.§ Keyphrase Extraction
+
+[Label id="app:algorithm"]
+We employ the Semantic Keyphrase Prioritization (SKP) algorithm to extract keyphrases that encapsulate the key semantic information of the entire document. The detailed are shown in Algorithm [Ref id="alg:algorithm"].
+While PromptRank uses prompts to rank keyphrases across the first segment of the document determined by its encoder model, our SKP applies this concept at the entire document level to ensure that each chunk can preserve the most informative content for the entire document. After obtaining the sorted phrases set $K_s$, we select top-n phrases as the keyphrases of the document, which can be regarded as ranked phrases according to their contextual significance within the entire document.
+
+[htb]
+    [Caption]{Semantic Keyphrase Prioritization (SKP) Algorithm}
+    [Label id="alg:algorithm"]
+    2
+    
+
+    Input: A tokenized document $D$, an encoder-decoder pretrained model represented by $ℱ_E$ and $ℱ_D$, a POS tagger $ℱ_{POS}$, a regular expression $ℱ_{REG} = ⟨NN.∗ |JJ⟩∗⟨NN.∗⟩$
+
+    Parameter: Experimentally determined $α$, $γ$  
+
+    Output: Sorted keyphrases set $K_s$
+
+        [1] 
+            Let $S=∅$, $K_s=∅$, $i=0$, $j=0$.
+            Get the candidate phrases set: 
+ $K=ℱ_{REG}(ℱ_{POS}(D))={k_0, k_1, …, k_{n-1}}$
+            Split $D$ into segments $S={D_0, D_1, …, D_{m-1}}$ to meet the input requirement of $ℱ_E$
+            { $i < n$}
+            Calculate the position penalty $r_i=L_c/l_d + γ/(l_d)^3$
+
+            where $L_c$ is the first occurrence position of $k_i$ in the document, $l_d$ is the length of the document 
+            Construct the prompt $P$ “The * mainly discusses $k_i$” and tokenize, * is the category of the document.
+            { $j < m$}
+            Calculate the probability $p_{ij}$ of the phrase $k_i$: 
+
+            $p_{ij} = 1/(l_P)^α∑_{g=h}^{h+l_k-1}log p(t_g | t_{<g})$, 
+
+            $p(t_g | t_{<g})=ℱ_D(ℱ_E(D_j), t_{<g})$ 
+
+            where $l_P$ is the length of the tokenized $P$, $h$ is the start index of $k_i$ in the prompt, $l_k$ is the length of $k_i$, $t$ is the token of the prompt.
+            Calculate the final score of $k_i$: $s_i=r_i×∑_{j=0}^{j<m}p_{ij}$
+            return $K_s=Sort(K, s)$
+        
+    
+    
+
+
+
+
+[Table]
+    
+    [TableHeader] Model     Year     Task     Lengthy Document Solution     Core Architecture
+    [Caption]{Summary of Related Works. D, T, G represent tasks of document classification, token classification, and text generation, respectively. }
+    [Label id="tab:related_work"]
+
+
+
+
+
+ §.§ Baselines
+
+[Label id="app:baseline models"]
+
+We use BERT <cit.> as our backbone model, comparing it with ToBERT <cit.>, CogLTX <cit.>, Longformer <cit.>, various BERT variants <cit.> and ChunkBERT <cit.> for the document classification task. For the NER task, we compare against Longformer, BigBird <cit.>, and two large language models, GPT4o and Gemini1.5pro. Below are brief descriptions of the baseline models:
+
+
+
+ 
+  * BERT: A transformer model pre-trained on masked language modeling (MLM) and next-sentence prediction (NSP). We fine-tuned the BERT-base variant on each dataset. 
+
+ 
+  * ToBERT: A BERT variant designed for long document classification, utilizing an additional transformer layer to learn inter-chunk relationships.
+
+ 
+  * CogLTX: A framework for applying BERT to long documents by training a key sentence identification model to assist in document understanding
+
+ 
+  * Longformer: Optimized for long sequences using sparse attention, combining dilated sliding window and global attention patterns
+
+ 
+  * BigBird: Utilizes block sparse attention, integrating sliding window, global, and random attention patterns across token blocks.
+
+ 
+  * BERT+TextRank and BERT+Random: Proposed to select other tokens randomly or with the help of TextRank<cit.> to feed into the BERT model as the supplementation for long document classification.
+    
+
+ 
+  * ChunkBERT: A BERT variant for long document classification that processes self-attention within document chunks and adds a TextCNN module for classification using the chunk representation.
+
+ 
+  * GPT-4o: A transformer-based multi-modal large language model developed by OpenAI, which leverages large-scale pretraining data to process diverse language tasks via instruction prompts.
+
+
+ 
+  * Gemini 1.5 Pro: an advanced multi-modal AI model from Google, leveraging a Sparse Mixture-of-Experts (MoE) Transformer architecture, with a context window of up to 2 million tokens. This architecture allows for the efficient handling of long documents.
+ 
+
+
+
+
+ §.§ Baseline Input
+
+[Label id="app: baseline input"]
+We selected these baseline models because they represent diverse methods for processing long documents. As summarized in Table [Ref id="tab:baseline_input"], BERT truncates the input to 512 tokens. Longformer and BigBird utilize sparse attention mechanisms, allowing them to process up to 4096 tokens while conserving computational resources. ToBERT divides the input into 200-token chunks, feeds them to BERT for chunk representations, and uses a transformer layer for downstream tasks. However, it cannot capture dependencies across the entire input sequence. CogLTX selects key sentences to form a 512-token input, limiting its input size to that constraint. BERT variants like BERT+TextRank and BERT+Random select up to 512 tokens using TextRank or random selection. They concatenate the [CLS] representation of the initial 512 tokens with the selected tokens, creating an augmented input for a fully connected classification layer, with a maximum input length of 1024 tokens. ChunkBERT splits the input into chunks, computes self-attention, and feeds chunk representations into a TextCNN module for classification. The original implementation processes up to 4096 tokens per document. It has the same limitation as the ToBERT. For GPT4o and Gemini1.5pro, we input all tokens together with our instruction in the prompt due to the large input size supported by these large language model. In contrast to these baseline models, our approach flexibly segments the entire input into chunks of varying sizes, using semantic keyphrases to minimize information loss. Additionally, we compute chunk-level attention to capture long-range dependencies more effectively.
+
+
+
+[Table]
+
+
+[TableHeader] {height 0.8pt}
+[Caption]{The input of the baseline models}
+[Label id="tab:baseline_input"]
+
+
+
+
+
+ §.§ Details of datasets
+
+[Label id="sec:Appendix:Dataset statistics"]
+[Table]
+[TableHeader] {height 0.8pt}
+[Caption]{The split and statistics of the datasets, including document classification task (HP, LUN, EURLEX57K, and Inverted EURLEX57K) and token classification task (GUM, CoNLL)}
+[Label id="datasettable"]
+
+We analyzed the data distribution across the datasets used in this paper. Of these, the CoNLL dataset has the highest average number of tokens per document at 5,065. In contrast, LUN has the shortest average length, with 480 tokens per document. Both HP and EURLEX57K have similar average document lengths, measuring 705 and 707 tokens respectively. GUM presents a relatively higher token count, averaging 972 tokens per document.
+
+Regarding the number of classes, EURLEX57K is the most complex dataset, containing 4,271 unique labels. In comparison, HP and LUN are more limited, with only 2 and 3 classes respectively. GUM and CoNLL are more diverse, with 21 and 37 different classes. Beyond label diversity, EURLEX57K also has the largest sample size, comprising 45,000 training samples, 6,000 development samples, and 6,000 test samples. LUN is the second-largest dataset, with 12,003 training samples, 2,992 development samples, and 2,250 test samples. Due to our selection strategy, CoNLL has the longest average document length, with the fewest samples. It has a total of 160 documents split into 120/20/20 for training, development, and test sets. GUM follows a similar distribution with 179/26/26 samples. The HP dataset includes 516 training samples, 64 development samples, and 65 test samples.
+
+
+
+ §.§ Implementation details
+
+[Label id="app:imp. details"]
+
+
+
+  §.§.§ Experiment hyperparameters
+
+ We performed extensive experiments to select the hyperparameters, including chunk size, token weights, learning rates, and warm-up strategies and steps. The optimal hyperparameters for each dataset for our proposed ChuLo model are presented in Table [Ref id="tap:app_hp_imp_details"]. 
+
+[Table]
+
+[TableHeader] {height 0.8pt}
+    [Caption]{The optimal hyperparameters used in our experiments.}
+    [Label id="tap:app_hp_imp_details"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  §.§.§ Hardware Information
+
+Our experiments are run on the Linux platform with an A6000 Nvidia graphic card and an AMD Ryzen Threadripper PRO 5955WX 16-core CPU, and the RAM is 128G.
+
+
+
+
+
+ §.§ Ablation Studies
+
+[Label id="app:ablation study"]
+
+We performed a few ablation studies on the HP and LUN  to assess the impact of various components within our model. First, we analyzed the effectiveness of different keyphrase extraction methods and the effect of using average chunk representations. As shown in Table [Ref id="tab:keyphrase ablation"], the PromptRank-based method yields the highest performance across both datasets, outperforming alternatives like YAKE-based. This improvement can be attributed to PromptRank’s ability to extract higher-quality keyphrases by considering semantic relationships within the document, whereas YAKE relies primarily on statistical features such as phrase frequency, resulting in less semantically rich keyphrases. 
+Then, we explored the effect of incorporating sentence embeddings into the chunk representations to introduce global sentence-level context. Surprisingly, as shown in Table [Ref id="tab:sent emb ablation"], the results indicate a performance drop when sentence embeddings are included. We hypothesize that adding sentence-level information at the initial representation stage may cause chunk embeddings within the same sentence to become too similar, hindering the model’s ability to learn distinctive patterns and reducing overall classification performance.
+Then, we evaluated the performance of different backbone models for the chunk attention module while keeping the keyphrase extraction and chunk representation settings consistent. Table [Ref id="tab:backbone ablation"] shows that BERT outperforms Longformer as the backbone. This result suggests that, after document chunking, the input sequences become relatively short, making it difficult for Longformer to leverage its long-range attention capabilities fully. Consequently, Longformer may suffer underutilization during training, resulting in suboptimal performance compared to BERT. 
+
+
+
+[Table]
+    
+    
+    [TableHeader] {height 0.8pt}
+    [Caption]{Effect of keyphrase extraction methods; Average: Average Chunk Representations}
+    [Label id="tab:keyphrase ablation"]
+    
+
+
+
+[Table]
+    
+    [TableHeader] {height 0.8pt}
+    [Caption]{Effect of sentence embedding, adding the sentence-level information to the chunk representations.}
+    [Label id="tab:sent emb ablation"]
+
+
+[Table]
+    
+
+    
+    [TableHeader] {height 0.8pt}
+    [Caption]{Effect of different backbone models for the chunk attention. }
+    [Label id="tab:backbone ablation"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+ §.§ More Case Studies
+
+[Label id="app:cases"]
+
+In this section, we will present several prompt and output samples for the long documents from the LUN (Figures [Ref id="fig:case1"]) and  [Ref id="fig:case2"]) and Hyperpartisan (Figures [Ref id="fig:case3"] and  [Ref id="fig:case4"]) datasets for document classification, as well as GUM (Figures [Ref id="case5"], [Ref id="case6"] and  [Ref id="case7"]) and CoNLL (Figures [Ref id="case8"],  [Ref id="case9"],  [Ref id="case10"] and  [Ref id="case11"]) datasets for NER task. Documents with various lengths are randomly selected to see the comparison of our model against GPT-4, Gemini1.5pro and Longformer. While there is always at least one baseline which predicts wrongly for the difficult cases presented for the document classification task, we can observe that our model consistently classifies those documents well. For the token classification task, our model can also correctly classify more tokens than each baseline across the shown cases.
+
+
+    
+
+    [Graphic src="images/case1.png"]
+    [Caption]{Prompt and output for a sample document of length 3928 in LUN dataset, where the correct prediction is highlighted in green and wrong predictions are highlighted in red. Compared to GPT4o, Gemini1.5pro and Longformer, our model can correctly classify the given document as Hoax.}
+    [Label id="fig:case1"]
+
+
+
+    [Graphic src="images/case2.png"]
+    [Caption]{Prompt and output for a sample document of length 2410 in LUN dataset, where the correct prediction is highlighted in green and wrong predictions are highlighted in red. Compared to GPT4o, Gemini1.5pro and Longformer, our model can correctly classify the given document as Propaganda.}
+    [Label id="fig:case2"]
+
+
+
+    
+
+    [Graphic src="images/case3.png"]
+    [Caption]{Prompt and output for a sample document of length 6800 in Hyperpartisan dataset, where correct predictions are highlighted in green and the wrong prediction is highlighted in red. Compared to Gemini1.5pro, our model, GPT4o and Longformer can correctly classify the given document as False.}
+    [Label id="fig:case3"]
+
+
+
+    [Graphic src="images/case4.png"]
+    [Caption]{Prompt and output for a sample document of length 2445 in Hyperpartisan dataset, where correct predictions are highlighted in green and wrong predictions are highlighted in red. Compared to GPT4o and Gemini1.5pro, our model and Longformer can correctly classify the given document as False.}
+    [Label id="fig:case4"]
+
+
+
+    [b]{1.0}   
+        [Graphic src="images/case5_prompt.png"] 
+    
+    
+
+    [b]{1.0}  
+        [Graphic src="images/case5_ans.png"]
+    
+    [Caption]{Prompt and output for a sample document of length 895 in GUM dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.}
+    [Label id="case5"]
+
+
+
+    [b]{1.0}   
+        [Graphic src="images/case6_prompt.png"] 
+    
+    
+
+    [b]{1.0}  
+        [Graphic src="images/case6_ans.png"]
+    
+    [Caption]{Prompt and output for a sample document of length 1029 in GUM dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.}
+    [Label id="case6"]
+
+
+
+    [b]{1.0}   
+        [Graphic src="images/case7_prompt.png"] 
+    
+    
+
+    [b]{1.0}  
+        [Graphic src="images/case7_ans.png"]
+    
+    [Caption]{Prompt and output for a sample document of length 1281 in GUM dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.}
+    [Label id="case7"]
+
+
+
+    [b]{1.0}   
+        [Graphic src="images/case8_prompt.png"] 
+    
+    
+
+    [b]{1.0}  
+        [Graphic src="images/case8_ans.png"]
+    
+    [Caption]{Prompt and output for a sample document of length 1798 in CoNLL dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.}
+    [Label id="case8"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    [b]{1.0}   
+        [Graphic src="images/case10_prompt.png"] 
+    
+    
+
+    [b]{1.0}  
+        [Graphic src="images/case10_ans.png"]
+    
+    [Caption]{Prompt and output for a sample document of length 7474 in CoNLL dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.}
+    [Label id="case10"]
+
+
+
+    [b]{1.0}   
+        [Graphic src="images/case11_prompt.png"] 
+    
+    
+
+    [b]{1.0}  
+        [Graphic src="images/case11_ans.png"]
+    
+    [Caption]{Prompt and output for a sample document of length 9778 in CoNLL dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.}
+    [Label id="case11"]
+
+
+

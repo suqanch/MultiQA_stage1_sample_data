@@ -1,0 +1,27 @@
+[
+    {
+        "question": "How does ChuLo compare with Longformer, BERT variants, and large language models on document classification overall and for longer documents (>1024 and >2048 tokens), and what explanations are given for these differences?",
+        "evidence": "We also benchmarked against newly released LLMs, GPT-4o and Gemini 1.5 Pro, using longer document inputs for both the LUN and HP datasets. On LUN, GPT-4o achieved an accuracy of 0.7143 and Gemini 1.5 Pro scored 0.6531, both surpassing Longformer. However, ChuLo achieved the highest accuracy of 0.7959, showcasing its superiority in handling long documents with diverse content. On the HP dataset, GPT-4o (0.8889) and Gemini 1.5 Pro (0.7778) performed worse than Longformer and ChuLo, both of which achieved a perfect accuracy of 1.0 on the longer documents. This highlights ChuLo’s robustness and consistency in classifying documents with varying length, even compared to advanced language models. The prompt and response samples are in Section [Ref id=\"sec:prompt\"] and [Ref id=\"app:cases\"]. Overall, these results demonstrate that ChuLo not only outperforms standard PLM baselines and chunking methods on long documents but also remains competitive against the latest large language models. By prioritizing key semantic elements and managing document length, ChuLo maintains stable performance across varying input lengths.",
+        "score": 0.8180199861526489
+    },
+    {
+        "question": "How does ChuLo compare with Longformer, BERT variants, and large language models on document classification overall and for longer documents (>1024 and >2048 tokens), and what explanations are given for these differences?",
+        "evidence": "We use Longformer and off-the-shelf LLMs, GPT4o and Gemini1.5 pro for comparison. As shown in Table [Ref id=\"tab:Accuracy length intervals\"], our model consistently outperforms others on longer documents in the LUN dataset. Specifically, for documents exceeding 2,048 tokens, ChuLo maintains a higher accuracy compared to all baselines, demonstrating its capacity to handle lengthy inputs effectively. This performance gain can be attributed to our chunk representation’s emphasis on keyphrases, which preserves crucial semantic content even when document length increases.",
+        "score": 0.801541805267334
+    },
+    {
+        "question": "Summarize the observed performance trends and their implications: how image/text scores vary by paragraph, context length, and image count, and how open-source and closed-source models differ.",
+        "evidence": "Figure [Ref id=\"fig:analysis\"](f) illustrates that leading closed-source models sustain stable text scores irrespective of the image count.",
+        "score": 0.7974601984024048
+    },
+    {
+        "question": "How does ChuLo compare with Longformer, BERT variants, and large language models on document classification overall and for longer documents (>1024 and >2048 tokens), and what explanations are given for these differences?",
+        "evidence": "Overall, these results demonstrate that ChuLo not only outperforms standard PLM baselines and chunking methods on long documents but also remains competitive against the latest large language models. By prioritizing key semantic elements and managing document length, ChuLo maintains stable performance across varying input lengths.",
+        "score": 0.7867475748062134
+    },
+    {
+        "question": "What do the tables and figures report about ChuLo’s NER performance across document length ranges on CoNLL and GUM, how does it compare to Longformer, BigBird, and LLMs, and what explanations are provided for its advantages?",
+        "evidence": "We further analyze the NER performance across different document length ranges. As presented in Table [Ref id=\"tab:Conll Microf1 length intervals\"] and Table [Ref id=\"tab:Gum Microf1 length intervals\"], we report the number of documents exceeding specific length thresholds and their corresponding performance metrics. On the CoNLL, as document lengths exceed the maximum input capacities of Longformer and BigBird, both models exhibit significant performance drops to 31.56Figures [Ref id=\"fig:conll_results\"] and [Ref id=\"fig:gum_results\"] visualize the performance breakdown across varying length ranges. For the CoNLL, our model maintains high performance in all length intervals, while Longformer and BigBird exhibit comparable performance within the [1k-2k) range but degrade significantly for longer texts, even for documents that do not exceed their maximum input length. This discrepancy suggests that the uneven distribution of document lengths in their pretraining corpora may lead to inconsistent performance on longer sequences. In contrast, our model’s ability to compress the entire document into 512-length chunks for the decoder enables it to leverage complete contextual information, resulting in better stability and accuracy even on longer documents.",
+        "score": 0.7857198715209961
+    }
+]

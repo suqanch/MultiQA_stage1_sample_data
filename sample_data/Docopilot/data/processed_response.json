@@ -1,0 +1,118 @@
+[
+    {
+        "Question": "How does Docopilot improve upon existing multimodal large language models (MLLMs) for document-level understanding?",
+        "Intent": [
+            "Comparative",
+            "Evaluative"
+        ],
+        "key_point": [
+            "Docopilot introduces a high-quality document-level dataset, Doc-750K, which supports in-depth understanding of multimodal documents.",
+            "Docopilot develops a native multimodal model that handles document-level dependencies without relying on retrieval-augmented generation (RAG).",
+            "Experiments show that Docopilot achieves superior coherence, accuracy, and efficiency in document understanding tasks."
+        ],
+        "text_ref": [
+            {
+                "section": "1 Introduction",
+                "paragraph": "Despite significant progress in multimodal large language models (MLLMs)..."
+            },
+            {
+                "section": "3 Multimodal Document Dataset Generation",
+                "paragraph": "In this section, we begin by introducing the details of the data engine..."
+            },
+            {
+                "section": "4 Enhanced Baseline for Document-Level Multimodal Understanding",
+                "paragraph": "Our model architecture leverages the widely-adopted ViT-MLP-LLM structure..."
+            },
+            {
+                "section": "5 Experiments",
+                "paragraph": "We compare our Docopilot with a series of open-source document-level MLLMs..."
+            }
+        ]
+    },
+    {
+        "Question": "What challenges do current retrieval-augmented generation (RAG) methods face in document-level tasks?",
+        "Intent": [
+            "Descriptive",
+            "Causal"
+        ],
+        "key_point": [
+            "RAG methods suffer from fragmented retrieval contexts, leading to a lack of overall document structure.",
+            "RAG methods experience multi-stage error accumulation, affecting subsequent responses and causing errors or omissions.",
+            "RAG methods incur extra time costs due to the retrieval step, limiting scalability in time-sensitive scenarios."
+        ],
+        "text_ref": [
+            {
+                "section": "1 Introduction",
+                "paragraph": "Retrieval-augmented generation (RAG) methods..."
+            },
+            {
+                "section": "2 Related Work",
+                "paragraph": "Another research approach aims to reduce context size by leveraging retrieval augmented generation (RAG)..."
+            },
+            {
+                "section": "4 Enhanced Baseline for Document-Level Multimodal Understanding",
+                "paragraph": "The training efficiency of MLLMs is hindered by two key challenges..."
+            }
+        ]
+    },
+    {
+        "Question": "What are the unique features of the Doc-750K dataset compared to existing datasets?",
+        "Intent": [
+            "Descriptive",
+            "Comparative"
+        ],
+        "key_point": [
+            "Doc-750K includes a large scale of 758K question-answer samples with 5.2B text tokens and 3.1M images.",
+            "Doc-750K maintains high quality by collecting real, in-depth question-answer pairs based on document structure.",
+            "Doc-750K provides multimodal content in both interleaved text-image and multi-image formats."
+        ],
+        "text_ref": [
+            {
+                "section": "3 Multimodal Document Dataset Generation",
+                "paragraph": "In this section, we begin by introducing the details of the data engine..."
+            },
+            {
+                "section": "3.1 Data Engine",
+                "paragraph": "The data engine operates primarily through two steps: document content extraction and question-answer (QA) pair construction."
+            },
+            {
+                "section": "3.2 Multimodal Document Dataset",
+                "paragraph": "The composition and distribution of our training data are detailed in Figure~\\ref{fig:data_distribution}."
+            },
+            {
+                "section": "3.3 Data Recipe for Supervised Fine-Tuning",
+                "paragraph": "Although Doc-750K effectively covers multimodal document QA scenarios..."
+            }
+        ]
+    },
+    {
+        "Question": "How does the data engine process documents to generate high-quality multimodal content?",
+        "Intent": [
+            "Procedural",
+            "Descriptive"
+        ],
+        "key_point": [
+            "The data engine extracts multimodal content from documents, including both text and images, and organizes them into a unified format.",
+            "Documents are processed into interleaved text-image and multi-image formats to capture textual content and preserve original layout.",
+            "Question-answer pairs are constructed based on the document structure, ensuring high-quality and contextually relevant data."
+        ],
+        "text_ref": [
+            {
+                "section": "3.1 Data Engine",
+                "paragraph": "The data engine operates primarily through two steps: document content extraction and question-answer (QA) pair construction."
+            },
+            {
+                "section": "3.1 Data Engine",
+                "paragraph": "Specifically, we first extract multimodal content, including both text and images, from the documents."
+            },
+            {
+                "section": "3.1 Data Engine",
+                "paragraph": "In this format, a document with $n$ pages is rendered as $n$ images, with each image corresponding to a single page."
+            },
+            {
+                "section": "3.1 Data Engine",
+                "paragraph": "In this step, we create question-and-answer pairs tailored to the source, content features, and formatting structure of each document."
+            }
+        ]
+    }
+]

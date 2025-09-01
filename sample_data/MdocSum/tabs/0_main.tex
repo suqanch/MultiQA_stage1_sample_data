@@ -1,0 +1,41 @@
+
+\begin{table*}[tbp]
+\caption{Overall performance comparison of different models on M-DocSum-Bench. The best performance for each metric is indicated in \textbf{bold}, and the best performance among open-source models is \underline{underlined}.}
+
+\centering
+\resizebox{0.98\textwidth}{!}{
+\begin{tabular}{lcccccccccccc}
+\toprule
+\multirow{2}{*}{Models} &\multirow{2}{*}{Size} & \multirow{2}{*}{IF} & \multicolumn{3}{c}{Text} & \multicolumn{5}{c}{Image} & \multirow{2}{*}{Total} \\ 
+\cmidrule(lr){4-6} \cmidrule(lr){7-11} 
+ &  & & Com & Acc & TS & ImgAcc & NonAcc & OMatch & JacSim & IS &  \\ 
+\midrule
+
+\multicolumn{11}{l}{\textbf{Close-Source Models}} \\
+GPT-4o\cite{openai_gpt4o} & - & 0.998 & 0.531 & 0.696 & 0.602 & \textbf{0.546} & 0.702 & \textbf{0.579} & \textbf{0.696} & \textbf{0.638} & 0.658 \\
+Gemini-Pro\cite{team2024gemini} & - & 0.998 & \textbf{0.581} & \textbf{0.835} & \textbf{0.685} & 0.425 & 0.585 & 0.466 & 0.640 & 0.553 & 0.657  \\
+Claude-3-5-sonnet\cite{TheC3} & - & \textbf{1.000} & 0.518 & \textbf{0.835} & 0.639 & 0.497 & 0.576 & 0.507 & 0.670 & 0.589 & 0.653 \\
+Step-1o-vision-32k\cite{step} & - & 0.882 & 0.410 & 0.814 & 0.545 & 0.407 & 0.784 & 0.504 & 0.647 & 0.576 & 0.593 \\
+Moonshot-v1-32k-vision-preview\cite{Moonshot} & - & 0.854 & 0.485 & 0.716 & 0.578 & 0.335 & 0.821 & 0.474 & 0.607 & 0.541 & 0.589 \\
+Doubao-vision-pro-32k\cite{doubao} & - & 0.938 & 0.470 & 0.724 & 0.570 & 0.264 & 0.876 & 0.405 & 0.525 & 0.465 & 0.560 \\
+\midrule
+
+\multicolumn{11}{l}{\textbf{Open-Source Models}} \\
+Qwen2.5-VL\cite{bai2025qwen2} & 72B & 0.980 & 0.501 & 0.639 & 0.562 & 0.320 & 0.712 & 0.419 & 0.615 & 0.517 & 0.583 \\
+Qwen2-VL\cite{wang2024qwen2} & 72B & 0.994 & 0.385 & 0.709 & 0.499 & 0.317 & 0.822 & 0.464 & 0.506 & 0.485 & 0.542 \\
+Qwen2.5-VL\cite{bai2025qwen2} & 7B & 0.894 & 0.386 & \underline{0.783} & 0.517 & 0.200 & 0.820 & 0.371 & 0.474 & 0.423 & 0.512 \\
+Qwen2-VL\cite{wang2024qwen2} & 7B & 0.972 & 0.317 & 0.769 & 0.449 & 0.403 & 0.400 & 0.337 & 0.504 & 0.421 & 0.489 \\
+InternVL-2.5\cite{chen2024expanding} & 8B & 0.736 & 0.402 & 0.709 & 0.513 & 0.032 & 0.989 & 0.366 & 0.056 & 0.211 & 0.399 \\
+InternVL-2\cite{chen2024internvl} & 8B & 0.700 & 0.408 & 0.753 & 0.529 & 0.011 & \textbf{\underline{0.992}} & 0.354 & 0.026 & 0.190 & 0.394 \\
+
+
+
+\midrule
+% PreNone(analysis only) & - & - & - & - & - & 0 & 1.000 & 0.325 & 0 & 0 & - \\
+\textbf{M-DocSum} & 7B & \textbf{\underline{1.000}} & \underline{0.553} & 0.770 & \underline{0.644} & \underline{0.542} & 0.716 & \textbf{\underline{0.579}} & \underline{0.693} & \underline{0.636} & \textbf{\underline{0.667}} \\
+
+\bottomrule
+\end{tabular}
+}
+\label{tab:main}
+\end{table*}

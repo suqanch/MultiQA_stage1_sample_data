@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\setlength\tabcolsep{4pt}
+\begin{tabular}{c|l|l|l}
+\toprule
+Layout    & Benchmark       & Description                             & Metric                                                                                      \\
+\midrule
+\multirow{3}{*}{Single-Page} & DocVQA~\cite{mathew2021docvqa}          & VQA on documents.                       & ANLS                                          \\
+                             & ChartVQA~\cite{masry2022chartqa}        & VQA on charts.                          & Relaxed EM                                    \\
+                             & InfoVQA~\cite{mathew2022infographicvqa}         & VQA on infographics.                    & ANLS                                          \\
+\midrule
+\multirow{5}{*}{Multi-Page}  & MP-DocVQA~\cite{tito2023mpdocvqa}       & VQA on multi-page documents.            & ANLS                                          \\
+                             & MMLongBench-Doc~\cite{ma2024mmlong} & VQA on super-long PDF documents.        & Accuracy, F1 Score                            \\
+                             & \multirow{3}{*}[3ex]{DocGenome~\cite{xia2024docgenome}}  & \multirow{3}{*}[3ex]{VQA on multi-page scientific documents.} & Classification Acc, \\
+                             &                                  &                                                          & Title ED, Abstract ED, \\
+                             &                                  &                                                          & Single-Page Acc,   Multi-Page Acc \\
+\midrule
+Interleaved                  & MM-NIAH~\cite{wang2024mmniah}         & VQA on natural texts or images.         & Accuracy   \\ 
+\bottomrule
+\end{tabular}
+\caption{\textbf{Evaluation benchmarks and metrics for document understanding.}
+This table summarizes key benchmarks used in document understanding tasks across three layout types: single-page, multi-page, and interleaved. 
+}
+\label{tab:benchmark_metrics}
+\end{table*}

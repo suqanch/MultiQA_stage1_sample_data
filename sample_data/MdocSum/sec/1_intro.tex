@@ -1,0 +1,49 @@
+\section{Introduction}
+The ability to generate concise, interleaved image-text summaries is crucial for a wide range of real-world applications~\cite{visualwebbench_s29, docvqa_s13}. 
+Imagine automatically generating accessible presentations from complex scientific papers, producing interactive reports from data-heavy analyses, or even crafting engaging social media posts summarizing lengthy articles. 
+These scenarios demand a deep understanding of not only the textual content but also the visual information and the intricate relationships between them. 
+However, despite the importance of this capability, the field of interleaved image-text document summarization remains largely unexplored~\cite{chartqa_s15, towards_s28, infographicvqa_s17}. 
+There is a critical lack of suitable benchmarks to evaluate the performance of Large Vision-Language Models (LVLMs) in this challenging setting, and consequently, a dearth of effective methodologies tailored for this task.
+Therefore, a crucial question remains: \textbf{Do LVLMs genuinely comprehend interleaved image-text in documents? }
+Addressing this question is vital for advancing document understanding towards more complex and practical applications.
+
+Existing benchmarks primarily feature text-only outputs and focus on Visual Question-Answering~(VQA) tasks, limiting their applicability in complex scenarios and failing to sufficiently assess the capability of interleaved image-text processing~\cite{longbench_s3, blau2024gram_ss15, kim2022ocr_ss4, lee2023pix2struct_ss5}.
+While some recent efforts have explored multi-page document understanding~\cite{hierarchical_s35, document_s31, slidevqa_s32}, their datasets often lack sufficient complexity in terms of cross-page and cross-element reasoning, whereas the recent MMLongBench-Doc~\cite{mmlongbench_s36} proves excessively difficult, resulting in universally poor performance across models.
+% While some recent efforts have explored multi-page document understanding~\cite{hierarchical_s35, document_s31, slidevqa_s32}, these datasets often lack sufficient complexity in terms of cross-page and cross-element reasoning, 
+% or as in the case of MMLongBench-Doc~\cite{mmlongbench_s36}, are excessively difficult, leading to poor performance across models.
+
+To investigate this critical issue and bridge this gap, we introduce a novel and challenging Multimodal Document Summarization Benchmark~\textbf{(M-DocSum-Bench)}, a reference-based generation task, which requires generating interleaved image-text summaries with reference-based images directly from long documents. 
+M-DocSum-Bench comprises 500 high-quality paper documents from arXiv primarily across six domains, created in or after April 2024, along with human-preference-aligned multimodal interleaved summaries.
+To facilitate evaluation and align with real-world application scenarios, these summaries are divided into four paragraphs, each optionally accompanied by a reference image based on the original image contents.
+Each paragraph has at most one accompanying image, and each image appears only once. 
+Through these efforts, M-DocSum-Bench offers two key advantages over previous work: 
+\textbf{(1) Clarity and intuitiveness:} The reference-based multimodal generation output format intuitively reflects the model's overall understanding of interleaved image-text information. 
+As illustrated in Figure~\ref{fig:intro}, the interleaved summarization format enables a clear observation of both image referencing and summarization results, thus providing a foundation for the investigation of model capabilities. 
+\textbf{(2) Comprehensive coverage:} The summary encompasses all critical key points from the beginning to the end of the document, including both images and text. 
+This rigorously evaluates the comprehensive capabilities of the models such as understanding, reasoning, locating and summarization, enabling in-depth analysis of its performance in handling long-range dependencies, multimodal integration, and global coherence.
+
+To facilitate this Benchmark, we develop an automated framework for constructing interleaved summaries which is subjected to a rigorous development process including cross-validation of human experts. 
+Subsequently, we propose a fine-grained evaluation method namely \textbf{M-DocEval}. 
+This method centers on three primary dimensions:
+\textbf{(1)Textual Content:} M-DocEval evaluates the completeness and accuracy of the textual summary. 
+\textbf{(2)Visual Reference:} This dimension assesses the precision and overall effectiveness of image referencing.
+\textbf{(3)Instruction Following:} This metric evaluates how well the model follows instructions.
+Furthermore, M-DocEval ensures reliability and consistency through a rigorous process, leveraging a powerful LLM such as GPT-4o.
+
+We conduct experiments on M-DocSum-Bench with several leading closed-source models (Gemini Pro~\cite{team2024gemini}, GPT-4o~\cite{openai_gpt4o}, Claude-3.5-Sonnet~\cite{TheC3}, etc.) and powerful open-source models (Qwen2.5-VL-72B~\cite{bai2025qwen2}, Qwen2-VL-72B~\cite{wang2024qwen2}, InternVL2.5-8B~\cite{chen2024expanding}, etc.).
+The evaluation results reveal a significant gap between the document summarization capabilities of LVLMs and humans.
+We also find that while LVLMs can process individual images and text segments, they struggle to maintain coherence and accurately integrate information within long interleaved contexts, particularly in image understanding, and often exhibiting confusion between similar images and a lack of robustness.
+
+To explore the performance boundary, we further develop a robust summarization baseline, i.e., M-DocSum-7B based Qwen2-vl-7B,
+Notably, leveraging a progressive two-stage training approach encompassing instruction-tuning and Direct Preference Optimization~(DPO)~\cite{rafailov2023direct}, along with the diverse instruction and preference data generated by our automated framework, the M-DocSum-7B achieves state-of-the-art performance among a range of closed-source and larger open-source models.
+This demonstrates the potential of LVLMs for enhancing interleaved image-text understanding and provides new insights for the document understanding community.
+
+Our contributions are summarized as follows:
+
+\begin{itemize}
+\item We introduce a novel and challenging M-DocSum-Bench, addressing a critical gap in the current landscape.
+\item We propose an automated evaluation method M-DocEval, providing a realistic and objective assessment.
+\item We develop a robust summarization baseline M-DocSum-7B, providing new insights for document understanding.
+\end{itemize}
+
+

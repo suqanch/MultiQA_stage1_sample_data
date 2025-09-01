@@ -1,0 +1,25 @@
+\begin{table}[tbp]
+\caption{Overall Statistics of M-DocSum-Bench. This includes the number of documents (Docs), the average number of text tokens (Tokens), and an indicator of whether the documents are multi-page (Multi). The evaluated model capabilities are denoted by U, R, L, S, representing Understanding, Reasoning, Locating, and Summarization, respectively. Data types are classified as Synthetic (generated data), Realistic (purely manually annotated data), and Hybrid (a mix of synthetic and realistic data).}
+
+\centering
+\resizebox{0.47\textwidth}{!}{
+\begin{tabular}{lcccccccc}
+\toprule
+Benchmarks & Docs & Tokens & Multi & U & R & L & S & Type \\
+\midrule
+DocVQA        & -       & 151.5   & $\times$          & $\checkmark$   & $\times$   & $\times$  & $\times$        & synthetic          \\
+ChartQA       & -       & 236.9   & $\times$          & $\checkmark$   & $\times$   & $\times$  & $\times$        & synthetic         \\
+RULER & any       & any   & $\checkmark$     & $\checkmark$   & $\times$  & $\times$     & $\times$  & synthetic          \\
+DUDE & 5019    & 1,831.5 & $\checkmark$     & $\checkmark$   & $\checkmark$   & $\times$  & $\times$   & hybrid          \\
+loong  & 1600    & 110,900 & $\checkmark$     & $\checkmark$   & $\checkmark$     & $\times$  & $\times$      & hybrid     \\
+MMLongBench  & 135     & 21,214.1 & $\checkmark$    & $\checkmark$      & $\checkmark$      & $\times$     & $\times$ & Realistic       \\
+M-Longdoc & 180 & 120,988 & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\times$  & $\times$ & hybrid  \\
+DocBench  & 229     & 46,377 & $\checkmark$     & $\checkmark$      & $\checkmark$      & $\times$      & $\times$      & hybrid \\
+LongDocURL  & 396 & 43,622.6 & $\checkmark$  & $\checkmark$ & $\checkmark$      & $\checkmark$   & $\times$  & hybrid        \\
+\midrule
+\textbf{M-DocSum-Bench}            & 500    & 12,912.4 & $\checkmark$   & $\checkmark$     & $\checkmark$   & $\checkmark$   & $\checkmark$  & hybrid        \\
+\bottomrule
+\end{tabular}
+}
+\label{tab:statis}
+\end{table}

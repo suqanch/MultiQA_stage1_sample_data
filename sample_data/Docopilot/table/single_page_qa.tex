@@ -1,0 +1,32 @@
+\begin{table}[t!]
+\centering
+\setlength{\tabcolsep}{7pt}
+\footnotesize
+    \begin{tabular}{lccc}
+    \toprule
+    Models & DocVQA & ChartQA & InfoVQA \\
+    \midrule
+    Gemini-1.5-Pro~\cite{reid2024gemini1_5}  & 93.1    & 87.2    & 81.0    \\
+    GPT-4o~\cite{gpt4v}                      & 92.8    & 85.7    & --      \\
+    \midrule
+    MiniMonkey-2B~\cite{huang2024minimonkey} & 87.4    & 76.5    & 60.1    \\
+    InternVL2-2B~\cite{chen2024far}          & 86.9    & 76.2    & 58.9    \\
+    \rowcolor{gray!15}
+    \modelname-2B (ours)                     & 87.3    & 76.4    & 58.5    \\
+    \midrule
+    Monkey-8B~\cite{li2023monkey}            & 66.5    & 65.1    & 36.1    \\
+    TextMonkey-9B~\cite{liu2024textmonkey}   & 73.0    & 66.9    & 28.6    \\
+    mPLUG-DocOwl2-8B~\cite{hu2024mplugdocowl2}& 80.7   & 70.0    & 46.4    \\
+    IXC2.5-7B \cite{zhang2024internlm}       & 90.9    & 82.2    & 69.9    \\
+    InternVL2-8B~\cite{chen2024far}          & 91.6    & 83.3    & 74.8    \\
+    \rowcolor{gray!15}
+    \modelname-8B (ours)                     & 92.0    & 83.3    & 73.3    \\
+    \bottomrule
+    \end{tabular}
+    \vspace{-1mm}
+    \caption{\textbf{Results on single-page VQA benchmarks.}
+    Our \modelname models perform comparably to baselines~\cite{InternVL2}, demonstrating enhanced long-context modeling without loss on shorter tasks.
+    }
+    \label{tab:single_page_qa}
+    \vspace{-3mm}
+\end{table}

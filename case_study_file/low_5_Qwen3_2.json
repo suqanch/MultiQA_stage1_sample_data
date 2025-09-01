@@ -1,0 +1,27 @@
+[
+    {
+        "question": "How was the Doc-750K dataset constructed, and what are its key features that make it suitable for training document-level multimodal models?",
+        "evidence": "The data engine operates primarily through two steps: document content extraction and question-answer (QA) pair construction.",
+        "score": 0.3918132185935974
+    },
+    {
+        "question": "What limitations does the Doc-750K dataset have, and how do these limitations affect the generalizability of models trained on it?",
+        "evidence": "Future work will focus on improving computational efficiency, extending the model to larger multimodal tasks, and adapting it to broader applications for enhanced practicality and generalization.",
+        "score": 0.4253237545490265
+    },
+    {
+        "question": "What are the stages involved in training the M-DocSum-7B model, and how do they contribute to its performance?",
+        "evidence": "During this stage, our primary goal is to enhance the accuracy and comprehensiveness of the model in extracting key points for summary generation, while ensuring that the referenced images are appropriate and well-structured.",
+        "score": 0.4411126375198364
+    },
+    {
+        "question": "What are the key components of ChuLo's framework, and how do they contribute to its performance in both document-level and token-level tasks?",
+        "evidence": "After extracting the semantically significant keyphrases, we construct a chunk representation that preserves and highlights this key information, ensuring that the chunk retains the core semantic content of the document. By assigning a higher weight to keyphrase tokens, we ensure that the resulting chunk representation emphasizes the most critical information while maintaining a compact input length.",
+        "score": 0.4419632852077484
+    },
+    {
+        "question": "How does ChuLo's chunk representation method address the limitations of existing approaches like truncation and sparse attention in handling long documents, and what evidence supports its effectiveness?",
+        "evidence": "Transformer-based models have achieved remarkable success in various Natural Language Processing (NLP) tasks, yet their ability to handle long documents is constrained by computational limitations. Traditional approaches, such as truncating inputs, sparse self-attention, and chunking, attempt to mitigate these issues, but they often lead to information loss and hinder the model's ability to capture long-range dependencies.",
+        "score": 0.4516259431838989
+    }
+]

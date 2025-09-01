@@ -1,0 +1,29 @@
+\begin{table}[h]
+\centering
+\small
+\setlength\tabcolsep{3.6pt}
+\begin{tabular}{c|l|cc}
+\toprule
+\multicolumn{2}{c|}{Settings}              & \modelname-2B     & \modelname-8B             \\
+\midrule
+\multirow{2}{*}{\rotatebox{90}{Model}}     & ViT               & InternViT-300M      & InternViT-300M \\
+                                           & LLM    & InternLM2-1.8B & InternLM2.5-7B \\
+
+\midrule
+\multirow{11}{*}{\rotatebox{90}{Training Hyperparameters}} & Tile Resolution   & \multicolumn{2}{c}{448}                                  \\
+                                           & Batch Size        & \multicolumn{2}{c}{128}                                  \\
+                                           & Optimizer         & \multicolumn{2}{c}{AdamW}                                \\
+                                           & Learning Rate     & \multicolumn{2}{c}{1.00E-05}                             \\
+                                           & Warmup Ratio      & \multicolumn{2}{c}{0.03}                                   \\
+                                           & LR Scheduler      & \multicolumn{2}{c}{Cosine}                               \\
+                                           & Weight Decay      & 0.01                & 0.05           \\
+                                           & ViT Drop Path     & \multicolumn{2}{c}{0.1}                                  \\
+                                           & Max Tile Number   & \multicolumn{2}{c}{24}                                   \\
+                                           & Image Threshold   & \multicolumn{2}{c}{48}                                   \\
+                                           & Token Threshold    & \multicolumn{2}{c}{32K}                                  \\
+                                           & Epochs   & \multicolumn{2}{c}{1}              \\
+\bottomrule
+\end{tabular}
+\caption{\textbf{Training settings and hyperparameters for \modelname models.} Key configurations for \modelname-2B and \modelname-8B, including model architectures and training parameters.}
+\label{tab:hyperparam}
+\end{table}

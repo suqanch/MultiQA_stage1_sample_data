@@ -1,0 +1,368 @@
+[
+    {
+        "question": "Summarize the full M-DocEval evaluation framework: define all text and image sub-metrics, report how TS and IS are computed (with formulas), and explain how they are combined with instruction following into the final Total score.",
+        "intent": [
+            "Descriptive",
+            "Procedural"
+        ],
+        "evidence": [
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "To provide a comprehensive and objective assessment of the performance in generating interleaved summaries, we design a multifaceted set of evaluation metrics."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "These metrics cover textual quality, image referencing appropriateness, and instruction-following capability, ensuring a holistic evaluation of the model abilities."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "(1) Completeness (Com) measures the proportion of essential information captured from the original text using a benchmark set of key points, generated and verified by human experts."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "(2) Accuracy (Acc) assesses the correctness of the summary by comparing each sentence to the original content, rewarding matches and penalizing hallucinations, repetitions, or semantic distortions."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "We compute the Text Score (TS) as the F1 score of completeness and accuracy: \\begin{equation} TS = 2 * Com * Acc/Com + Acc. \\end{equation} This balanced score ensures a comprehensive assessment of the textual quality."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "For image referencing, we evaluate the model's ability to determine image necessity and select appropriate images correctly."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "(1) None Accuracy (NonAcc) assesses the correct identification of paragraphs needing no image."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "(2) Image Accuracy (ImgAcc) measures precise image matching for paragraphs requiring images."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "(3) Overall Matching Rate (OMatch) provides an overall assessment of correct image decisions across all paragraphs."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "(4) Jaccard Similarity (JacSim) evaluates the similarity between the model's referenced images and the correct set, excluding “None\" cases, offering insight into image selection accuracy regardless of placement."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "The Image Score (IS) is computed as the weighted average of Overall Matching Rate and Jaccard Similarity: \\begin{equation} IS = OMatch + JacSim/2. \\end{equation} This score reflects both the correctness of image selection and the overall appropriateness of image references in the summary, ensuring a robust and objective evaluation framework."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "Instruction Following Capability. Given that open-source multimodal models may not always generate content that fully adheres to the given instructions, we introduce an Instruction Following Capability (IF) metric."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "This metric evaluates how well the model follows instructions by assessing whether it produces appropriate summary texts and image references as specified."
+            },
+            {
+                "section": "§.§ M-DocEval [Label id=\"sec:3.5\"]",
+                "type": "paragraph",
+                "content": "To obtain a final, comprehensive evaluation of each sample, we integrate the TS, IS, and IF using a weighted average: \\begin{equation} Total = α * IF + β * TS + γ * IS, \\end{equation} where $α, β, γ$ are $0.1, 0.45, 0.45$, respectively."
+            }
+        ]
+    },
+    {
+        "question": "Describe the M-DocSum task setup end-to-end: the interleaved input modalities, the four-paragraph output with image references, and the rationale/advantages of this interleaved format as outlined in the paper and Figure references.",
+        "intent": [
+            "Descriptive"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "To investigate this critical issue and bridge this gap, we introduce a novel and challenging Multimodal Document Summarization Benchmark (M-DocSum-Bench), a reference-based generation task, which requires generating interleaved image-text summaries with reference-based images directly from long documents."
+            },
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "To facilitate evaluation and align with real-world application scenarios, these summaries are divided into four paragraphs, each optionally accompanied by a reference image based on the original image contents."
+            },
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "Each paragraph has at most one accompanying image, and each image appears only once."
+            },
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "As illustrated in Figure [Ref id=\"fig:intro\"], the interleaved summarization format enables a clear observation of both image referencing and summarization results, thus providing a foundation for the investigation of model capabilities."
+            },
+            {
+                "section": "§.§ Task Define",
+                "type": "paragraph",
+                "content": "The input comprises two modalities, first, the textual information of the scientific article is parsed into complex markdown format, preserving not only the main body of the text but also critical elements like tables and image captions."
+            },
+            {
+                "section": "§.§ Task Define",
+                "type": "paragraph",
+                "content": "Second, the accompanying images within the article are parsed into image format, retaining their original visual information."
+            },
+            {
+                "section": "§.§ Task Define",
+                "type": "paragraph",
+                "content": "These two modalities are then fed into the model in an interleaved manner, simulating the natural alternating text-image experience of human readers when engaging with scientific articles."
+            },
+            {
+                "section": "§.§ Task Define",
+                "type": "paragraph",
+                "content": "Following model processing, a structured output is generated, including: 1) Summary text: a concise summary of the article's core content divided into four fixed paragraphs, covering essential information such as background, main arguments, experimental results or analysis, and conclusions."
+            },
+            {
+                "section": "§.§ Task Define",
+                "type": "paragraph",
+                "content": "2) Referenced images: the model generates indices for referenced images along with their corresponding captions."
+            },
+            {
+                "section": "§.§ Task Define",
+                "type": "paragraph",
+                "content": "By matching these indices with the original image sequence, we parse the output into the final interleaved summary format."
+            },
+            {
+                "section": "§.§ Task Define",
+                "type": "paragraph",
+                "content": "This output format not only demands strong text summarization skills from the model but also requires accurate identification and referencing of key images, demonstrating a comprehensive understanding of multimodal information."
+            },
+            {
+                "section": "§.§ Task Define",
+                "type": "paragraph",
+                "content": "Additionally, the fixed paragraph structure provides clear criteria for evaluating the generation, facilitating both automated and human assessments."
+            }
+        ]
+    },
+    {
+        "question": "Explain the automated pipeline for interleaved summary generation and the multi-roll data verification: how key points are extracted, summaries and image references are produced, and how LLM/LLVM checks and human reviews ensure quality.",
+        "intent": [
+            "Procedural",
+            "Descriptive"
+        ],
+        "evidence": [
+            {
+                "section": "§.§ Interleaved Summary Generation [Label id=\"sec:3.3\"]",
+                "type": "paragraph",
+                "content": "As shown in Figure [Ref id=\"fig-main\"](a), to create a high-quality benchmark, we design a meticulous automated framework for generating summary texts and selecting referenced images."
+            },
+            {
+                "section": "§.§ Interleaved Summary Generation [Label id=\"sec:3.3\"]",
+                "type": "paragraph",
+                "content": "Initially, we extract key points for each summary paragraph from the original text, adhering to specific rules: ensuring no repetition of information, maintaining atomicity so each point is an independent, indivisible unit, verifying that each point is traceable back to the original text, and limiting the number of key points per paragraph to no more than 10."
+            },
+            {
+                "section": "§.§ Interleaved Summary Generation [Label id=\"sec:3.3\"]",
+                "type": "paragraph",
+                "content": "Once these key points are confirmed, we utilize advanced LLM like GPT-4o to synthesize them into coherent and comprehensive paragraph summaries."
+            },
+            {
+                "section": "§.§ Interleaved Summary Generation [Label id=\"sec:3.3\"]",
+                "type": "paragraph",
+                "content": "For image referencing, we provide the extracted key points, original images, and image captions to a powerful LVLM."
+            },
+            {
+                "section": "§.§ Interleaved Summary Generation [Label id=\"sec:3.3\"]",
+                "type": "paragraph",
+                "content": "The model first determines if an image is necessary to aid understanding of the summary paragraph."
+            },
+            {
+                "section": "§.§ Interleaved Summary Generation [Label id=\"sec:3.3\"]",
+                "type": "paragraph",
+                "content": "If deemed necessary, it selects the most suitable image based on criteria such as high relevance to the paragraph's content, providing crucial visual support that complements textual information, and ensuring that only one image is referenced per paragraph and each image is used only once."
+            },
+            {
+                "section": "§.§ Quality Control [Label id=\"sec:3.4\"]",
+                "type": "paragraph",
+                "content": "As shown in Figure [Ref id=\"fig-main\"](right), we introduce Multi-roll Data Verification, a semi-automatic quality control process combining LLMs and human expertise to ensure high benchmark quality."
+            },
+            {
+                "section": "§.§ Quality Control [Label id=\"sec:3.4\"]",
+                "type": "paragraph",
+                "content": "Initially, LLMs perform two rounds of validation: Round 1 checks for necessary key fields and at least one image reference in the summary format, while Round 2 ensures semantic integrity by identifying repetitive or invalid content."
+            },
+            {
+                "section": "§.§ Quality Control [Label id=\"sec:3.4\"]",
+                "type": "paragraph",
+                "content": "Following LLM validation, domain experts conduct thorough reviews, spending at least 20 minutes on each document to correct any hallucinations or semantic distortions."
+            },
+            {
+                "section": "§.§ Quality Control [Label id=\"sec:3.4\"]",
+                "type": "paragraph",
+                "content": "They also refine image references to align with human reading habits."
+            },
+            {
+                "section": "§.§ Quality Control [Label id=\"sec:3.4\"]",
+                "type": "paragraph",
+                "content": "Additionally, annotators cross-check each other’s work, with primary reviewer resolving any disagreements to maintain consistency."
+            },
+            {
+                "section": "§.§ Quality Control [Label id=\"sec:3.4\"]",
+                "type": "paragraph",
+                "content": "This rigorous process ensures a high-quality, reliable benchmark for advancing multimodal document understanding."
+            }
+        ]
+    },
+    {
+        "question": "Outline the two-stage training of M-DocSum-7B: summarize the goals and settings of Stage 1 (instruction tuning) and the construction, filtering, objective, and training settings of Stage 2 (DPO).",
+        "intent": [
+            "Procedural",
+            "Descriptive"
+        ],
+        "evidence": [
+            {
+                "section": "§ TRAINING",
+                "type": "paragraph",
+                "content": "After establishing the InterSum-Bench, as shown in Figure [Ref id=\"fig-main\"](b), we initialize M-DocSum-7B with the weights from Qwen2-VL and adopt a two-stage training strategy."
+            },
+            {
+                "section": "§.§ Stage 1: Instruction-Tuning",
+                "type": "paragraph",
+                "content": "During this stage, our primary goal is to enhance the accuracy and comprehensiveness of the model in extracting key points for summary generation, while ensuring that the referenced images are appropriate and well-structured."
+            },
+            {
+                "section": "§.§ Stage 1: Instruction-Tuning",
+                "type": "paragraph",
+                "content": "To achieve this, we utilize the training set generated by the automated framework described in Section [Ref id=\"sec:3.3\"]."
+            },
+            {
+                "section": "§.§ Stage 1: Instruction-Tuning",
+                "type": "paragraph",
+                "content": "We train the model for one epoch on the training set using 64 H800 GPUs, configuring all components except the ViT to be trainable."
+            },
+            {
+                "section": "§.§ Stage 1: Instruction-Tuning",
+                "type": "paragraph",
+                "content": "For each image, we set the maximum pixels equal to the minimum pixels."
+            },
+            {
+                "section": "§.§ Stage 1: Instruction-Tuning",
+                "type": "paragraph",
+                "content": "The globe batch size is set to 64, max length is set to 24k, and the learning rate is configured to 1e-5."
+            },
+            {
+                "section": "§.§ Stage 2: Direct Preference Optimization",
+                "type": "paragraph",
+                "content": "In this stage, we introduce a novel method for constructing preference data."
+            },
+            {
+                "section": "§.§ Stage 2: Direct Preference Optimization",
+                "type": "paragraph",
+                "content": "By conducting a second-stage DPO training on this data, we can further enhance the performance and robustness of the model."
+            },
+            {
+                "section": "§.§ Stage 2: Direct Preference Optimization",
+                "type": "paragraph",
+                "content": "The modifications include: (1) Shuffling Image Order: Altering the order of images without providing image indices. (2) Adding Constraints: Requiring each paragraph to include an image reference, disallowing no selection. (3) Reducing Information: Providing only the abstract and introduction paragraphs of the original article."
+            },
+            {
+                "section": "§.§ Stage 2: Direct Preference Optimization",
+                "type": "paragraph",
+                "content": "A preference data pair is considered standard if it satisfies the following formula: \\begin{equation} Δ TS > 0  and  Δ IS > 0  and  Δ TS + Δ IS > δ, \\end{equation} where the $Δ TS$ and $Δ IS$ represent the differences in TS and IS between $y$ and $y$, and $δ$ is an adjustable threshold that controls the margin."
+            },
+            {
+                "section": "§.§ Stage 2: Direct Preference Optimization",
+                "type": "paragraph",
+                "content": "The final policy model is optimized using the following loss function: \\begin{equation} ℒ_{DPO} = -   𝔼_{(x, y_w, y_l) ∼𝒟} [    logσ( βlogπ_θ(y_w|x)/π_{ref}(y_w|x) - βlogπ_θ(y_l|x)/π_{ref}(y_l|x)) ], \\end{equation} where $π_{ref}(y_w|x)$ denotes the model obtained during the stage 1."
+            },
+            {
+                "section": "§.§ Stage 2: Direct Preference Optimization",
+                "type": "paragraph",
+                "content": "We train M-DocSum-7B on 64 H800 GPUs, loading only one preference data pair per GPU per training step."
+            },
+            {
+                "section": "§.§ Stage 2: Direct Preference Optimization",
+                "type": "paragraph",
+                "content": "Global batch size is set to 64, the learning rate is set to 1e-6, and β is set to 0.2."
+            },
+            {
+                "section": "§.§ Stage 2: Direct Preference Optimization",
+                "type": "paragraph",
+                "content": "All training processes utilize the DeepSpeed acceleration framework for efficiency."
+            }
+        ]
+    },
+    {
+        "question": "Summarize the observed performance trends and their implications: how image/text scores vary by paragraph, context length, and image count, and how open-source and closed-source models differ.",
+        "intent": [
+            "Comparative",
+            "Evaluative",
+            "Causal",
+            "Descriptive"
+        ],
+        "evidence": [
+            {
+                "section": "§.§.§ Paragraph-wise Performance Variations",
+                "type": "paragraph",
+                "content": "Figure [Ref id=\"fig:analysis\"](a) reveals that models more accurately reference images in earlier paragraphs, with accuracy declining in later sections."
+            },
+            {
+                "section": "§.§.§ Paragraph-wise Performance Variations",
+                "type": "paragraph",
+                "content": "Figure [Ref id=\"fig:analysis\"](b) indicates that the task difficulty is well-calibrated with an average score around 0.55, showing distinct difficulty levels across paragraphs."
+            },
+            {
+                "section": "§.§.§ Paragraph-wise Performance Variations",
+                "type": "paragraph",
+                "content": "Paragraph 4 scores the highest, reflecting strong summarization capabilities, likely due to its structured and key information-rich nature."
+            },
+            {
+                "section": "§.§.§ Paragraph-wise Performance Variations",
+                "type": "paragraph",
+                "content": "Paragraphs 1 and 3 (Background and Experimental Design) score lower, possibly because of their extensive detail and background information, challenging models in extraction and summarization."
+            },
+            {
+                "section": "§.§.§ Paragraph-wise Performance Variations",
+                "type": "paragraph",
+                "content": "The consistent trend observed across all models indicates that our paragraph and difficulty settings are reasonable and our evaluation is stable, leading to highly consistent results."
+            },
+            {
+                "section": "§.§.§ Influence of Context Length on Performance",
+                "type": "paragraph",
+                "content": "Figures [Ref id=\"fig:analysis\"](c) and (d) illustrate a clear trend: as the context length increases, both text and image scores decrease."
+            },
+            {
+                "section": "§.§.§ Influence of Context Length on Performance",
+                "type": "paragraph",
+                "content": "Notably, the decline in image scores is more precipitous than that of text scores."
+            },
+            {
+                "section": "§.§.§ Influence of Context Length on Performance",
+                "type": "paragraph",
+                "content": "Furthermore, a performance gap is observed between open-source and closed-source models."
+            },
+            {
+                "section": "§.§.§ Influence of Context Length on Performance",
+                "type": "paragraph",
+                "content": "Open-source models exhibit a steeper performance degradation with increasing context length, while closed-source models demonstrate greater robustness."
+            },
+            {
+                "section": "§.§.§ Impact of Image Quantity on Performance",
+                "type": "paragraph",
+                "content": "Figure [Ref id=\"fig:analysis\"](e) reveals a significant decrease in image referencing scores across all models as the number of images per document increases."
+            },
+            {
+                "section": "§.§.§ Impact of Image Quantity on Performance",
+                "type": "paragraph",
+                "content": "Figure [Ref id=\"fig:analysis\"](f) illustrates that leading closed-source models sustain stable text scores irrespective of the image count."
+            },
+            {
+                "section": "§.§.§ Impact of Image Quantity on Performance",
+                "type": "paragraph",
+                "content": "Conversely, open-source models, along with certain closed-source models, show a deterioration in text quality as the number of images grows, suggesting limitations in their multimodal integration capabilities, potentially attributable to constraints in model size and training data."
+            }
+        ]
+    }
+]

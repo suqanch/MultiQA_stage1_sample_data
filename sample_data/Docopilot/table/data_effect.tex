@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\setlength{\tabcolsep}{8pt}
+\footnotesize
+    \begin{tabular}{lcc}
+    \toprule
+    Models                                                & Acc    & F1    \\
+    \midrule
+    Baseline (InternVL2-2B~\cite{InternVL2})              & 10.5   & 10.8  \\
+    -- Variant1: SFT using data recipe w/o \dataname      & 18.4   & 9.4   \\
+    -- Variant2: Variant1 + our Sci-Hub data              & 18.5   & 15.2  \\
+    -- Variant3: Variant2 + our Arxiv data                & 20.5   & 15.5  \\
+    \rowcolor{gray!15}
+    \modelname-2B: Variant3 + our OpenReview data         & 21.8   & 16.0  \\
+    \bottomrule
+    \end{tabular}
+    \caption{\textbf{Ablation study on the data recipe.}
+    We evaluate the effectiveness of the training data from different sources on MMLongBench-Doc. Our \dataname can consistently enhance the ability of the model to understand multi-page documents.}
+    \label{tab:data_effect}
+\end{table}

@@ -1,0 +1,46 @@
+\begin{table*}[t] % Use [t] to place at the top of the next page if necessary
+\centering
+% \caption{Performance Comparisons under Different Conditions} % Overall caption
+\begin{minipage}{0.4\textwidth}
+  \centering
+  \caption{Image Score and Decline Rates (Shuffled)} % Sub-caption
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{lcc}
+    \toprule
+    Models                      & Original IS & Shuffled IS \\
+    \midrule
+    GPT-4o                   & 0.638          & 0.533           \\
+    Gemini-pro                 & 0.553          & 0.501           \\
+    Claude-3-5-sonnet & 0.589          & 0.512           \\
+    Qwen2.5-VL-72B             & 0.517          & 0.491           \\
+    Qwen2-vl-72B               & 0.485          & 0.399           \\
+    Qwen2.5-vl-7B               & 0.423          & 0.373           \\
+    Qwen2-vl-7B                & 0.421          & 0.302           \\
+    Stage-1       & 0.615          & 0.450           \\
+    M-DocSum-7B      & 0.636          & 0.483           \\
+    M-DocSum-7B w/o stage-1                 & 0.556          & 0.405         \\
+    \bottomrule
+    \end{tabular}
+  }
+  \label{tab:shuffle}
+\end{minipage}\hspace{0.05\textwidth}
+\begin{minipage}{0.4\textwidth}
+  \centering
+  \caption{Text Score and Decline Rates (W/o Abstract)} % Sub-caption
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{lcc}
+    \toprule
+    Models                     & Original TS & W/o abstract TS \\
+    \midrule
+    Qwen2.5-VL-7B                       & 0.517	&0.418           \\
+    Qwen2-VL-7B         &  0.449&	0.402           \\
+    InternVL2-8B & 0.513&	0.435          \\
+    InternVL2.5-8B             & 0.529&	0.488           \\
+    Stage-1                & 0.660&	0.605          \\
+    M-DocSum-7B               & 0.644&	0.615         \\
+    \bottomrule
+    \end{tabular}
+  }
+  \label{tab:abs}
+\end{minipage}
+\end{table*}

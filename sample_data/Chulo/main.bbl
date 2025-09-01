@@ -1,0 +1,292 @@
+\begin{thebibliography}{58}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Anil et~al.(2023)Anil, Dai, Firat, Johnson, Lepikhin, Passos, Shakeri, Taropa, Bailey, Chen et~al.}]{anil2023palm}
+Rohan Anil, Andrew~M Dai, Orhan Firat, Melvin Johnson, Dmitry Lepikhin, Alexandre Passos, Siamak Shakeri, Emanuel Taropa, Paige Bailey, Zhifeng Chen, et~al. 2023.
+\newblock Palm 2 technical report.
+\newblock \emph{arXiv preprint arXiv:2305.10403}.
+
+\bibitem[{Beltagy et~al.(2020)Beltagy, Peters, and Cohan}]{beltagy2020longformer}
+Iz~Beltagy, Matthew~E Peters, and Arman Cohan. 2020.
+\newblock Longformer: The long-document transformer.
+\newblock \emph{arXiv preprint arXiv:2004.05150}.
+
+\bibitem[{Bennani-Smires et~al.(2018)Bennani-Smires, Musat, Hossmann, Baeriswyl, and Jaggi}]{bennani2018simple}
+Kamil Bennani-Smires, Claudiu Musat, Andreea Hossmann, Michael Baeriswyl, and Martin Jaggi. 2018.
+\newblock Simple unsupervised keyphrase extraction using sentence embeddings.
+\newblock In \emph{Proceedings of the 22nd Conference on Computational Natural Language Learning}, pages 221--229.
+
+\bibitem[{Bhattacharya et~al.(2023)Bhattacharya, Bhat, Tripathy, Bansal, and Choudhary}]{bhattacharya2023improving}
+Medha Bhattacharya, Swati Bhat, Sirshasree Tripathy, Anvita Bansal, and Monika Choudhary. 2023.
+\newblock Improving biomedical named entity recognition through transfer learning and asymmetric tri-training.
+\newblock \emph{Procedia Computer Science}, 218:2723--2733.
+
+\bibitem[{Bougouin et~al.(2013)Bougouin, Boudin, and Daille}]{bougouin2013topicrank}
+Adrien Bougouin, Florian Boudin, and B{\'e}atrice Daille. 2013.
+\newblock Topicrank: Graph-based topic ranking for keyphrase extraction.
+\newblock In \emph{International joint conference on natural language processing (IJCNLP)}, pages 543--551.
+
+\bibitem[{Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal, Neelakantan, Shyam, Sastry, Askell et~al.}]{brown2020language}
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared~D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et~al. 2020.
+\newblock Language models are few-shot learners.
+\newblock \emph{Advances in neural information processing systems}, 33:1877--1901.
+
+\bibitem[{Campos et~al.(2020)Campos, Mangaravite, Pasquali, Jorge, Nunes, and Jatowt}]{campos2020yake}
+Ricardo Campos, V{\'\i}tor Mangaravite, Arian Pasquali, Al{\'\i}pio Jorge, C{\'e}lia Nunes, and Adam Jatowt. 2020.
+\newblock Yake! keyword extraction from single documents using multiple local features.
+\newblock \emph{Information Sciences}, 509:257--289.
+
+\bibitem[{{\c{C}}etinda{\u{g}} et~al.(2023){\c{C}}etinda{\u{g}}, Yaz{\i}c{\i}o{\u{g}}lu, and Ko{\c{c}}}]{ccetindaug2023named}
+Can {\c{C}}etinda{\u{g}}, Berkay Yaz{\i}c{\i}o{\u{g}}lu, and Aykut Ko{\c{c}}. 2023.
+\newblock Named-entity recognition in turkish legal texts.
+\newblock \emph{Natural Language Engineering}, 29(3):615--642.
+
+\bibitem[{Chalkidis et~al.(2019)Chalkidis, Fergadiotis, Malakasiotis, and Androutsopoulos}]{chalkidis2019large}
+Ilias Chalkidis, Emmanouil Fergadiotis, Prodromos Malakasiotis, and Ion Androutsopoulos. 2019.
+\newblock Large-scale multi-label text classification on eu legislation.
+\newblock In \emph{Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics}, pages 6314--6322.
+
+\bibitem[{Child et~al.(2019)Child, Gray, Radford, and Sutskever}]{child2019generating}
+Rewon Child, Scott Gray, Alec Radford, and Ilya Sutskever. 2019.
+\newblock Generating long sequences with sparse transformers.
+\newblock \emph{arXiv preprint arXiv:1904.10509}.
+
+\bibitem[{Choromanski et~al.(2020)Choromanski, Likhosherstov, Dohan, Song, Gane, Sarlos, Hawkins, Davis, Belanger, Colwell et~al.}]{choromanski2020masked}
+Krzysztof Choromanski, Valerii Likhosherstov, David Dohan, Xingyou Song, Andreea Gane, Tamas Sarlos, Peter Hawkins, Jared Davis, David Belanger, Lucy Colwell, et~al. 2020.
+\newblock Masked language modeling for proteins via linearly scalable long-context transformers.
+\newblock \emph{arXiv preprint arXiv:2006.03555}.
+
+\bibitem[{Chowdhery et~al.(2023)Chowdhery, Narang, Devlin, Bosma, Mishra, Roberts, Barham, Chung, Sutton, Gehrmann et~al.}]{chowdhery2023palm}
+Aakanksha Chowdhery, Sharan Narang, Jacob Devlin, Maarten Bosma, Gaurav Mishra, Adam Roberts, Paul Barham, Hyung~Won Chung, Charles Sutton, Sebastian Gehrmann, et~al. 2023.
+\newblock Palm: Scaling language modeling with pathways.
+\newblock \emph{Journal of Machine Learning Research}, 24(240):1--113.
+
+\bibitem[{Dagdelen et~al.(2024)Dagdelen, Dunn, Lee, Walker, Rosen, Ceder, Persson, and Jain}]{dagdelen2024structured}
+John Dagdelen, Alexander Dunn, Sanghoon Lee, Nicholas Walker, Andrew~S Rosen, Gerbrand Ceder, Kristin~A Persson, and Anubhav Jain. 2024.
+\newblock Structured information extraction from scientific text with large language models.
+\newblock \emph{Nature Communications}, 15(1):1418.
+
+\bibitem[{Dai et~al.(2019)Dai, Yang, Yang, Carbonell, Le, and Salakhutdinov}]{dai2019transformer}
+Zihang Dai, Zhilin Yang, Yiming Yang, Jaime~G Carbonell, Quoc Le, and Ruslan Salakhutdinov. 2019.
+\newblock Transformer-xl: Attentive language models beyond a fixed-length context.
+\newblock In \emph{Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics}, pages 2978--2988.
+
+\bibitem[{Ding et~al.(2020)Ding, Zhou, Yang, and Tang}]{ding2020cogltx}
+Ming Ding, Chang Zhou, Hongxia Yang, and Jie Tang. 2020.
+\newblock Cogltx: Applying bert to long texts.
+\newblock \emph{Advances in Neural Information Processing Systems}, 33:12792--12804.
+
+\bibitem[{Dubey et~al.(2024)Dubey, Jauhri, Pandey, Kadian, Al-Dahle, Letman, Mathur, Schelten, Yang, Fan et~al.}]{dubey2024llama}
+Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Amy Yang, Angela Fan, et~al. 2024.
+\newblock The llama 3 herd of models.
+\newblock \emph{arXiv preprint arXiv:2407.21783}.
+
+\bibitem[{El-Beltagy and Rafea(2009)}]{el2009kp}
+Samhaa~R El-Beltagy and Ahmed Rafea. 2009.
+\newblock Kp-miner: A keyphrase extraction system for english and arabic documents.
+\newblock \emph{Information systems}, 34(1):132--144.
+
+\bibitem[{Florescu and Caragea(2017)}]{florescu2017positionrank}
+Corina Florescu and Cornelia Caragea. 2017.
+\newblock Positionrank: An unsupervised approach to keyphrase extraction from scholarly documents.
+\newblock In \emph{Proceedings of the 55th annual meeting of the association for computational linguistics (volume 1: long papers)}, pages 1105--1115.
+
+\bibitem[{Hasan and Ng(2014)}]{hasan-ng-2014-automatic}
+Kazi~Saidul Hasan and Vincent Ng. 2014.
+\newblock \href {https://doi.org/10.3115/v1/P14-1119} {Automatic keyphrase extraction: A survey of the state of the art}.
+\newblock In \emph{Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}, pages 1262--1273, Baltimore, Maryland. Association for Computational Linguistics.
+
+\bibitem[{Hu et~al.(2024)Hu, Chen, Du, Peng, Keloth, Zuo, Zhou, Li, Jiang, Lu et~al.}]{hu2024improving}
+Yan Hu, Qingyu Chen, Jingcheng Du, Xueqing Peng, Vipina~Kuttichi Keloth, Xu~Zuo, Yujia Zhou, Zehan Li, Xiaoqian Jiang, Zhiyong Lu, et~al. 2024.
+\newblock Improving large language models for clinical named entity recognition via prompt engineering.
+\newblock \emph{Journal of the American Medical Informatics Association}, page ocad259.
+
+\bibitem[{Hutchins et~al.(2022)Hutchins, Schlag, Wu, Dyer, and Neyshabur}]{hutchins2022block}
+DeLesley Hutchins, Imanol Schlag, Yuhuai Wu, Ethan Dyer, and Behnam Neyshabur. 2022.
+\newblock Block-recurrent transformers.
+\newblock \emph{Advances in Neural Information Processing Systems}, 35:33248--33261.
+
+\bibitem[{Jaiswal and Milios(2023)}]{jaiswal2023breaking}
+Aman Jaiswal and Evangelos Milios. 2023.
+\newblock Breaking the token barrier: Chunking and convolution for efficient long text classification with bert.
+\newblock \emph{arXiv preprint arXiv:2310.20558}.
+
+\bibitem[{Kenton and Toutanova(2019)}]{kenton2019bert}
+Jacob Devlin Ming-Wei~Chang Kenton and Lee~Kristina Toutanova. 2019.
+\newblock Bert: Pre-training of deep bidirectional transformers for language understanding.
+\newblock In \emph{Proceedings of NAACL-HLT}, pages 4171--4186.
+
+\bibitem[{Kiesel et~al.(2019)Kiesel, Mestre, Shukla, Vincent, Adineh, Corney, Stein, and Potthast}]{kiesel2019semeval}
+Johannes Kiesel, Maria Mestre, Rishabh Shukla, Emmanuel Vincent, Payam Adineh, David Corney, Benno Stein, and Martin Potthast. 2019.
+\newblock Semeval-2019 task 4: Hyperpartisan news detection.
+\newblock In \emph{Proceedings of the 13th International Workshop on Semantic Evaluation}, pages 829--839.
+
+\bibitem[{Kong et~al.(2023)Kong, Zhao, Chen, Li, Qin, Sun, and Bai}]{kong-etal-2023-promptrank}
+Aobo Kong, Shiwan Zhao, Hao Chen, Qicheng Li, Yong Qin, Ruiqi Sun, and Xiaoyan Bai. 2023.
+\newblock \href {https://doi.org/10.18653/v1/2023.acl-long.545} {{P}rompt{R}ank: Unsupervised keyphrase extraction using prompt}.
+\newblock In \emph{Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}, pages 9788--9801, Toronto, Canada. Association for Computational Linguistics.
+
+\bibitem[{Lewis et~al.(2020)Lewis, Liu, Goyal, Ghazvininejad, Mohamed, Levy, Stoyanov, and Zettlemoyer}]{lewis2020bart}
+Mike Lewis, Yinhan Liu, Naman Goyal, Marjan Ghazvininejad, Abdelrahman Mohamed, Omer Levy, Veselin Stoyanov, and Luke Zettlemoyer. 2020.
+\newblock Bart: Denoising sequence-to-sequence pre-training for natural language generation, translation, and comprehension.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics}, pages 7871--7880.
+
+\bibitem[{Li et~al.(2023{\natexlab{a}})Li, Hovy, and Lau}]{li2023towards}
+Miao Li, Eduard Hovy, and Jey~Han Lau. 2023{\natexlab{a}}.
+\newblock Towards summarizing multiple documents with hierarchical relationships.
+\newblock \emph{arXiv preprint arXiv:2305.01498}.
+
+\bibitem[{Li et~al.(2023{\natexlab{b}})Li, Li, Luo, Xie, Lee, Zhao, Wang, and Li}]{li-etal-2023-recurrent}
+Xianming Li, Zongxi Li, Xiaotian Luo, Haoran Xie, Xing Lee, Yingbin Zhao, Fu~Lee Wang, and Qing Li. 2023{\natexlab{b}}.
+\newblock \href {https://doi.org/10.18653/v1/2023.findings-acl.188} {Recurrent attention networks for long-text modeling}.
+\newblock In \emph{Findings of the Association for Computational Linguistics: ACL 2023}, pages 3006--3019, Toronto, Canada. Association for Computational Linguistics.
+
+\bibitem[{Li et~al.(2025)Li, Kim, Park, and Han}]{li-etal-2025-midas}
+Yan Li, So-Eon Kim, Seong-Bae Park, and Caren Han. 2025.
+\newblock \href {https://aclanthology.org/2025.findings-naacl.445/} {{MIDAS}: Multi-level intent, domain, and slot knowledge distillation for multi-turn {NLU}}.
+\newblock In \emph{Findings of the Association for Computational Linguistics: NAACL 2025}, pages 7989--8012, Albuquerque, New Mexico. Association for Computational Linguistics.
+
+\bibitem[{Lin and Zeldes(2021)}]{lin-zeldes-2021-wikigum}
+Jessica Lin and Amir Zeldes. 2021.
+\newblock \href {https://aclanthology.org/2021.law-1.18} {{W}iki{GUM}: Exhaustive entity linking for wikification in 12 genres}.
+\newblock In \emph{Proceedings of The Joint 15th Linguistic Annotation Workshop (LAW) and 3rd Designing Meaning Representations (DMR) Workshop (LAW-DMR 2021)}, pages 170--175, Punta Cana, Dominican Republic.
+
+\bibitem[{Liu et~al.(2009)Liu, Li, Zheng, and Sun}]{liu2009clustering}
+Zhiyuan Liu, Peng Li, Yabin Zheng, and Maosong Sun. 2009.
+\newblock Clustering to find exemplar terms for keyphrase extraction.
+\newblock In \emph{Proceedings of the 2009 conference on empirical methods in natural language processing}, pages 257--266.
+
+\bibitem[{Mengliev et~al.(2024)Mengliev, Barakhnin, Abdurakhmonova, and Eshkulov}]{mengliev2024developing}
+Davlatyor Mengliev, Vladimir Barakhnin, Nilufar Abdurakhmonova, and Mukhriddin Eshkulov. 2024.
+\newblock Developing named entity recognition algorithms for uzbek: Dataset insights and implementation.
+\newblock \emph{Data in Brief}, 54:110413.
+
+\bibitem[{Mihalcea and Tarau(2004)}]{mihalcea2004textrank}
+Rada Mihalcea and Paul Tarau. 2004.
+\newblock Textrank: Bringing order into text.
+\newblock In \emph{Proceedings of the 2004 conference on empirical methods in natural language processing}, pages 404--411.
+
+\bibitem[{Ouyang et~al.(2022)Ouyang, Wu, Jiang, Almeida, Wainwright, Mishkin, Zhang, Agarwal, Slama, Ray et~al.}]{ouyang2022training}
+Long Ouyang, Jeffrey Wu, Xu~Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, et~al. 2022.
+\newblock Training language models to follow instructions with human feedback.
+\newblock \emph{Advances in neural information processing systems}, 35:27730--27744.
+
+\bibitem[{Pappagari et~al.(2019)Pappagari, Zelasko, Villalba, Carmiel, and Dehak}]{pappagari2019hierarchical}
+Raghavendra Pappagari, Piotr Zelasko, Jes{\'u}s Villalba, Yishay Carmiel, and Najim Dehak. 2019.
+\newblock Hierarchical transformers for long document classification.
+\newblock In \emph{2019 IEEE automatic speech recognition and understanding workshop (ASRU)}, pages 838--844. IEEE.
+
+\bibitem[{Park et~al.(2022)Park, Vyas, and Shah}]{park2022efficient}
+Hyunji Park, Yogarshi Vyas, and Kashif Shah. 2022.
+\newblock Efficient classification of long documents using transformers.
+\newblock In \emph{Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)}, pages 702--709.
+
+\bibitem[{Park et~al.(2023)Park, Lee, Yang, Park, and Sohn}]{park2023web}
+Yeon-Ji Park, Min-a Lee, Geun-Je Yang, Soo~Jun Park, and Chae-Bong Sohn. 2023.
+\newblock Web interface of ner and re with bert for biomedical text mining.
+\newblock \emph{Applied Sciences}, 13(8):5163.
+
+\bibitem[{Peng et~al.(2021)Peng, Pappas, Yogatama, Schwartz, Smith, and Kong}]{peng2021random}
+H~Peng, N~Pappas, D~Yogatama, R~Schwartz, N~Smith, and L~Kong. 2021.
+\newblock Random feature attention.
+\newblock In \emph{International Conference on Learning Representations (ICLR 2021)}.
+
+\bibitem[{Pradhan et~al.(2013)Pradhan, Moschitti, Xue, Ng, Bj{\"o}rkelund, Uryupina, Zhang, and Zhong}]{pradhan-etal-2013-towards}
+Sameer Pradhan, Alessandro Moschitti, Nianwen Xue, Hwee~Tou Ng, Anders Bj{\"o}rkelund, Olga Uryupina, Yuchen Zhang, and Zhi Zhong. 2013.
+\newblock \href {https://aclanthology.org/W13-3516} {Towards robust linguistic analysis using {O}nto{N}otes}.
+\newblock In \emph{Proceedings of the Seventeenth Conference on Computational Natural Language Learning}, pages 143--152, Sofia, Bulgaria. Association for Computational Linguistics.
+
+\bibitem[{Radford(2018)}]{radford2018improving}
+Alec Radford. 2018.
+\newblock Improving language understanding by generative pre-training.
+
+\bibitem[{Radford et~al.(2019)Radford, Wu, Child, Luan, Amodei, Sutskever et~al.}]{radford2019language}
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, Ilya Sutskever, et~al. 2019.
+\newblock Language models are unsupervised multitask learners.
+\newblock \emph{OpenAI blog}, 1(8):9.
+
+\bibitem[{Rashkin et~al.(2017)Rashkin, Choi, Jang, Volkova, and Choi}]{rashkin2017truth}
+Hannah Rashkin, Eunsol Choi, Jin~Yea Jang, Svitlana Volkova, and Yejin Choi. 2017.
+\newblock Truth of varying shades: Analyzing language in fake news and political fact-checking.
+\newblock In \emph{Proceedings of the 2017 conference on empirical methods in natural language processing}, pages 2931--2937.
+
+\bibitem[{Roy et~al.(2021)Roy, Saffar, Vaswani, and Grangier}]{roy2021efficient}
+Aurko Roy, Mohammad Saffar, Ashish Vaswani, and David Grangier. 2021.
+\newblock Efficient content-based sparse attention with routing transformers.
+\newblock \emph{Transactions of the Association for Computational Linguistics}, 9:53--68.
+
+\bibitem[{Sun et~al.(2020)Sun, Qiu, Zheng, Wang, and Zhang}]{sun2020sifrank}
+Yi~Sun, Hangping Qiu, Yu~Zheng, Zhongwei Wang, and Chaoran Zhang. 2020.
+\newblock Sifrank: a new baseline for unsupervised keyphrase extraction based on pre-trained language model.
+\newblock \emph{IEEE Access}, 8:10896--10906.
+
+\bibitem[{Touvron et~al.(2023{\natexlab{a}})Touvron, Lavril, Izacard, Martinet, Lachaux, Lacroix, Rozi{\`e}re, Goyal, Hambro, Azhar et~al.}]{touvron2023llama}
+Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lachaux, Timoth{\'e}e Lacroix, Baptiste Rozi{\`e}re, Naman Goyal, Eric Hambro, Faisal Azhar, et~al. 2023{\natexlab{a}}.
+\newblock Llama: Open and efficient foundation language models.
+\newblock \emph{arXiv preprint arXiv:2302.13971}.
+
+\bibitem[{Touvron et~al.(2023{\natexlab{b}})Touvron, Martin, Stone, Albert, Almahairi, Babaei, Bashlykov, Batra, Bhargava, Bhosale et~al.}]{touvron2023llama2}
+Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhosale, et~al. 2023{\natexlab{b}}.
+\newblock Llama 2: Open foundation and fine-tuned chat models.
+\newblock \emph{arXiv preprint arXiv:2307.09288}.
+
+\bibitem[{Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin}]{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan~N Gomez, {\L}ukasz Kaiser, and Illia Polosukhin. 2017.
+\newblock Attention is all you need.
+\newblock \emph{Advances in neural information processing systems}, 30.
+
+\bibitem[{Wan and Xiao(2008)}]{wan2008single}
+Xiaojun Wan and Jianguo Xiao. 2008.
+\newblock Single document keyphrase extraction using neighborhood knowledge.
+
+\bibitem[{Wang et~al.(2023)Wang, Sun, Li, Ouyang, Wu, Zhang, Li, and Wang}]{wang2023gpt}
+Shuhe Wang, Xiaofei Sun, Xiaoya Li, Rongbin Ouyang, Fei Wu, Tianwei Zhang, Jiwei Li, and Guoyin Wang. 2023.
+\newblock Gpt-ner: Named entity recognition via large language models.
+\newblock \emph{arXiv preprint arXiv:2304.10428}.
+
+\bibitem[{Wang et~al.(2020)Wang, Li, Khabsa, Fang, and Ma}]{wang2020linformer}
+Sinong Wang, Belinda~Z Li, Madian Khabsa, Han Fang, and Hao Ma. 2020.
+\newblock Linformer: Self-attention with linear complexity.
+\newblock \emph{arXiv preprint arXiv:2006.04768}.
+
+\bibitem[{Wei et~al.(2021)Wei, Bosma, Zhao, Guu, Yu, Lester, Du, Dai, and Le}]{wei2021finetuned}
+Jason Wei, Maarten Bosma, Vincent~Y Zhao, Kelvin Guu, Adams~Wei Yu, Brian Lester, Nan Du, Andrew~M Dai, and Quoc~V Le. 2021.
+\newblock Finetuned language models are zero-shot learners.
+\newblock \emph{arXiv preprint arXiv:2109.01652}.
+
+\bibitem[{Won et~al.(2019)Won, Martins, and Raimundo}]{won2019automatic}
+Miguel Won, Bruno Martins, and Filipa Raimundo. 2019.
+\newblock Automatic extraction of relevant keyphrases for the study of issue competition.
+\newblock In \emph{International Conference on Computational Linguistics and Intelligent Text Processing}, pages 648--669. Springer.
+
+\bibitem[{Yu et~al.(2023)Yu, Li, Wang, and Xia}]{yu2023grounded}
+Jianfei Yu, Ziyan Li, Jieming Wang, and Rui Xia. 2023.
+\newblock Grounded multimodal named entity recognition on social media.
+\newblock In \emph{Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}, pages 9141--9154.
+
+\bibitem[{Yu and Ng(2018)}]{yu2018wikirank}
+Yang Yu and Vincent Ng. 2018.
+\newblock Wikirank: Improving keyphrase extraction based on background knowledge.
+\newblock \emph{arXiv preprint arXiv:1803.09000}.
+
+\bibitem[{Zaheer et~al.(2020)Zaheer, Guruganesh, Dubey, Ainslie, Alberti, Ontanon, Pham, Ravula, Wang, Yang et~al.}]{zaheer2020big}
+Manzil Zaheer, Guru Guruganesh, Kumar~Avinava Dubey, Joshua Ainslie, Chris Alberti, Santiago Ontanon, Philip Pham, Anirudh Ravula, Qifan Wang, Li~Yang, et~al. 2020.
+\newblock Big bird: Transformers for longer sequences.
+\newblock \emph{Advances in neural information processing systems}, 33:17283--17297.
+
+\bibitem[{Zhang et~al.(2023)Zhang, Yuan, Li, and Liu}]{zhang2023reducing}
+Xin Zhang, Jingling Yuan, Lin Li, and Jianquan Liu. 2023.
+\newblock Reducing the bias of visual objects in multimodal named entity recognition.
+\newblock In \emph{Proceedings of the Sixteenth ACM international conference on web search and data mining}, pages 958--966.
+
+\bibitem[{Zhang et~al.(2022)Zhang, Ni, Mao, Wu, Zhu, Deb, Awadallah, Radev, and Zhang}]{zhang2022summn}
+Yusen Zhang, Ansong Ni, Ziming Mao, Chen~Henry Wu, Chenguang Zhu, Budhaditya Deb, Ahmed Awadallah, Dragomir Radev, and Rui Zhang. 2022.
+\newblock Summn: A multi-stage summarization framework for long input dialogues and documents: A multi-stage summarization framework for long input dialogues and documents.
+\newblock In \emph{Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)}, pages 1592--1604.
+
+\bibitem[{Zhao et~al.(2021)Zhao, Bao, Wang, Zhou, Wu, He, and Zhou}]{zhao2021ror}
+Jing Zhao, Junwei Bao, Yifan Wang, Yongwei Zhou, Youzheng Wu, Xiaodong He, and Bowen Zhou. 2021.
+\newblock Ror: Read-over-read for long document machine reading comprehension.
+\newblock In \emph{Findings of the Association for Computational Linguistics: EMNLP 2021}, pages 1862--1872.
+
+\end{thebibliography}

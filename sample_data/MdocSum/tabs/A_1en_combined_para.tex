@@ -1,0 +1,24 @@
+
+\begin{table*}[t]
+\caption{TS and OMatch Across Different Models and Paragraphs}
+\centering
+\resizebox{0.85\textwidth}{!}{
+\begin{tabular}{l|cc|cc|cc|cc}
+\toprule
+\multirow{2}{*}{Model} & \multicolumn{2}{c|}{para 1} & \multicolumn{2}{c|}{para 2} & \multicolumn{2}{c|}{para 3} & \multicolumn{2}{c}{para 4} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7} \cmidrule(lr){8-9}
+ & TS & OMatch & TS & OMatch & TS & OMatch & TS & OMatch \\
+\midrule
+GPT-4o & 0.596 & 0.705 & 0.637 & 0.531 & 0.560 & 0.489 & 0.610 & 0.571 \\
+Gemini-Pro & 0.670 & 0.547 & 0.705 & 0.421 & 0.647 & 0.477 & 0.722 & 0.419 \\
+Claude-3-5-Sonnet & 0.623 & 0.628 & 0.658 & 0.458 & 0.589 & 0.496 & 0.685 & 0.448 \\
+Qwen2.5-VL-72B & 0.536 & 0.263 & 0.568 & 0.208 & 0.542 & 0.288 & 0.588 & 0.512 \\
+Qwen2-VL-72B & 0.475 & 0.447 & 0.586 & 0.372 & 0.438 & 0.423 & 0.485 & 0.600 \\
+Qwen2.5-VL-7B & 0.497 & 0.255 & 0.558 & 0.121 & 0.472 & 0.157 & 0.533 & 0.570 \\
+Qwen2-VL-7B & 0.433 & 0.518 & 0.498 & 0.293 & 0.375 & 0.214 & 0.479 & 0.194 \\
+
+\bottomrule
+\end{tabular}
+}
+\label{tab:para}
+\end{table*}

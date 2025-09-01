@@ -1,0 +1,16 @@
+\begin{abstract}
+We investigate a critical yet under-explored question in Large Vision-Language Models~(LVLMs): Do LVLMs genuinely comprehend interleaved image-text in the document?
+Existing document understanding benchmarks often assess LVLMs using question-answer formats, which are information-sparse and difficult to guarantee the coverage of long-range dependencies.
+To address this issue, we introduce a novel and challenging Multimodal Document Summarization Benchmark~(M-DocSum-Bench), which comprises 500 high-quality arXiv papers, along with interleaved multimodal summaries aligned with human preferences.
+M-DocSum-Bench is a reference-based generation task and necessitates the generation of interleaved image-text summaries using provided reference images, thereby simultaneously evaluating capabilities in understanding, reasoning, localization, and summarization within complex multimodal document scenarios.
+% Existing benchmarks often assess LVLMs using question-answer formats, which are information-sparse and difficult to guarantee the coverage of long-range dependencies.
+% In contrast, M-DocSum-Bench, a reference-based generation task, necessitates the generation of interleaved image-text summaries with reference-based images.
+% It simultaneously evaluates the capabilities of understanding, reasoning, localization, and summarization in multimodal document scenarios.
+To facilitate this benchmark, we develop an automated framework to construct summaries and propose a fine-grained evaluation method called M-DocEval.
+Moreover, we further develop a robust summarization baseline, i.e., M-DocSum-7B, by progressive two-stage training with diverse instruction and preference data.
+The extensive results on our M-DocSum-Bench reveal that the leading LVLMs struggle to maintain coherence and accurately integrate information within long and interleaved contexts, often exhibiting confusion between similar images and a lack of robustness. 
+Notably, M-DocSum-7B achieves state-of-the-art performance compared to larger and closed-source models (including GPT-4o, Gemini Pro, Claude-3.5-Sonnet and Qwen2.5-VL-72B, etc.), demonstrating the potential of LVLMs for improved interleaved image-text understanding. 
+The code, data, and models are available at \url{https://github.com/stepfun-ai/M-DocSum-Bench}.
+
+
+\end{abstract}

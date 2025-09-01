@@ -1,0 +1,401 @@
+[{
+  "caption": "Figure 9. Prompt template for summary generation.",
+  "captionBoundary": {
+    "x1": 213.130615234375,
+    "x2": 382.4075622558594,
+    "y1": 610.740966796875,
+    "y2": 615.9292602539062
+  },
+  "figType": "Figure",
+  "imageText": ["Please", "generate", "the", "four-paragraph", "summary,", "strictly", "adhering", "to", "all", "instructions", "provided", "in", "the", "system", "prompt.", "Remember", "to", "generate", "a", "**bolded**", "title", "at", "the", "beginning", "of", "each", "paragraph", "and", "output", "the", "result", "as", "a", "Python", "list", "in", "the", "format:", "`[summary1,", "summary2,", "summary3,", "summary4]`.", "Each", "element", "of", "the", "list", "should", "be", "a", "complete", "paragraph,", "including", "its", "title.", "Output:", "**Here", "are", "Key", "Points:**", "{key_points}", "**Original", "Article", "Text:**", "{txt}", "Here", "is", "the", "original", "article", "text", "and", "the", "key", "points", "for", "each", "of", "the", "four", "paragraphs", "I", "need", "you", "to", "summarize:", "8.", "**Output", "Only", "Summary:**", "Do", "not", "include", "any", "introductory", "remarks,", "concluding", "statements,", "explanations,", "or", "*any*", "text", "other", "than", "the", "Python", "list", "itself.", "Output", "*only*", "the", "list.", "7.", "**Output", "Format:**", "The", "final", "output", "*must*", "be", "a", "single", "Python", "list", "containing", "the", "four", "summary", "paragraphs", "(with", "titles)", "as", "strings.", "The", "format", "should", "be:", "`[summary1,", "summary2,", "summary3,", "summary4]`,", "where", "`summary1`,", "`summary2`,", "`summary3`,", "and", "`summary4`", "are", "the", "four", "generated", "paragraphs,", "*each", "including", "its", "bolded", "title*.", "6.", "**Titles:**", "For", "each", "paragraph,", "generate", "a", "short,", "descriptive", "title", "based", "on", "the", "provided", "key", "points.", "The", "title", "should", "accurately", "reflect", "the", "main", "topic", "of", "the", "paragraph.", "The", "title", "*must*", "be", "placed", "at", "the", "very", "beginning", "of", "the", "paragraph", "and", "be", "formatted", "in", "**bold**.", "5.", "**Integration:**", "Do", "not", "explicitly", "mention", "or", "list", "the", "key", "points", "(e.g.,", "\"Key", "point", "1", "says...\").", "Instead,", "weave", "the", "information", "from", "the", "key", "points", "seamlessly", "into", "the", "prose", "of", "the", "summary.", "4.", "**Paragraph", "Structure:**", "Your", "output", "must", "consist", "of", "exactly", "four", "paragraphs.", "3.", "**Verifiability", "(Grounding):**", "Every", "statement", "in", "your", "generated", "summary", "*must*", "be", "directly", "and", "explicitly", "supported", "by", "the", "provided", "original", "article", "text.", "A", "reader", "should", "be", "able", "to", "easily", "find", "the", "source", "of", "each", "piece", "of", "information", "in", "the", "original", "text.", "Avoid", "any", "claims", "or", "conclusions", "not", "found", "in", "the", "article.", "2.", "**Fluency", "and", "Coherence:**", "The", "rewritten", "paragraphs", "must", "be", "easy", "to", "read", "and", "understand.", "Sentences", "should", "flow", "logically,", "and", "transitions", "between", "ideas", "should", "be", "smooth.", "Combine,", "reorder,", "and", "rephrase", "the", "key", "points", "as", "needed", "to", "achieve", "a", "natural", "and", "cohesive", "style.", "1.", "**Semantic", "Preservation:**", "The", "meaning", "of", "the", "original", "key", "points", "must", "be", "completely", "preserved.", "Do", "not", "introduce", "any", "new", "information,", "interpretations,", "or", "inferences", "that", "are", "not", "directly", "stated", "in", "the", "provided", "key", "points.", "Your", "output", "*must*", "adhere", "to", "the", "following", "strict", "rules:", "You", "are", "a", "scientific", "summarization", "assistant.", "Your", "role", "is", "to", "take", "disjointed", "key", "points", "from", "a", "scientific", "article", "and", "rewrite", "them", "into", "fluent,", "coherent,", "and", "grammatically", "correct", "paragraphs,", "each", "with", "a", "concise", "title.", "You", "are", "provided", "with", "the", "original", "article", "text", "and", "a", "set", "of", "key", "points", "for", "each", "of", "four", "paragraphs."],
+  "name": "9",
+  "page": 14,
+  "regionBoundary": {
+    "x1": 93.84,
+    "x2": 501.12,
+    "y1": 214.79999999999998,
+    "y2": 600.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure9-1.png"
+}, {
+  "caption": "Table 4. TS and OMatch Across Different Models and Paragraphs",
+  "captionBoundary": {
+    "x1": 189.52383422851562,
+    "x2": 406.015625,
+    "y1": 136.0540771484375,
+    "y2": 141.24237060546875
+  },
+  "figType": "Table",
+  "imageText": ["GPT-4o", "0.596", "0.705", "0.637", "0.531", "0.560", "0.489", "0.610", "0.571", "Gemini-Pro", "0.670", "0.547", "0.705", "0.421", "0.647", "0.477", "0.722", "0.419", "Claude-3-5-Sonnet", "0.623", "0.628", "0.658", "0.458", "0.589", "0.496", "0.685", "0.448", "Qwen2.5-VL-72B", "0.536", "0.263", "0.568", "0.208", "0.542", "0.288", "0.588", "0.512", "Qwen2-VL-72B", "0.475", "0.447", "0.586", "0.372", "0.438", "0.423", "0.485", "0.600", "Qwen2.5-VL-7B", "0.497", "0.255", "0.558", "0.121", "0.472", "0.157", "0.533", "0.570", "Qwen2-VL-7B", "0.433", "0.518", "0.498", "0.293", "0.375", "0.214", "0.479", "0.194", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "Model", "para", "1", "para", "2", "para", "3", "para", "4"],
+  "name": "4",
+  "page": 20,
+  "regionBoundary": {
+    "x1": 105.83999999999999,
+    "x2": 487.2,
+    "y1": 152.88,
+    "y2": 270.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Table4-1.png"
+}, {
+  "caption": "Table 7. Image Score and Decline Rates (Shuffled)",
+  "captionBoundary": {
+    "x1": 111.61548614501953,
+    "x2": 278.1898498535156,
+    "y1": 574.1492919921875,
+    "y2": 579.3375854492188
+  },
+  "figType": "Table",
+  "imageText": ["GPT-4o", "0.638", "0.533", "Gemini-pro", "0.553", "0.501", "Claude-3-5-sonnet", "0.589", "0.512", "Qwen2.5-VL-72B", "0.517", "0.491", "Qwen2-vl-72B", "0.485", "0.399", "Qwen2.5-vl-7B", "0.423", "0.373", "Qwen2-vl-7B", "0.421", "0.302", "Stage-1", "0.615", "0.450", "M-DocSum-7B", "0.636", "0.483", "M-DocSum-7B", "w/o", "stage-1", "0.556", "0.405", "Models", "Original", "IS", "Shufﬂed", "IS"],
+  "name": "7",
+  "page": 20,
+  "regionBoundary": {
+    "x1": 105.83999999999999,
+    "x2": 284.15999999999997,
+    "y1": 590.88,
+    "y2": 699.12
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Table7-1.png"
+}, {
+  "caption": "Table 5. TS and OMatch Across Different Models and Token Length",
+  "captionBoundary": {
+    "x1": 184.93673706054688,
+    "x2": 410.60125732421875,
+    "y1": 297.101806640625,
+    "y2": 302.29010009765625
+  },
+  "figType": "Table",
+  "imageText": ["GPT-4o", "0.594", "0.688", "0.605", "0.547", "0.608", "0.514", "0.600", "0.552", "0.621", "0.381", "0.609", "0.414", "Gemini-Pro", "0.687", "0.585", "0.688", "0.468", "0.694", "0.366", "0.673", "0.401", "0.688", "0.298", "0.668", "0.283", "Claude-3-5-Sonnet", "0.630", "0.646", "0.643", "0.464", "0.655", "0.458", "0.623", "0.453", "0.662", "0.333", "0.645", "0.329", "Qwen2.5-VL-72B", "0.544", "0.463", "0.561", "0.260", "0.559", "0.218", "0.552", "0.234", "0.543", "0.155", "0.517", "0.211", "Qwen2-VL-72B", "0.499", "0.604", "0.503", "0.456", "0.514", "0.377", "0.464", "0.302", "0.490", "0.286", "0.467", "0.257", "Qwen2.5-VL-7B", "0.495", "0.397", "0.477", "0.185", "0.412", "0.158", "0.423", "0.156", "0.412", "0.107", "0.428", "0.184", "Qwen2-VL-7B", "0.444", "0.350", "0.449", "0.299", "0.430", "0.275", "0.404", "0.224", "0.442", "0.250", "0.389", "0.197", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "Model", "0˜5k", "5˜10k", "10˜15k", "15˜20k", "20˜25k", "25˜30k"],
+  "name": "5",
+  "page": 20,
+  "regionBoundary": {
+    "x1": 82.8,
+    "x2": 510.0,
+    "y1": 313.92,
+    "y2": 408.24
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Table5-1.png"
+}, {
+  "caption": "Table 8. Text Score and Decline Rates (W/o Abstract)",
+  "captionBoundary": {
+    "x1": 312.2499084472656,
+    "x2": 489.0206298828125,
+    "y1": 588.8322143554688,
+    "y2": 594.0205078125
+  },
+  "figType": "Table",
+  "imageText": ["Qwen2.5-VL-7B", "0.517", "0.418", "Qwen2-VL-7B", "0.449", "0.402", "InternVL2-8B", "0.513", "0.435", "InternVL2.5-8B", "0.529", "0.488", "Stage-1", "0.660", "0.605", "M-DocSum-7B", "0.644", "0.615", "Models", "Original", "TS", "W/o", "abstract", "TS"],
+  "name": "8",
+  "page": 20,
+  "regionBoundary": {
+    "x1": 312.0,
+    "x2": 490.08,
+    "y1": 606.0,
+    "y2": 684.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Table8-1.png"
+}, {
+  "caption": "Table 6. TS and OMatch Across Different Models and Image Numbers",
+  "captionBoundary": {
+    "x1": 181.3872833251953,
+    "x2": 414.15240478515625,
+    "y1": 435.6260070800781,
+    "y2": 440.8143005371094
+  },
+  "figType": "Table",
+  "imageText": ["GPT-4o", "0.567", "0.540", "0.613", "0.616", "0.613", "0.562", "0.605", "0.535", "0.559", "0.591", "0.550", "0.489", "Gemini-Pro", "0.670", "0.540", "0.692", "0.520", "0.696", "0.441", "0.678", "0.459", "0.658", "0.392", "0.667", "0.326", "Claude-3-5-Sonnet", "0.618", "0.680", "0.636", "0.534", "0.640", "0.486", "0.650", "0.485", "0.634", "0.466", "0.645", "0.446", "Qwen2.5-VL-72B", "0.573", "0.590", "0.562", "0.347", "0.560", "0.256", "0.534", "0.276", "0.519", "0.278", "0.494", "0.337", "Qwen2-VL-72B", "0.520", "0.520", "0.516", "0.519", "0.505", "0.438", "0.473", "0.429", "0.467", "0.352", "0.411", "0.402", "Qwen2.5-VL-7B", "0.511", "0.500", "0.481", "0.301", "0.479", "0.203", "0.461", "0.197", "0.382", "0.188", "0.315", "0.185", "Qwen2-VL-7B", "0.431", "0.320", "0.434", "0.346", "0.459", "0.278", "0.420", "0.279", "0.412", "0.233", "0.388", "0.217", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "TS", "OMatch", "Model", "1˜3", "4˜6", "7˜9", "10˜12", "13˜15", "16˜17"],
+  "name": "6",
+  "page": 20,
+  "regionBoundary": {
+    "x1": 82.8,
+    "x2": 510.0,
+    "y1": 452.88,
+    "y2": 547.1999999999999
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Table6-1.png"
+}, {
+  "caption": "Table 3. All image reference results are “None”.",
+  "captionBoundary": {
+    "x1": 336.7682800292969,
+    "x2": 495.1116943359375,
+    "y1": 349.8003234863281,
+    "y2": 354.9886169433594
+  },
+  "figType": "Table",
+  "imageText": ["“None”", "0", "1.000", "0.325", "0", "0", "ImgAcc", "NonAcc", "OMatch", "JacSim", "IS"],
+  "name": "3",
+  "page": 6,
+  "regionBoundary": {
+    "x1": 314.88,
+    "x2": 515.04,
+    "y1": 366.96,
+    "y2": 397.2
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Table3-1.png"
+}, {
+  "caption": "Table 2. Overall performance comparison of different models on M-DocSum-Bench. The best performance for each metric is indicated in bold, and the best performance among open-source models is underlined.",
+  "captionBoundary": {
+    "x1": 71.70178985595703,
+    "x2": 523.8331909179688,
+    "y1": 126.80040740966797,
+    "y2": 141.9986572265625
+  },
+  "figType": "Table",
+  "imageText": ["M-DocSum", "7B", "1.000", "0.553", "0.770", "0.644", "0.542", "0.716", "0.579", "0.693", "0.636", "0.667", "Open-Source", "Models", "Qwen2.5-VL[2]", "72B", "0.980", "0.501", "0.639", "0.562", "0.320", "0.712", "0.419", "0.615", "0.517", "0.583", "Qwen2-VL[46]", "72B", "0.994", "0.385", "0.709", "0.499", "0.317", "0.822", "0.464", "0.506", "0.485", "0.542", "Qwen2.5-VL[2]", "7B", "0.894", "0.386", "0.783", "0.517", "0.200", "0.820", "0.371", "0.474", "0.423", "0.512", "Qwen2-VL[46]", "7B", "0.972", "0.317", "0.769", "0.449", "0.403", "0.400", "0.337", "0.504", "0.421", "0.489", "InternVL-2.5[8]", "8B", "0.736", "0.402", "0.709", "0.513", "0.032", "0.989", "0.366", "0.056", "0.211", "0.399", "InternVL-2[9]", "8B", "0.700", "0.408", "0.753", "0.529", "0.011", "0.992", "0.354", "0.026", "0.190", "0.394", "Close-Source", "Models", "GPT-4o[36]", "-", "0.998", "0.531", "0.696", "0.602", "0.546", "0.702", "0.579", "0.696", "0.638", "0.658", "Gemini-Pro[43]", "-", "0.998", "0.581", "0.835", "0.685", "0.425", "0.585", "0.466", "0.640", "0.553", "0.657", "Claude-3-5-sonnet[1]", "-", "1.000", "0.518", "0.835", "0.639", "0.497", "0.576", "0.507", "0.670", "0.589", "0.653", "Step-1o-vision-32k[41]", "-", "0.882", "0.410", "0.814", "0.545", "0.407", "0.784", "0.504", "0.647", "0.576", "0.593", "Moonshot-v1-32k-vision-preview[35]", "-", "0.854", "0.485", "0.716", "0.578", "0.335", "0.821", "0.474", "0.607", "0.541", "0.589", "Doubao-vision-pro-32k[14]", "-", "0.938", "0.470", "0.724", "0.570", "0.264", "0.876", "0.405", "0.525", "0.465", "0.560", "Models", "Size", "IF", "Text", "Image", "Total", "Com", "Acc", "TS", "ImgAcc", "NonAcc", "OMatch", "JacSim", "IS"],
+  "name": "2",
+  "page": 6,
+  "regionBoundary": {
+    "x1": 75.84,
+    "x2": 517.1999999999999,
+    "y1": 142.56,
+    "y2": 330.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Table2-1.png"
+}, {
+  "caption": "Figure 8. Prompt template for key point extraction.",
+  "captionBoundary": {
+    "x1": 214.08877563476562,
+    "x2": 381.44927978515625,
+    "y1": 706.9081420898438,
+    "y2": 712.096435546875
+  },
+  "figType": "Figure",
+  "imageText": ["Please", "output", "only", "the", "content", "in", "JSON", "format,", "and", "do", "not", "include", "any", "other", "irrelevant", "information.", "The", "overall", "output", "format", "is", "as", "follows:", "[[", "{\"type\":", "\"title\",", "\"text\":", "\"Research", "Background\"},", "{\"type\":", "\"key_points\",", "\"text\":", "[\"Key", "point", "1\",", "\"Key", "point", "2\",", "\"Key", "point", "3\",...]}", "],", "[", "{\"type\":", "\"title\",", "\"text\":", "\"${Title", "of", "the", "proposed", "method", "&", "model}\"},", "{\"type\":", "\"key_points\",", "\"text\":", "[\"Key", "point", "1\",", "\"Key", "point", "2\",", "\"Key", "point", "3\",...]}", "],", "[", "{\"type\":", "\"title\",", "\"text\":", "\"Experimental", "Results\"},", "{\"type\":", "\"key_points\",", "\"text\":", "[\"Key", "point", "1\",", "\"Key", "point", "2\",", "\"Key", "point", "3\",...]}", "],", "[", "{\"type\":", "\"title\",", "\"text\":", "\"Conclusion\"},", "{\"type\":", "\"key_points\",", "\"text\":", "[\"Key", "point", "1\",", "\"Key", "point", "2\",", "\"Key", "point", "3\",...]}", "]]", "Output:", "**Paragraph", "4:", "Conclusion**", "**Content:**", "Extract", "key", "summary", "information", "from", "the", "**Conclusion**", "or", "**Summary**", "sections", "of", "the", "article.", "**Example", "Sentences:**", "\"This", "paper", "proposes", "a", "...", "method...\"", "\"Experiments", "have", "verified", "...\"", "**Paragraph", "3:", "Experimental", "Results**", "**Content:**", "Extract", "key", "information", "about", "the", "experimental", "design", "and", "results", "from", "the", "\"Experiment\",", "\"Results\",", "or", "\"Analysis\"", "sections", "of", "the", "article.", "**Example", "Sentences:**", "\"The", "authors", "compared", "the", "...", "model", "on", "the", "...", "dataset.", "\"The", "experimental", "scheme/experimental", "setup", "is", "as", "follows:", "...\"", "**Paragraph", "2:", "Proposed", "Method**", "**Content:**", "Extract", "key", "information", "about", "the", "main", "method", "used", "in", "this", "paper", "from", "the", "“Method”,", "“Model”,", "or", "“Framework”...", "sections", "of", "the", "article.", "**Step-by-Step/Module", "Extraction", "(if", "applicable):**", "If", "the", "method", "includes", "multiple", "steps,", "components,", "modules,", "or", "strategies,", "please", "extract", "them", "in", "the", "following", "format:", "Subtitle", "1:", "Name", "of", "step/component/module/strategy", "Describe", "the", "specific", "content", "in", "detail,", "explaining", "the", "specific", "approach,", "motivation,", "effect,", "etc....", "**Example", "Sentences:**", "\"To", "address", "the", "...", "problem,", "this", "paper", "proposes", "a", "...", "method/model.\"", "\"The", "core", "idea", "of", "this", "method/model", "is", "...\"", "\"This", "method/model", "includes", "the", "following", "key", "steps/components/modules/strategies,", "They", "are", "...\"", "**Specific", "Requirements", "for", "Each", "Paragraph:**", "**Paragraph", "1:", "Research", "Background**", "**Content:**", "Extract", "key", "information", "about", "the", "research", "background", "and", "the", "current", "state", "of", "research", "domestically", "and", "internationally", "from", "the", "**Introduction**,", "**Background**", "or", "**Related", "Work**", "sections", "of", "the", "article.", "**Example", "Sentences:**", "\"This", "paper", "addresses", "the", "...", "problem", "and", "proposes", "a", "...", "method.\"", "\"Existing", "methods", "for", "the", "...", "problem", "include", "...,", "...,", "etc.", "These", "methods", "have", "...", "advantages", "but", "are", "limited", "by", "...", "disadvantages", "and", "cannot", "meet", "the", "...", "requirements.\"", "**General", "Requirements:**", "**Language:**", "Use", "concise", "and", "easy-to-understand", "words", "for", "summarization.", "**Key", "Information", "Extraction", "Principles:**", "**No", "Repetition:**", "Do", "not", "extract", "the", "same", "information", "point", "repeatedly.", "**Atomicity:**", "Ensure", "that", "each", "key", "information", "point", "is", "independent", "and", "the", "smallest", "indivisible", "unit", "of", "information.", "**Traceability:**", "Ensure", "that", "each", "key", "information", "point", "can", "be", "traced", "back", "to", "its", "corresponding", "basis", "in", "the", "original", "text.", "**Quantity", "Limit:**", "The", "number", "of", "key", "information", "points", "in", "each", "paragraph", "should", "not", "exceed", "10.", "**Task", "Overview:**", "You", "need", "to", "extract", "key", "information", "from", "the", "given", "academic", "article", "and", "organize", "this", "information", "into", "four", "paragraphs:", "**Paragraph", "1:", "Research", "Background**", "**Paragraph", "2:", "Proposed", "Method**", "**Paragraph", "3:", "Experimental", "Results**", "**Paragraph", "4:", "Conclusion**", "You", "are", "a", "professional", "academic", "article", "summarization", "expert.", "The", "user", "will", "give", "you", "a", "content-rich", "academic", "article,", "and", "please", "help", "extract", "relevant", "information.", "Please", "strictly", "follow", "the", "requirements", "and", "format", "below:"],
+  "name": "8",
+  "page": 13,
+  "regionBoundary": {
+    "x1": 111.83999999999999,
+    "x2": 484.08,
+    "y1": 181.92,
+    "y2": 696.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure8-1.png"
+}, {
+  "caption": "Table 1. Overall Statistics of M-DocSum-Bench. This includes the number of documents (Docs), the average number of text tokens (Tokens), and an indicator of whether the documents are multipage (Multi). The evaluated model capabilities are denoted by U, R, L, S, representing Understanding, Reasoning, Locating, and Summarization, respectively. Data types are classified as Synthetic (generated data), Realistic (purely manually annotated data), and Hybrid (a mix of synthetic and realistic data).",
+  "captionBoundary": {
+    "x1": 308.043701171875,
+    "x2": 523.8311767578125,
+    "y1": 126.80040740966797,
+    "y2": 202.0582275390625
+  },
+  "figType": "Table",
+  "imageText": ["M-DocSum-Bench", "500", "12,912.4", "↭", "↭", "↭", "↭", "↭", "hybrid", "DocVQA", "-", "151.5", "→", "↭", "→", "→", "→", "synthetic", "ChartQA", "-", "236.9", "→", "↭", "→", "→", "→", "synthetic", "RULER", "any", "any", "↭", "↭", "→", "→", "→", "synthetic", "DUDE", "5019", "1,831.5", "↭", "↭", "↭", "→", "→", "hybrid", "loong", "1600", "110,900", "↭", "↭", "↭", "→", "→", "hybrid", "MMLongBench", "135", "21,214.1", "↭", "↭", "↭", "→", "→", "Realistic", "M-Longdoc", "180", "120,988", "↭", "↭", "↭", "→", "→", "hybrid", "DocBench", "229", "46,377", "↭", "↭", "↭", "→", "→", "hybrid", "LongDocURL", "396", "43,622.6", "↭", "↭", "↭", "↭", "→", "hybrid", "Benchmarks", "Docs", "Tokens", "Multi", "U", "R", "L", "S", "Type"],
+  "name": "1",
+  "page": 2,
+  "regionBoundary": {
+    "x1": 309.84,
+    "x2": 520.0799999999999,
+    "y1": 213.84,
+    "y2": 307.2
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Table1-1.png"
+}, {
+  "caption": "Figure 12. Prompt template for evaluating text Accuracy (Acc).",
+  "captionBoundary": {
+    "x1": 193.67979431152344,
+    "x2": 401.8588562011719,
+    "y1": 698.1376953125,
+    "y2": 703.3259887695312
+  },
+  "figType": "Figure",
+  "imageText": ["Output:", "**Important", "Notes:**", "*", "Please", "read", "the", "original", "text", "and", "the", "abstract", "paragraphs", "carefully", "to", "ensure", "the", "accuracy", "of", "your", "evaluation.", "*", "When", "assessing", "accuracy,", "consider", "information", "completeness,", "the", "presence", "of", "errors,", "hallucinations,", "and", "semantic", "distortions.", "*", "Repetition", "includes", "not", "only", "literal", "repetition", "but", "also", "semantic", "repetition.", "*", "Semantic", "distortion", "refers", "to", "changes", "in", "the", "meaning", "of", "key", "information", "due", "to", "improper", "information", "processing.", "*", "Only", "output", "the", "JSON", "format", "content,", "do", "not", "output", "any", "irrelevant", "information.", "The", "output", "should", "be", "a", "list", "containing", "evaluations", "for", "the", "4", "paragraphs.", "Each", "paragraph's", "evaluation", "must", "be", "in", "strict", "JSON", "format:", "```json[", "{{", "\"paragraph\":", "\"Paragraph", "1\",", "\"accuracy\":", "\"Completely", "Accurate/Mostly", "Accurate/Partially", "Accurate/Inaccurate\",", "\"repetitions\":", "0,", "\"hallucinations\":", "0,", "\"distortions\":", "0,", "\"fluency\":", "\"Fluent/Mostly", "Fluent/Not", "Fluent\"", "}},", "{{", "\"paragraph\":", "\"Paragraph", "2\",", "\"accuracy\":", "\"Completely", "Accurate/Mostly", "Accurate/Partially", "Accurate/Inaccurate\",", "\"repetitions\":", "0,", "\"hallucinations\":", "0,", "\"distortions\":", "0,", "\"fluency\":", "\"Fluent/Mostly", "Fluent/Not", "Fluent\"", "}},", "{{", "\"paragraph\":", "\"Paragraph", "3\",", "\"accuracy\":", "\"Completely", "Accurate/Mostly", "Accurate/Partially", "Accurate/Inaccurate\",", "\"repetitions\":", "0,", "\"hallucinations\":", "0,", "\"distortions\":", "0,", "\"fluency\":", "\"Fluent/Mostly", "Fluent/Not", "Fluent\"", "}},", "{{", "\"paragraph\":", "\"Paragraph", "4\",", "\"accuracy\":", "\"Completely", "Accurate/Mostly", "Accurate/Partially", "Accurate/Inaccurate\",", "\"repetitions\":", "0,", "\"hallucinations\":", "0,", "\"distortions\":", "0,", "\"fluency\":", "\"Fluent/Mostly", "Fluent/Not", "Fluent\"", "}}", "]```", "The", "input", "list", "of", "summarized", "text", "paragraphs", "is", "as", "follows:", "{text}", "The", "original", "text", "content", "is", "as", "follows:", "{ori_txt}", "**3.", "Fluency", "and", "Coherence", "Assessment", "(Based", "on", "each", "paragraph):**", "Evaluate", "the", "overall", "fluency", "and", "coherence", "of", "the", "paragraph", "and", "assign", "one", "of", "the", "following", "ratings:", "**1.", "Fluent:**", "The", "expression", "is", "clear,", "natural,", "logically", "coherent,", "and", "easy", "to", "understand.", "**2.", "Mostly", "Fluent:**", "The", "expression", "is", "generally", "clear,", "but", "there", "are", "a", "few", "minor", "instances", "of", "awkwardness", "or", "incoherence.", "**3.", "Not", "Fluent:**", "The", "expression", "has", "several", "issues,", "with", "logical", "jumps", "and", "difficulty", "in", "understanding.", "**2.", "Deduction", "Item", "Identification", "(Based", "on", "each", "paragraph):**", "Identify", "the", "following", "issues", "within", "the", "paragraph", "and", "record", "the", "number", "of", "occurrences", "for", "each:", "**1.", "Repetitions:**", "Includes", "repetitions", "within", "a", "sentence,", "between", "sentences", "within", "the", "paragraph,", "and", "with", "other", "paragraphs.", "**2.", "Hallucinations:**", "Content", "appearing", "in", "the", "paragraph", "that", "is", "not", "mentioned", "in", "the", "original", "text.", "**3.", "Distortions:**", "Changes", "in", "the", "meaning", "of", "key", "information", "due", "to", "omissions,", "additions,", "or", "modifications.", "**1.", "Overall", "Paragraph", "Accuracy", "Assessment", "(Based", "on", "each", "paragraph):**", "Evaluate", "the", "overall", "accuracy", "of", "the", "paragraph", "and", "assign", "one", "of", "the", "following", "ratings:", "**1.", "Completely", "Accurate:**", "The", "paragraph", "content", "is", "fully", "consistent", "with", "the", "original", "text,", "with", "no", "omissions,", "distortions,", "errors,", "or", "hallucinated", "information.", "**2.", "Mostly", "Accurate:**", "The", "paragraph", "content", "is", "generally", "consistent", "with", "the", "original", "text,", "but", "contains", "minor,", "unimportant", "omissions,", "deviations,", "or", "slight", "errors.", "**3.", "Partially", "Accurate:**", "The", "paragraph", "content", "partially", "aligns", "with", "the", "original", "text,", "but", "contains", "several", "omissions,", "deviations,", "errors,", "or", "a", "small", "amount", "of", "hallucinated/distorted", "information.", "**4.", "Inaccurate:**", "The", "paragraph", "content", "significantly", "deviates", "from", "the", "original", "text,", "with", "numerous", "errors,", "hallucinations,", "or", "severe", "distortions.", "Specific", "Requirements:", "You", "are", "provided", "with", "a", "list", "of", "text", "paragraphs", "summarized", "from", "a", "scientific", "article,", "along", "with", "the", "original", "source", "text.", "Your", "task", "is", "to", "evaluate", "the", "informational", "accuracy", "of", "each", "of", "these", "summarized", "paragraphs.", "There", "are", "four", "paragraphs", "in", "total.", "Working", "at", "the", "paragraph", "level,", "please", "analyze", "each", "paragraph", "individually", "and", "determine", "whether", "its", "content", "aligns", "with", "the", "original", "text.", "Specifically,", "assess", "whether", "there", "are", "any", "semantic", "distortions,", "errors,", "repetitions,", "or", "hallucinated", "information,", "and", "evaluate", "the", "fluency", "and", "coherence", "of", "the", "language.", "You", "are", "an", "expert", "specializing", "in", "the", "evaluation", "of", "scientific", "paper", "abstracts.", "Your", "task", "is", "to", "assess", "the", "informational", "accuracy", "of", "each", "paragraph", "within", "a", "given", "abstract.", "Please", "complete", "this", "task", "by", "following", "a", "structured", "process", "that", "includes:", "establishing", "reading", "rules,", "performing", "accuracy", "assessment,", "identifying", "any", "deduction", "items", "(errors", "or", "omissions),", "and", "evaluating", "the", "overall", "fluency."],
+  "name": "12",
+  "page": 17,
+  "regionBoundary": {
+    "x1": 116.88,
+    "x2": 479.03999999999996,
+    "y1": 136.79999999999998,
+    "y2": 684.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure12-1.png"
+}, {
+  "caption": "Figure 7. Presentation 2 of Case Study and M-DocEval Evaluation Methodology",
+  "captionBoundary": {
+    "x1": 165.4493865966797,
+    "x2": 430.0896911621094,
+    "y1": 685.1729125976562,
+    "y2": 690.3612060546875
+  },
+  "figType": "Figure",
+  "imageText": ["Partially", "Included", "+0.5", "+1", "Included", "Completely", "Interleaved", "summarization", "from", "Qwen2-VL-7B", "Interleaved", "summarization", "from", "M-DocSum-7B:", "Evaluation", "Criteria", "ImgAcc", "=", "0", "/", "3", "=", "0", "NonAcc", "=", "0", "/", "1", "=", "0", "OMatch", "=", "0", "/", "4", "=", "0", "JacSim", "=", "Jaccard", "Similarity(", "set(1,3,4,’None’),", "set(1,4,5,’None’)", ")", "=", "2", "/", "4", "=", "0.5", "ImgAcc", "=", "3", "/", "3", "=", "1", "NonAcc", "=", "1", "/", "1", "=", "1", "OMatch", "=", "4", "/", "4", "=", "1", "JacSim", "=", "Jaccard", "Similarity(", "set(1,3,4,’None’),", "set(1,3,4,’None’)", ")", "=", "4", "/", "4", "=", "1", "Reference", "images", "from", "Qwen2-VL:", "[‘None’,", "1,", "5,", "4", "]", "Reference", "images", "from", "M-DocSum:", "[", "1,", "3,", "4,", "‘None’]", "Ground", "truth", "reference", "images:", "[", "1,", "3,", "4,", "‘None’]", "Evaluation", "of", "Reference", "Images:", "From", "M-DocSum:", "From", "Qwen2-VL:", "Acc", "=", "(accuracy", "-", "fluency", "-", "penalty_times)", "/", "4", "penalty_times", "=", "repetitions", "+", "hallucinations", "+", "distortions", "accuracy:", "“Completely", "Accurate”", "4,", "“Mostly", "Accurate”", "3,", "“Partially", "Accurate”", "2,", "“Inaccurate”", "1", "fluency:", "“Fluent”", "0,", "“Mostly", "Fluent”", "1,", "“Not", "Fluent”", "2", "\"accuracy\":", "\"Completely", "Accurate\",", "\"fluency\":", "\"Fluent\",", "\"repetitions\":", "1,", "\"hallucinations\":", "0,", "\"distortions\":", "0", "Acc", "=", "(4", "-", "0", "-", "1)", "/", "4", "=", "0.75", "\"accuracy\":", "\"Mostly", "Accurate\",", "\"fluency\":", "\"Fluent\",", "\"repetitions\":", "0,", "\"hallucinations\":", "0,", "\"distortions\":", "1", "Acc", "=", "(3", "-", "0", "-", "1)", "/", "4", "=", "0.5", "Evaluation", "Com", "and", "Acc", "of", "Research", "Background:", "Key", "points", "from", "paragraph", "1:", "From", "Qwen2-VL:", "From", "M-DocSum:", "Com", "=", "4.5", "/", "8", "=", "0.563", "8.Previous", "works,", "such", "as", "TLC-GNN,", "have", "integrated", "PH", "with", "GNNs", "but", "require", "further", "research", "for", "datasets", "without", "node", "attributes.Com", "=", "1.5", "/", "8", "=", "0.188", "7.", "Persistent", "homology", "(PH),", "a", "topological", "data", "analysis", "tool,", "has", "been", "successfully", "applied", "to", "graph", "and", "node", "classification", "tasks", "but", "is", "underexplored", "for", "LP", "tasks.", "6.", "GNN-based", "methods", "achieve", "superior", "performance", "by", "leveraging", "local", "and", "global", "graph", "information", "but", "are", "difficult", "to", "interpret", "due", "to", "their", "complexity.", "5.", "Embedding", "methods", "map", "nodes", "into", "low-dimensional", "vector", "spaces", "but", "often", "require", "large", "dimensions", "and", "may", "fail", "to", "capture", "similar", "neighborhood", "structures.", "4.", "Heuristic", "methods", "rely", "on", "predefined", "structural", "features", "but", "struggle", "with", "capturing", "complex", "relationships.", "1.", "This", "paper", "addresses", "the", "link", "prediction", "(LP)", "problem,", "which", "involves", "inferring", "the", "connectivity", "between", "nodes", "in", "graph", "data.", "2.", "LP", "is", "crucial", "for", "applications", "such", "as", "social", "networks,", "bioinformatics,", "recommendation", "systems,", "and", "supply", "chain", "optimization.", "3.", "Existing", "LP", "methods", "are", "categorized", "into", "heuristic", "methods,", "embedding", "methods,", "and", "graph", "neural", "network", "(GNN)-based", "methods.", "This", "paper", "proposes", "PHLP,", "an", "explainable", "method", "that", "applies", "PH", "to", "analyze", "the", "topological", "structure", "of", "graphs", "to", "overcome", "the", "limitations", "of", "GNN-based", "methods", "for", "LP.", "By", "employing", "the", "proposed", "methods,", "such", "as", "angle", "hop", "subgraphs", "and", "Degree", "DRNL,", "PHLP", "improves", "the", "analysis", "of", "the", "topological", "structure", "of", "graphs.", "The", "experimental", "results", "demonstrate", "that", "the", "proposed", "PHLP", "method", "achieves", "competitive", "performance", "across", "benchmark", "datasets,", "even", "SOTA", "performance,", "especially", "on", "the", "Power", "dataset.", "Additionally,", "when", "integrated", "with", "existing", "GNN-based", "methods,", "PHLP", "improves", "performance", "across", "all", "datasets.", "By", "analyzing", "the", "topological", "information", "of", "the", "given", "graphs,", "PHLP", "addresses", "the", "limitations", "of", "GNN-based", "methods", "and", "enhances", "overall", "performance.", "As", "demonstrated,", "PHLP", "provides", "explainable", "algorithms", "without", "relying", "on", "complex", "deep", "learning", "techniques,", "providing", "insight", "into", "the", "factors", "that", "significantly", "influence", "performance", "for", "the", "LP", "problem", "of", "graph", "data.", "To", "address", "the", "link", "prediction", "problem,", "this", "paper", "proposes", "a", "novel", "method", "called", "PHLP,", "which", "employs", "persistent", "homology", "(PH)", "for", "link", "prediction.", "PHLP", "focuses", "on", "how", "the", "presence", "or", "absence", "of", "target", "links", "influences", "the", "overall", "topology.", "The", "PHLP", "utilizes", "the", "angle", "hop", "subgraph", "and", "new", "node", "labeling", "called", "Degree", "DRNL,", "distinguishing", "the", "information", "of", "graphs", "better", "than", "DRNL.", "Using", "only", "a", "classifier,", "PHLP", "performs", "similarly", "to", "state-of-the-art", "(SOTA)", "models", "on", "most", "benchmark", "datasets.", "Incorporating", "the", "outputs", "calculated", "using", "PHLP", "into", "the", "existing", "GNN-based", "SOTA", "models", "improves", "performance", "across", "all", "benchmark", "datasets.", "To", "the", "best", "of", "our", "knowledge,", "PHLP", "is", "the", "first", "method", "of", "applying", "PH", "to", "LP", "without", "GNNs.", "The", "proposed", "approach,", "employing", "PH", "while", "not", "relying", "on", "neural", "networks,", "enables", "the", "identification", "of", "crucial", "factors", "for", "improving", "performance.", "The", "authors", "compared", "the", "proposed", "method", "on", "the", "Power", "dataset.", "The", "advantages", "of", "the", "proposed", "method", "are", "...,", "and", "the", "disadvantages", "are", "....", "The", "experimental", "scheme/experimental", "setup", "is", "as", "follows:", "...", "Experimental", "results", "and", "analysis:", "Compared", "with", "the", "...", "model,", "the", "proposed", "model", "improved", "by", "...", "on", "the", "...", "dataset.", "This", "indicates", "...", "This", "paper", "proposes", "PHLP,", "an", "explainable", "method", "that", "applies", "PH", "to", "analyze", "the", "topological", "structure", "of", "graphs", "to", "overcome", "the", "limitations", "of", "GNN-based", "methods", "for", "LP.", "By", "employing", "the", "proposed", "methods,", "such", "as", "angle", "hop", "subgraphs", "and", "Degree", "DRNL,", "PHLP", "improves", "the", "analysis", "of", "the", "topological", "structure", "of", "graphs.", "The", "experimental", "results", "demonstrate", "that", "the", "proposed", "PHLP", "method", "achieves", "competitive", "performance", "across", "benchmark", "datasets,", "even", "SOTA", "performance,", "especially", "on", "the", "Power", "dataset.", "Additionally,", "when", "integrated", "with", "existing", "GNN-based", "methods,", "PHLP", "improves", "performance", "across", "all", "datasets.", "By", "analyzing", "the", "topological", "information", "of", "the", "given", "graphs,", "PHLP", "addresses", "the", "limitations", "of", "GNN-", "based", "methods", "and", "enhances", "overall", "performance.", "As", "demonstrated,", "PHLP", "provides", "explainable", "algorithms", "without", "relying", "on", "complex", "deep", "learning", "techniques,", "providing", "insight", "into", "the", "factors", "that", "significantly", "influence", "performance", "for", "the", "LP", "problem", "of", "graph", "data.", "Image", "Idx:", "None", "Image", "Idx:", "None", "Research", "Background:", "Link", "prediction", "(LP)", "is", "a", "critical", "area", "in", "graph", "data", "analysis,", "focusing", "on", "inferring", "the", "connectivity", "between", "nodes.", "This", "task", "is", "essential", "for", "applications", "such", "as", "social", "network", "friend", "recommendations,", "knowledge", "graph", "completion,", "and", "drug-protein", "interaction", "prediction.", "While", "LP", "has", "been", "categorized", "into", "heuristic", "methods,", "embedding", "methods,", "and", "graph", "neural", "network", "(GNN)-based", "methods,", "GNN-", "based", "models", "have", "recently", "achieved", "significant", "improvements", "in", "capturing", "intricate", "relationships", "within", "graphs.", "However,", "the", "high", "performance", "of", "GNN-based", "models", "is", "challenging", "to", "interpret", "due", "to", "their", "complex", "neural", "network", "structures.", "Persistent", "homology", "(PH),", "a", "topological", "data", "analysis", "method,", "has", "been", "successfully", "applied", "to", "graph", "classification", "and", "node", "classification", "tasks", "but", "has", "seen", "limited", "use", "in", "LP.", "The", "TLC-", "GNN", "is", "a", "notable", "exception,", "integrating", "PH", "with", "GNNs", "to", "enhance", "LP", "performance,", "though", "it", "requires", "node", "attributes", "for", "its", "operation.", "Proposed", "Method:", "The", "proposed", "method,", "PHLP,", "leverages", "persistent", "homology", "to", "analyze", "the", "topological", "structure", "of", "graphs", "for", "LP.", "It", "employs", "angle", "hop", "subgraphs", "and", "a", "new", "node", "labeling", "technique", "called", "Degree", "DRNL", "to", "better", "distinguish", "graph", "information.", "PHLP", "calculates", "persistence", "images", "(PIs)", "for", "subgraphs", "with", "and", "without", "target", "links,", "transforming", "each", "target", "node", "into", "a", "vector", "comprising", "these", "PIs.", "The", "method", "uses", "a", "classifier", "to", "predict", "the", "existence", "of", "target", "links", "based", "on", "these", "vectors.", "Additionally,", "MA-PHLP", "is", "introduced", "to", "analyze", "data", "from", "multiple", "angles,", "enhancing", "the", "extraction", "of", "diverse", "topological", "information.", "The", "hybrid", "method", "integrates", "PHLP", "with", "existing", "subgraph", "methods,", "such", "as", "SEAL", "and", "WP,", "by", "concatenating", "PHLP", "vectors", "with", "the", "outputs", "of", "these", "models", "before", "classification.", "Experimental", "Results:", "The", "performance", "of", "MA-", "PHLP", "was", "evaluated", "using", "the", "area", "under", "the", "curve", "(AUC)", "as", "the", "primary", "metric", "across", "eight", "benchmark", "datasets.", "MA-PHLP", "demonstrated", "competitive", "performance,", "achieving", "scores", "comparable", "to", "state-of-the-art", "models.", "Notably,", "it", "outperformed", "several", "baselines,", "including", "SEAL", "and", "WP,", "on", "most", "datasets.", "The", "Power", "dataset,", "which", "is", "known", "for", "its", "low", "performance", "in", "LP,", "showed", "significant", "improvement", "with", "MA-PHLP,", "achieving", "the", "highest", "AUC", "score", "among", "baseline", "models.", "The", "hybrid", "methods,", "which", "combined", "MA-", "PHLP", "with", "SEAL", "and", "WP,", "further", "enhanced", "performance,", "particularly", "on", "the", "Power", "dataset.", "Ablation", "studies", "revealed", "that", "Degree", "DRNL", "significantly", "improved", "performance,", "especially", "on", "the", "Power", "dataset,", "where", "it", "increased", "the", "AUC", "score", "by", "over", "4", "points.", "The", "analysis", "of", "subgraphs", "with", "node", "labeling", "showed", "that", "the", "number", "of", "nodes", "in", "positive", "links", "was", "smaller", "than", "in", "negative", "links,", "highlighting", "the", "importance", "of", "node", "selection", "in", "the", "analysis", "of", "small", "graphs.", "Conclusion:", "This", "study", "introduces", "PHLP,", "a", "novel", "method", "that", "applies", "persistent", "homology", "to", "analyze", "the", "topological", "structure", "of", "graphs", "for", "LP.", "By", "employing", "angle", "hop", "subgraphs", "and", "Degree", "DRNL,", "PHLP", "enhances", "the", "analysis", "of", "graph", "topology.", "Experimental", "results", "demonstrate", "that", "PHLP", "achieves", "competitive", "performance", "across", "benchmark", "datasets,", "including", "state-of-the-art", "performance", "on", "the", "Power", "dataset.", "The", "integration", "of", "PHLP", "with", "existing", "GNN-based", "methods", "further", "improves", "performance", "across", "all", "datasets.", "This", "approach", "provides", "explainable", "algorithms", "without", "relying", "on", "complex", "deep", "learning", "techniques,", "offering", "valuable", "insights", "into", "the", "factors", "that", "influence", "LP", "performance", "in", "graph", "data."],
+  "name": "7",
+  "page": 12,
+  "regionBoundary": {
+    "x1": 123.83999999999999,
+    "x2": 474.47999999999996,
+    "y1": 144.96,
+    "y2": 668.16
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure7-1.png"
+}, {
+  "caption": "Figure 4. Quantitative analysis of the performance trends of different models as data characteristics vary, including the different paragraphs in the interleaved summarization, the token length of the original text, and the number of input images.",
+  "captionBoundary": {
+    "x1": 71.70178985595703,
+    "x2": 523.8329467773438,
+    "y1": 337.6365966796875,
+    "y2": 352.8348083496094
+  },
+  "figType": "Figure",
+  "imageText": ["(f)", "(e)", "(d)", "(c)", "(b)", "(a)"],
+  "name": "4",
+  "page": 7,
+  "regionBoundary": {
+    "x1": 70.8,
+    "x2": 524.16,
+    "y1": 126.0,
+    "y2": 327.12
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure4-1.png"
+}, {
+  "caption": "Figure 5. Blue bars represent original image scores, orange bars represent scores after modification, and the green line indicates the decline rate.",
+  "captionBoundary": {
+    "x1": 71.70178985595703,
+    "x2": 287.48919677734375,
+    "y1": 601.2891235351562,
+    "y2": 626.497314453125
+  },
+  "figType": "Figure",
+  "imageText": ["(b)", "(a)"],
+  "name": "5",
+  "page": 7,
+  "regionBoundary": {
+    "x1": 70.8,
+    "x2": 293.03999999999996,
+    "y1": 373.91999999999996,
+    "y2": 590.16
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure5-1.png"
+}, {
+  "caption": "Figure 2. The quantitative indicators of M-DocSum-Bench display fundamental information such as token length, image count, and document topics.",
+  "captionBoundary": {
+    "x1": 71.70178985595703,
+    "x2": 287.4892272949219,
+    "y1": 466.8441162109375,
+    "y2": 492.05230712890625
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "2",
+  "page": 3,
+  "regionBoundary": {
+    "x1": 72.96,
+    "x2": 286.08,
+    "y1": 129.84,
+    "y2": 456.24
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure2-1.png"
+}, {
+  "caption": "Figure 13. Prompt template for inference.",
+  "captionBoundary": {
+    "x1": 229.399169921875,
+    "x2": 366.1376953125,
+    "y1": 689.4695434570312,
+    "y2": 694.6578369140625
+  },
+  "figType": "Figure",
+  "imageText": ["Please", "output", "only", "the", "content", "in", "JSON", "format,", "and", "do", "not", "include", "any", "other", "irrelevant", "information.", "Output:", "The", "overall", "output", "format", "is", "as", "follows:", "```json", "[", "{", "\"summary\":", "\"the", "summary", "of", "Paragraph1\",", "\"image\":", "{\"imageRef\":", "\"idx\",", "\"imageCaption\":", "\"caption\"}", "or", "{\"imageRef\":", "\"None\",", "\"imageCaption\":", "\"None\"}", "},", "{", "\"summary\":", "\"the", "summary", "of", "Paragraph2\",", "\"image\":", "{\"imageRef\":", "\"idx\",", "\"imageCaption\":", "\"caption\"}", "or", "{\"imageRef\":", "\"None\",", "\"imageCaption\":", "\"None\"}", "},", "{", "\"summary\":", "\"the", "summary", "of", "Paragraph3\",", "\"image\":", "{\"imageRef\":", "\"idx\",", "\"imageCaption\":", "\"caption\"}", "or", "{\"imageRef\":", "\"None\",", "\"imageCaption\":", "\"None\"}", "},", "{", "\"summary\":", "\"the", "summary", "of", "Paragraph4\",", "\"image\":", "{\"imageRef\":", "\"idx\",", "\"imageCaption\":", "\"caption\"}", "or", "{\"imageRef\":", "\"None\",", "\"imageCaption\":", "\"None\"}", "}", "]", "```", "\"imageRef\":", "\"idx_number\",", "\"imageCaption\":", "\"caption\"", "\"This", "paper", "proposes", "a", "...", "method...\"", "\"Experiments", "have", "verified", "...\"", "\"Experimental", "results", "show", "...\"", "Summary", "from", "the", "[Conclusion]", "or", "[Summary]", "sections", "of", "the", "article.", "**Example", "Sentences:**", "**Paragraph4.", "Conclusion**", "\"imageRef\":", "\"idx_number\",", "\"imageCaption\":", "\"caption\"", "\"The", "authors", "compared", "the", "...", "model", "on", "the", "...", "dataset.", "The", "advantages", "of", "the", "proposed", "method", "are", "...,", "and", "the", "disadvantages", "are", "....\"", "\"The", "experimental", "scheme/experimental", "setup", "is", "as", "follows:", "...\"", "\"Experimental", "results", "and", "analysis:\"", "\"Compared", "with", "the", "...", "model,", "the", "proposed", "model", "improved", "by", "...", "on", "the", "...", "dataset.", "This", "indicates", "...\"", "Summary", "about", "the", "experimental", "design", "and", "results", "from", "the", "\"Experiment\",", "\"Results\",", "or", "\"Analysis\"...", "sections", "of", "the", "article.", "**Example", "Sentences:**", "**Paragraph3.", "Experimental", "Results**", "\"imageRef\":", "\"idx_number\",", "\"imageCaption\":", "\"caption\"", "\"To", "address", "the", "...", "problem,", "this", "paper", "proposes", "a", "...", "method/model.\"", "\"The", "core", "idea", "of", "this", "method/model", "is", "...\"", "\"This", "method/model", "includes", "the", "following", "key", "steps/components/modules/strategies,", "They", "are", "...\"", "**Example", "Sentences:**", "**Subtitle", "1:", "Name", "of", "step/component/module/strategy**\\n", "Describe", "the", "specific", "content", "in", "detail,", "explaining", "the", "specific", "approach,", "motivation,", "effect,", "etc.", "**Subtitle", "2:", "Name", "of", "step/component/module/strategy**\\n", "Describe", "the", "specific", "content", "in", "detail,", "explaining", "the", "specific", "approach,", "motivation,", "effect,", "etc.", "...", "If", "the", "method", "includes", "multiple", "steps,", "components,", "modules,", "or", "strategies,", "please", "extract", "them", "in", "the", "following", "format:", "model", "name,", "you", "can", "use", "a", "general", "description,", "such", "as", "\"Proposed", "Improvement", "Method.\"", "Summary", "about", "the", "main", "method", "used", "in", "this", "paper", "from", "the", "“Method”,", "“Model”,", "or", "“Framework”...", "sections", "of", "the", "article.", "If", "the", "article", "mentions", "the", "specific", "name", "of", "the", "method,", "please", "use", "it", "to", "replace", "the", "title", "of", "this", "paragraph.", "If", "the", "article", "does", "not", "have", "an", "explicit", "**Paragraph2.", "Proposed", "Method**", "\"imageRef\":", "\"idx_number\",", "\"imageCaption\":", "\"caption\"", "meet", "the", "...", "requirements.\"", "\"This", "paper", "addresses", "the", "...", "problem", "and", "proposes", "a", "...", "method.\"", "\"Existing", "methods", "for", "the", "...", "problem", "include", "...,", "...,", "etc.", "These", "methods", "have", "...", "advantages", "but", "are", "limited", "by", "...", "disadvantages", "and", "cannot", "**Example", "Sentences:**", "or", "[Related", "Work]", "sections", "of", "the", "article.", "Summary", "about", "the", "research", "background", "and", "the", "current", "state", "of", "research", "domestically", "and", "internationally", "from", "the", "[Introduction],[Background]", "**Specific", "Requirements", "for", "Each", "Paragraph:**", "**Paragraph1.", "Introduction", "or", "background**", "suitable", "for", "multiple", "paragraphs", "at", "the", "same", "time,", "only", "the", "most", "suitable", "paragraph", "can", "be", "selected,", "and", "other", "paragraphs", "can", "only", "be", "selected", "from", "the", "remaining", "images.", "If", "an", "image", "is", "not", "necessary,", "use", "\"imageRef\":", "\"None\"", "and", "\"imageCaption\":", "\"None\".", "**Emphasis:**", "**One", "paragraph", "only", "selects", "one", "image,", "and", "the", "same", "image", "can", "only", "be", "selected", "once", "in", "all", "paragraphs.**", "That", "is,", "if", "an", "image", "is", "\"imageCaption\"", "for", "the", "selected", "image", "(e.g.,", "\"imageCaption\":", "\"caption\").", "If", "an", "image", "is", "necessary,", "specify", "the", "image", "using", "its", "idx", "tag", "(e.g.,", "\"imageRef\":", "\"idx_number\").", "You", "will", "also", "create", "a", "concise", "and", "descriptive", "For", "each", "paragraph", "of", "your", "summary,", "you", "must:", "**Summarize", "Content:**", "Provide", "a", "concise", "and", "accurate", "summary,", "following", "the", "exact", "template", "provided", "for", "each", "paragraph", "below.", "Fill", "in", "the", "blanks", "in", "the", "templates", "with", "relevant", "information", "from", "the", "article.", "**Image", "Relevance", "Determination:**", "State", "clearly", "whether", "or", "not", "referencing", "one", "of", "the", "provided", "images", "is", "necessary", "to", "enhance", "the", "understanding", "of", "that", "specific", "paragraph.", "You", "are", "a", "professional", "academic", "summarization", "agent.", "I", "will", "provide", "you", "with", "the", "text", "of", "an", "illustrated", "academic", "article.", "The", "article", "will", "also", "include", "images.", "Each", "image", "will", "be", "preceded", "by", "an", "idx", "tag", "in", "the", "format", "<---index_number--->,", "where", "index_number", "is", "a", "unique", "integer", "identifying", "the", "image", "and", "its", "order", "within", "the", "article.", "Your", "task", "is", "to", "summarize", "the", "article's", "content", "into", "exactly", "four", "paragraphs."],
+  "name": "13",
+  "page": 18,
+  "regionBoundary": {
+    "x1": 116.88,
+    "x2": 479.03999999999996,
+    "y1": 138.0,
+    "y2": 677.04
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure13-1.png"
+}, {
+  "caption": "Figure 11. Prompt template for evaluating text Completeness (Com).",
+  "captionBoundary": {
+    "x1": 184.957763671875,
+    "x2": 410.5812683105469,
+    "y1": 603.9863891601562,
+    "y2": 609.1746826171875
+  },
+  "figType": "Figure",
+  "imageText": ["Output:", "Please", "output", "your", "judgment", "results.", "Only", "output", "the", "JSON", "format", "content,", "do", "not", "output", "any", "irrelevant", "information.", "The", "output", "must", "strictly", "adhere", "to", "the", "following", "JSON", "format:", "```json[", "{{", "\"key_point\":", "\"Copy", "the", "content", "of", "a", "key", "information", "point", "here\",", "\"relationship\":", "\"State", "the", "name", "of", "your", "classification", "here", "(Completely", "Included,", "Partially", "Included,", "Not", "Included)\",", "\"reason\":", "\"Explain", "your", "reasoning", "here\"", "}},", "{{", "\"key_point\":", "\"Copy", "the", "content", "of", "a", "key", "information", "point", "here\",", "\"relationship\":", "\"State", "the", "name", "of", "your", "classification", "here", "(Completely", "Included,", "Partially", "Included,", "Not", "Included)\",", "\"reason\":", "\"Explain", "your", "reasoning", "here\"", "}},", "...", "]```", "Key", "Information", "List:", "{key_points}", "-------Text", "Paragraph", "Start-------", "{paragraph}", "-------Text", "Paragraph", "End-------", "Here", "are", "the", "provided", "text", "paragraph", "and", "the", "list", "of", "key", "information", "points:", "**Important", "Reminders**:", "1.", "As", "long", "as", "the", "overall", "sentence", "meaning", "is", "consistent,", "it", "can", "be", "judged", "as", "**Completely", "Included**.", "It", "is", "not", "necessary", "to", "explicitly", "repeat", "a", "specific", "phrase", "or", "proper", "noun.", "2.", "The", "criterion", "for", "**Partially", "Included**", "is", "that", "the", "amount", "of", "information", "in", "the", "sentence", "from", "the", "list", "does", "not", "match", "the", "paragraph,", "is", "incomplete,", "or", "the", "main", "information", "is", "missing.", "3.", "The", "following", "descriptions", "can", "be", "considered", "equivalent", "in", "meaning:", "\"existing", "methods", "-", "other", "methods\",", "\"method", "-", "model", "-", "framework\",", "\"performance", "improvement", "-", "state-of-the-art", "results\",", "\"training", "-", "optimization\".", "The", "criteria", "for", "judgment", "are", "to", "categorize", "the", "relationship", "between", "the", "key", "information", "and", "the", "text", "paragraph", "into", "the", "following", "three", "cases:", "1.**Completely", "Included**:", "The", "key", "information", "is", "fully", "contained", "within", "the", "text", "paragraph,", "no", "more", "and", "no", "less.", "2.**Partially", "Included**:", "The", "key", "information", "is", "partially", "contained", "within", "the", "text", "paragraph,", "but", "not", "completely.", "3.**Not", "Included**:", "The", "key", "information", "is", "not", "contained", "within", "the", "text", "paragraph.", "After", "making", "your", "judgment,", "please", "explain", "the", "reason", "for", "your", "judgment.", "You", "are", "given", "a", "text", "paragraph", "summarized", "from", "a", "scientific", "article", "and", "a", "list", "of", "key", "information", "points.", "Please", "iterate", "through", "the", "list", "of", "key", "information", "points.", "For", "each", "key", "information", "point,", "determine", "whether", "it", "appears", "in", "the", "text", "paragraph.", "Note", "that", "when", "comparing", "the", "key", "information", "to", "the", "text", "paragraph,", "you", "do", "not", "need", "to", "consider", "the", "order", "of", "the", "information.", "You", "only", "need", "to", "determine", "whether", "the", "key", "information", "appears", "in", "the", "text", "paragraph.", "You", "are", "a", "professor", "of", "Artificial", "Intelligence", "with", "strong", "logical", "reasoning", "skills,", "specializing", "in", "the", "analysis", "of", "academic", "literature", "and", "the", "interpretation", "of", "sentence", "semantics.", "You", "will", "be", "provided", "with", "summarized", "statements", "extracted", "from", "research", "papers.", "Your", "task", "is", "to", "assist", "the", "user", "in", "performing", "semantic", "judgment", "tasks", "on", "these", "statements."],
+  "name": "11",
+  "page": 16,
+  "regionBoundary": {
+    "x1": 93.84,
+    "x2": 501.12,
+    "y1": 220.79999999999998,
+    "y2": 594.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure11-1.png"
+}, {
+  "caption": "Figure 6. Presentation 1 of Case Study and M-DocEval Evaluation Methodology.",
+  "captionBoundary": {
+    "x1": 164.6921844482422,
+    "x2": 430.8476257324219,
+    "y1": 704.8338012695312,
+    "y2": 710.0220947265625
+  },
+  "figType": "Figure",
+  "imageText": ["Partially", "Included", "Interleaved", "summarization", "from", "Qwen2-VL-7B", "Interleaved", "summarization", "from", "M-DocSum-7B:", "Evaluation", "Criteria", "ImgAcc", "=", "1", "/", "3", "=", "0.33", "NonAcc", "=", "0", "/", "1", "=", "0", "OMatch", "=", "1", "/", "4", "=", "0.25", "JacSim", "=", "Jaccard", "Similarity(", "set(1,3,6,’None’),", "set(1,2,3,4)", ")", "=", "2", "/", "4", "=", "0.5", "ImgAcc", "=", "3", "/", "3", "=", "1", "NonAcc", "=", "1", "/", "1", "=", "1", "OMatch", "=", "4", "/", "4", "=", "1", "JacSim", "=", "Jaccard", "Similarity(", "set(1,3,6,’None’),", "set(1,3,6,’None’)", ")", "=", "4", "/", "4", "=", "1", "Reference", "images", "from", "Qwen2-VL:", "[", "1", ",", "2,", "3,", "4", "]", "Reference", "images", "from", "M-DocSum:", "[", "1,", "3,", "6,", "‘None’]", "Ground", "truth", "reference", "images:", "[", "1,", "3,", "6,", "‘None’]", "Evaluation", "of", "Reference", "Images:", "From", "M-DocSum:", "From", "Qwen2-VL:", "accuracy:", "“Completely", "Accurate”", "4,", "“Mostly", "Accurate”", "3,", "“Partially", "Accurate”", "2,", "“Inaccurate”", "1", "fluency:", "“Fluent”", "0,", "“Mostly", "Fluent”", "1,", "“Not", "Fluent”", "2", "penalty_times", "=", "repetitions", "+", "hallucinations", "+", "distortions", "Acc", "=", "(accuracy", "-", "fluency", "-", "penalty_times)", "/", "4", "\"accuracy\":", "\"Mostly", "Accurate\",", "\"fluency\":", "\"Fluent\",", "\"repetitions\":", "1,", "\"hallucinations\":", "0,", "\"distortions\":", "0", "Acc", "=", "(3", "-", "0", "-", "1)", "/", "4", "=", "0.5", "\"accuracy\":", "\"Completely", "Accurate\",", "\"fluency\":", "\"Fluent\",", "\"repetitions\":", "0,", "\"hallucinations\":", "0,", "\"distortions\":", "1", "Acc", "=", "(4", "-", "0", "-", "0)", "/", "4", "=", "1.0", "Evaluation", "Com", "and", "Acc", "of", "Conclusion:", "Key", "points", "from", "paragraph", "4:", "From", "Qwen2-VL:", "From", "M-DocSum:", "+0.5", "+1", "Com", "=", "2.5", "/", "5", "=", "0.5", "5.", "Future", "work", "aims", "to", "combine", "the", "DB-PIM", "framework", "with", "value-level", "sparsity", "techniques", "to", "maximize", "the", "exploitation", "of", "sparsity", "in", "neural", "network", "models.", "Com", "=", "1.5", "/", "5", "=", "0.3", "4.", "The", "proposed", "approach", "significantly", "improves", "utilization,", "throughput,", "and", "energy", "efficiency", "compared", "to", "existing", "PIM-based", "accelerators.", "2.", "The", "framework", "integrates", "the", "FTA", "algorithm,", "CSD", "encoding,", "and", "a", "customized", "architecture", "to", "address", "computational", "dependency", "and", "low", "utilization", "issues.", "3.", "Experimental", "results", "demonstrate", "that", "DB-PIM", "achieves", "up", "to", "7.69×", "speedup", "and", "83.43%", "energy", "savings,", "with", "minimal", "accuracy", "loss", "across", "various", "neural", "network", "models.", "1.", "This", "paper", "proposes", "the", "Dyadic", "Block", "PIM", "(DB-PIM)", "framework", "to", "exploit", "unstructured", "bit-level", "sparsity", "in", "digital", "SRAM-PIM.", "The", "experimental", "results", "demonstrate", "that", "the", "proposed", "DB-PIM", "framework", "achieves", "a", "remarkable", "speedup", "of", "up", "to", "7.69x", "and", "energy", "savings", "of", "83.43%", "over", "the", "dense", "PIM", "baseline.", "The", "speedup", "is", "achieved", "by", "utilizing", "unstructured", "weight", "bit", "sparsity,", "and", "when", "combined", "with", "input", "bit", "sparsity,", "the", "speedup", "increases", "to", "7.69x.", "The", "energy", "efficiency", "is", "also", "improved", "by", "up", "to", "83.43%", "compared", "to", "the", "dense", "PIM", "baseline.", "The", "area", "breakdown", "analysis", "shows", "that", "the", "additional", "logic", "required", "for", "the", "DB-PIM", "framework", "is", "relatively", "minor,", "approximately", "0.48%.", "The", "comparison", "with", "prior", "works", "shows", "that", "DB-PIM", "achieves", "up", "to", "3x", "improvement", "in", "actual", "utilization,", "3.14x", "improvement", "in", "peak", "throughput", "per", "macro,", "and", "higher", "energy", "efficiency", "and", "energy", "efficiency", "per", "unit", "area.", "This", "paper", "proposes", "a", "novel", "algorithm-architecture", "co-design", "framework,", "DB-PIM,", "to", "effectively", "exploit", "unstructured", "bit-level", "sparsity", "in", "digital", "SRAM-PIM", "architectures.", "The", "framework", "includes", "an", "FTA", "algorithm", "that", "maintains", "model", "accuracy", "while", "preserving", "the", "randomness", "of", "non-zero", "bits", "and", "a", "DB-PIM", "architecture", "that", "accelerates", "these", "patterns.", "The", "results", "show", "that", "DB-PIM", "achieves", "a", "remarkable", "speedup", "of", "up", "to", "7.69x", "and", "energy", "savings", "of", "83.43%.", "multiply", "units", "(DBMUs)", "and", "CSD-based", "adder", "trees,", "which", "are", "specifically", "designed", "for", "efficient", "MAC", "operations", "on", "randomly", "distributed", "non-zero", "bits.", "Additionally,", "the", "architecture", "dynamically", "detects", "sparse", "blocks", "from", "input", "features,", "bypassing", "all-zero-bit", "blocks", "to", "enhance", "computational", "efficiency.", "This", "paper", "addresses", "the", "computational", "efficiency", "problem", "in", "deep", "neural", "networks", "(DNNs)", "and", "proposes", "a", "novel", "algorithm-", "architecture", "co-design", "framework,", "DB-PIM,", "to", "effectively", "exploit", "unstructured", "bit-level", "sparsity", "in", "digital", "SRAM-PIM", "architectures.", "The", "framework", "includes", "an", "FTA", "algorithm", "that", "maintains", "model", "accuracy", "while", "preserving", "the", "randomness", "of", "non-zero", "bits", "and", "a", "DB-PIM", "architecture", "that", "accelerates", "these", "patterns.", "The", "results", "show", "that", "DB-PIM", "achieves", "a", "remarkable", "speedup", "of", "up", "to", "7.69x", "and", "energy", "savings", "of", "83.43%.", "The", "proposed", "DB-PIM", "framework", "includes", "an", "FTA", "algorithm", "and", "a", "DB-PIM", "architecture.", "The", "FTA", "algorithm", "employs", "a", "fixed", "threshold", "approximation", "(FTA)", "algorithm", "and", "a", "unique", "bit-", "level", "sparsity", "pattern,", "termed", "dyadic", "block", "(DB),", "which", "employs", "the", "Canonical", "Signed", "Digit", "(CSD)", "encoding", "method.", "This", "approach", "maintains", "the", "randomness", "of", "non-zero", "bits", "while", "limiting", "the", "number", "of", "non-zero", "bits", "in", "each", "weight", "to", "improve", "regularity.", "The", "DB-PIM", "architecture", "is", "designed", "to", "accelerate", "these", "patterns,", "specifically", "tailored", "for", "Multiply-Accumulate", "(MAC)", "operations.", "It", "includes", "dyadic", "block", "Image", "Idx:", "None", "Experimental", "Results:", "DB-PIM", "was", "evaluated", "on", "a", "28", "nm", "technology", "platform", "with", "a", "128", "KB", "feature", "buffer,", "a", "16", "KB", "instruction", "buffer,", "and", "other", "hardware", "configurations.", "The", "FTA", "algorithm", "demonstrated", "minimal", "accuracy", "loss,", "with", "accuracy", "degradation", "remaining", "below", "1%", "even", "when", "applied", "to", "all", "layers", "of", "compact", "NN", "models.", "The", "framework", "achieved", "significant", "speedup", "across", "various", "NN", "models,", "with", "a", "speedup", "of", "about", "5.20×", "for", "AlexNet", "and", "4.46×", "for", "VGG19", "by", "utilizing", "weight", "sparsity.", "Energy", "savings", "were", "also", "substantial,", "with", "energy", "efficiency", "improving", "by", "63.49%", "to", "83.43%", "across", "five", "classical", "NN", "models.", "The", "area", "overhead", "of", "DB-PIM", "was", "relatively", "minor,", "with", "an", "overhead", "of", "approximately", "0.48%", "compared", "to", "the", "digital", "PIM", "baseline.", "The", "framework", "outperformed", "existing", "state-of-the-art", "PIM-based", "accelerators", "in", "terms", "of", "utilization,", "peak", "throughput", "per", "macro,", "energy", "efficiency,", "and", "energy", "efficiency", "per", "unit", "area.", "Conclusion:", "The", "DB-PIM", "framework", "effectively", "utilizes", "unstructured", "bit-level", "sparsity", "in", "digital", "SRAM-PIM,", "overcoming", "the", "limitations", "of", "conventional", "designs.", "The", "results", "show", "that", "DB-", "PIM", "achieves", "a", "remarkable", "5.20×", "speedup", "and", "a", "74.47%", "improvement", "in", "energy", "saving", "by", "utilizing", "unstructured", "weight", "bit", "sparsity.", "When", "combined", "with", "input", "bit", "sparsity,", "the", "framework", "attains", "even", "more", "remarkable", "results,", "with", "a", "7.69×", "speedup", "and", "an", "83.43%", "increase", "in", "energy", "efficiency.", "These", "results", "validate", "the", "co-design", "approach", "and", "highlight", "its", "potential", "to", "utilize", "bit-", "level", "sparsity.", "Future", "work", "aims", "to", "combine", "the", "approach", "with", "value-level", "sparsity", "to", "maximize", "the", "exploitation", "of", "sparsity", "in", "NN", "models.", "Research", "Background:", "Deep", "Neural", "Networks", "(DNNs)", "are", "widely", "used", "in", "applications", "such", "as", "image", "recognition,", "speech", "recognition,", "and", "object", "detection,", "but", "they", "require", "substantial", "memory", "and", "computing", "resources,", "which", "can", "be", "a", "challenge", "for", "resource-constrained", "devices.", "Processing-in-memory", "(PIM)", "offers", "a", "potential", "solution", "by", "executing", "multiply-accumulate", "(MAC)", "operations", "in", "memory,", "thereby", "eliminating", "the", "Memory", "Wall", "caused", "by", "frequent", "data", "movement.", "Current", "SRAM-PIM", "research", "focuses", "on", "sparsity", "support", "to", "further", "improve", "computational", "efficiency,", "with", "most", "studies", "leveraging", "value-", "level", "sparsity.", "However,", "bit-level", "sparsity,", "which", "eliminates", "redundant", "computations", "associated", "with", "zero", "bits", "in", "values,", "has", "been", "explored", "less.", "While", "bit-level", "sparsity", "has", "been", "applied", "in", "traditional", "digital", "accelerators,", "its", "efficient", "utilization", "in", "SRAM-PIM", "remains", "a", "significant", "challenge", "due", "to", "the", "rigid", "crossbar", "structure", "of", "PIM-based", "accelerators.", "Proposed", "Method:", "The", "Dyadic", "Block", "PIM", "(DB-PIM)", "framework", "is", "introduced", "as", "a", "groundbreaking", "algorithm-architecture", "co-design", "solution", "to", "effectively", "harness", "unstructured", "bit-level", "sparsity", "in", "SRAM-PIM.", "At", "the", "algorithm", "level,", "the", "Fixed", "Threshold", "Approximation", "(FTA)", "algorithm", "is", "proposed", "alongside", "a", "unique", "bit-level", "sparsity", "pattern", "called", "the", "dyadic", "block", "(DB),", "which", "employs", "Canonical", "Signed", "Digit", "(CSD)", "encoding.", "This", "approach", "maintains", "the", "random", "distribution", "of", "non-zero", "bits", "for", "accuracy", "while", "restricting", "the", "number", "of", "non-zero", "bits", "in", "each", "weight", "to", "improve", "regularity.", "At", "the", "architecture", "level,", "a", "customized", "PIM", "macro", "is", "designed", "to", "include", "dyadic", "block", "multiply", "units", "(DBMUs)", "and", "CSD-based", "adder", "trees,", "specifically", "tailored", "for", "Multiply-", "Accumulate", "(MAC)", "operations.", "Additionally,", "an", "input", "pre-processing", "unit", "(IPU)", "is", "developed", "to", "refine", "performance", "and", "efficiency", "by", "capitalizing", "on", "block-", "wise", "input", "sparsity.", "Included", "Completely"],
+  "name": "6",
+  "page": 11,
+  "regionBoundary": {
+    "x1": 129.84,
+    "x2": 467.03999999999996,
+    "y1": 180.95999999999998,
+    "y2": 687.8399999999999
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure6-1.png"
+}, {
+  "caption": "Figure 3. The illustration of automated data construction pipeline, multi-roll data verification, and two-stage training.",
+  "captionBoundary": {
+    "x1": 105.86473083496094,
+    "x2": 489.66778564453125,
+    "y1": 271.375,
+    "y2": 276.56329345703125
+  },
+  "figType": "Figure",
+  "imageText": ["(b)", "Training", "(a)", "Collection", "and", "Generation", "Stage", "2", "<б", ">б", "Stage", "1", "Chosen", "Rejecte", "d", "M-DocEval", "Score", "Training", "SetM-DocSum", "M-DocSum-Bench", "Multi-roll", "Data", "Verification", "r4", "r3", "r2", "r1", "Human", "Annotators", "LLM", "LLM", "Preference", "Refine", "Expert", "Review", "Semantic", "Checker", "Format", "Checker", "Extract", "&", "Filter", "Key", "Points", "&", "Text", "summary", "Reference", "Images", "Prompt", "Template", "2", "&", "3", "Prompt", "Template", "1", "Texts", "Image", "captions", "Document", "Iteration", "Round", "Images"],
+  "name": "3",
+  "page": 4,
+  "regionBoundary": {
+    "x1": 74.88,
+    "x2": 518.16,
+    "y1": 128.88,
+    "y2": 255.6
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure3-1.png"
+}, {
+  "caption": "Figure 10. Prompt template for reference image extraction.",
+  "captionBoundary": {
+    "x1": 201.03448486328125,
+    "x2": 394.5044250488281,
+    "y1": 689.1141967773438,
+    "y2": 694.302490234375
+  },
+  "figType": "Figure",
+  "imageText": ["**Output", "format:**", "```json[", "{", "\"imageRef\":", "\"idx\",", "\"imageCaption\":", "\"image", "caption", "here\",", "\"reasoning\":", "\"thinking", "process", "here\"", "},", "{", "\"imageRef\":", "\"idx\",", "\"imageCaption\":", "\"image", "caption", "here\",", "\"reasoning\":", "\"thinking", "process", "here\"", "},", "{", "\"imageRef\":", "\"idx\",", "\"imageCaption\":", "\"image", "caption", "here\",", "\"reasoning\":", "\"thinking", "process", "here\"", "},", "{", "\"imageRef\":", "\"idx\",", "\"imageCaption\":", "\"image", "caption", "here\",", "\"reasoning\":", "\"thinking", "process", "here\"", "}", "]```", "Output:", "Reiterate:", "The", "same", "photo", "can", "only", "be", "selected", "once", "in", "all", "paragraphs,", "that", "is,", "the", "image", "index", "finally", "output", "cannot", "be", "repeated.", "Please", "carefully", "understand", "the", "4", "paragraphs", "of", "key", "information", "of", "abstract", "paragraphs", "summary", "text,", "and", "output", "your", "annotation", "results", "in", "JSON", "format,", "including", "the", "following", "fields:", "*", "\"imageRef\"", "(str):", "If", "an", "image", "is", "needed,", "this", "field", "is", "the", "index", "idx", "of", "the", "most", "suitable", "image,", "replacing", "idx", "with", "natural", "numbers", "such", "as", "\"1,2,3,4,5...\";", "If", "an", "image", "is", "not", "needed,", "this", "field", "is", "\"None\".", "*", "\"imageCaption\"", "(str):", "If", "an", "image", "is", "needed,", "this", "field", "is", "the", "title", "of", "the", "image;", "if", "an", "image", "is", "not", "needed,", "this", "field", "is", "\"None\".", "*", "\"reasoning\"", "(str):", "If", "an", "image", "is", "needed,", "please", "show", "the", "detailed", "thinking", "process", "of", "your", "judgment;", "If", "an", "image", "is", "not", "needed,", "this", "field", "is", "\"None\".", "For", "each", "given", "abstract", "paragraph,", "please", "complete", "the", "following", "steps:", "1.", "**Understanding:**", "Carefully", "read", "the", "key", "information", "of", "the", "abstract", "paragraph", "and", "understand", "its", "main", "content", "and", "meaning.", "2.", "**Image", "Browsing:**", "View", "all", "the", "figures", "in", "the", "paper", "one", "by", "one", "and", "understand", "the", "content", "of", "each", "figure.", "3.", "**Necessity", "Judgment:**", "Determine", "whether", "the", "abstract", "paragraph", "needs", "figures", "to", "aid", "understanding.", "If", "\"not", "needed\",", "please", "skip", "directly", "to", "the", "\"Output\"", "section.", "If", "\"needed\",", "please", "proceed", "to", "the", "next", "step.", "4.", "**Image", "Selection:**", "If", "figures", "are", "needed,", "select", "the", "\"gold", "standard\"", "figure", "from", "all", "the", "figures", "in", "the", "paper", "that", "best", "meets", "the", "following", "criteria:", "**High", "Relevance:**", "The", "content", "of", "the", "figure", "is", "highly", "relevant", "to", "the", "abstract", "paragraph", "and", "can", "accurately", "and", "intuitively", "reflect", "the", "theme", "or", "key", "information", "of", "the", "paragraph.", "**Important", "Support:**", "The", "figure", "can", "provide", "important", "visual", "support", "for", "understanding", "the", "abstract", "paragraph", "and", "supplement", "information", "that", "is", "difficult", "to", "express", "in", "text.", "**Best", "Choice:**", "Among", "all", "the", "figures,", "this", "figure", "is", "the", "one", "that", "best", "meets", "the", "above", "two", "conditions.", "**Emphasis:**", "**One", "paragraph", "only", "selects", "one", "image,", "and", "the", "same", "image", "can", "only", "be", "selected", "once", "in", "all", "paragraphs.**", "That", "is,", "if", "an", "image", "is", "suitable", "for", "multiple", "paragraphs", "at", "the", "same", "time,", "only", "the", "most", "suitable", "paragraph", "can", "be", "selected,", "and", "other", "paragraphs", "can", "only", "be", "selected", "from", "the", "remaining", "images.", "5.", "**Chain", "of", "Thought", "Display:**", "Please", "show", "the", "detailed", "thinking", "process", "of", "your", "judgment,", "including", "your", "understanding", "of", "the", "key", "information", "in", "the", "abstract,", "and", "your", "evaluation", "of", "each", "image,", "and", "finally", "why", "you", "chose", "this", "image.", "**Task", "Instructions:**", "2.", "**Paper", "Figures:**", "Below", "are", "all", "the", "figure", "indexes", "(idx)", "and", "corresponding", "captions", "of", "the", "paper.", "Each", "figure", "has", "a", "unique", "idx", "in", "front", "of", "it.", "{cap_list}", "You", "will", "receive", "the", "following", "input:", "1.", "**Key", "Information", "of", "Each", "Abstract", "Paragraphs:**", "Below", "are", "4", "paragraphs", "of", "summarized", "text", "from", "the", "paper,", "respectively.", "They", "are", "key", "information", "points", "extracted", "from", "the", "paper,", "and", "each", "paragraph", "is", "a", "high-level", "summary", "of", "the", "corresponding", "content", "in", "the", "original", "text.", "{key_points}", "You", "are", "a", "professional", "academic", "paper", "analysis", "assistant.", "Your", "task", "is", "to", "select", "the", "'gold", "standard'", "image", "that", "best", "aids", "understanding", "for", "a", "given", "paper", "abstract", "paragraph."],
+  "name": "10",
+  "page": 15,
+  "regionBoundary": {
+    "x1": 93.84,
+    "x2": 501.12,
+    "y1": 135.84,
+    "y2": 678.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/MdocSum/parse_result/figMdocSum-Figure10-1.png"
+}]

@@ -1,0 +1,27 @@
+[
+    {
+        "question": "What strategies are used to optimize the memory and computational efficiency of Docopilot for handling long multimodal documents, and how do these strategies contribute to its ability to process extended contexts?",
+        "evidence": "In this section, we provide a detailed description of our packing algorithm. The main workflow is outlined in Algorithm [Ref id=\"alg:packed_dataset\"]. Specifically, our algorithm constructs the packed dataset by combining individual samples drawn from the original dataset. ... The packing operation involves four steps: (1) Check Sample ... (2) Find Buffer ... (3) Pack Samples ... (4) Maintain Buffer List ... each token can only attend to other tokens within the same original sample. Tokens from other samples packed together remain inaccessible. ... After generating a packed sample, we check if its number of images or tokens meets the specified thresholds. If so, the sample is added to the output; otherwise, it is reinserted into the buffer list for potential future packing.",
+        "score": 0.251293420791626
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "To address these issues, we have implemented the following strategies: (1) Multimodal Data Packing ... (2) Ring Attention ... (3) Liger Kernel ... Leveraging the Liger Kernel thus enables higher training throughput and addresses memory limitations, allowing for efficient scaling of large multimodal models.",
+        "score": 0.36253830790519714
+    },
+    {
+        "question": "How does Docopilot improve the efficiency and accuracy of document-level question answering compared to retrieval-augmented generation (RAG) and other baseline models, considering both the model architecture and experimental results (such as latency, accuracy, and performance on multi-page benchmarks)?",
+        "evidence": "Another research approach aims to reduce context size by leveraging retrieval augmented generation (RAG), where only the most relevant passages are retrieved and fed into the generation model. However, this retrieval-based approach can disrupt the coherence of the semantic chain, particularly in complex reasoning tasks, due to fragmented information flow. In this work, we integrate the above engineering techniques into MLLMs and demonstrate that a model fine-tuned on a high-quality, long-context training corpus is a strong baseline, achieving superior performance compared to its RAG counterpart.",
+        "score": 0.42702412605285645
+    },
+    {
+        "question": "What are the key methodological steps involved in constructing the M-DocSum-Bench interleaved summaries, and how is the quality of generated data ensured?",
+        "evidence": "For image referencing, we provide the extracted key points, original images, and image captions to a powerful LVLM. The model first determines if an image is necessary to aid understanding of the summary paragraph. If deemed necessary, it selects the most suitable image based on criteria such as high relevance to the paragraph's content, providing crucial visual support that complements textual information, and ensuring that only one image is referenced per paragraph and each image is used only once.",
+        "score": 0.43982934951782227
+    },
+    {
+        "question": "What are the main processes and design considerations in generating the Doc-750K dataset for document-level multimodal understanding, including data extraction formats, QA pair construction, task coverage, and quality controls?",
+        "evidence": "Prompt. The prompt used to generate question-answer pairs from GPT-4o is shown below. ... Please design about 3 to 5 question-answer pairs based on the paper. All questions should require as much text as possible to answer and it is better to ask about the images in the papers. ... Please try to analyze the asked image in the answer.",
+        "score": 0.4403948187828064
+    }
+]

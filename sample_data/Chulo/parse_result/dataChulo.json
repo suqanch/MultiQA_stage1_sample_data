@@ -1,0 +1,521 @@
+[{
+  "caption": "Table 1: Document classification Result. Following previous work, we use accuracy for HP and LUN, and micro F1 for other datasets. Results for LUN are obtained by our own experiment based on provided baseline codes and methods, while baseline results for the other datasets are from previous work(Park et al., 2022; Jaiswal and Milios, 2023). † are the BERT variants proposed by (Park et al., 2022). The best performance for each dataset is bolded while the second best is underscored, and we can see that our final model, a BERTbased backbone, generally outperforms other baselines across all datasets by achieving the best or second-best.",
+  "captionBoundary": {
+    "x1": 70.54752349853516,
+    "x2": 290.7921142578125,
+    "y1": 159.07444763183594,
+    "y2": 296.5908203125
+  },
+  "figType": "Table",
+  "imageText": ["Model", "HP", "LUN", "EUR", "I-EUR", "BERT", "0.9200", "0.5797", "0.7309", "0.7053", "ToBERT", "0.8954", "0.3697", "0.6757", "0.6731", "CogLTX", "0.9477", "-", "0.7013", "0.7080", "Longformer", "0.9569", "0.5552", "0.5453", "0.5647", "BERT+TextRank†", "0.9115", "0.4880", "0.7287", "0.7130", "BERT+Random†", "0.8923", "0.3015", "0.7322", "0.7147", "ChunkBERT", "0.9300", "-", "0.6494", "0.6294", "Ours", "0.9538", "0.6440", "0.7332", "0.7244"],
+  "name": "1",
+  "page": 5,
+  "regionBoundary": {
+    "x1": 69.84,
+    "x2": 291.12,
+    "y1": 70.56,
+    "y2": 147.12
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table1-1.png"
+}, {
+  "caption": "Table 2: The usage of the input content in the experiments.“F-512“ and “F-4096“ means the first 512 tokens and the first 4096 tokens, “S-512“ means the selected 512 tokens.",
+  "captionBoundary": {
+    "x1": 70.54752349853516,
+    "x2": 289.1391296386719,
+    "y1": 732.3740844726562,
+    "y2": 774.24365234375
+  },
+  "figType": "Table",
+  "imageText": ["Model", "The", "Usage", "of", "Input", "BERT", "F-512", "tokens", "ToBERT", "All", "CogLTX", "S-512", "tokens", "Longformer", "F-4096", "tokens", "BERT+TextRank", "F-512", "+", "S-512", "tokens", "BERT+Random", "F-512", "+", "S-512", "tokens", "ChunkBERT", "All", "Ours", "All", "(512*Chunk", "Size)"],
+  "name": "2",
+  "page": 5,
+  "regionBoundary": {
+    "x1": 108.0,
+    "x2": 252.0,
+    "y1": 645.6,
+    "y2": 720.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table2-1.png"
+}, {
+  "caption": "Table 9: The input of the baseline models",
+  "captionBoundary": {
+    "x1": 214.70773315429688,
+    "x2": 380.2644958496094,
+    "y1": 172.84312438964844,
+    "y2": 178.84588623046875
+  },
+  "figType": "Table",
+  "imageText": ["Model", "Input", "BERT", "(Kenton", "and", "Toutanova,", "2019)", "The", "first", "512", "tokens", "ToBERT", "(Pappagari", "et", "al.,", "2019)", "Segmented", "all", "input", "tokens", "CogLTX", "(Ding", "et", "al.,", "2020)", "Selected", "512", "tokens", "Longformer", "(Beltagy", "et", "al.,", "2020)", "The", "first", "4096", "tokens", "BigBird", "(Zaheer", "et", "al.,", "2020)", "The", "first", "4096", "tokens", "BERT+TextRank", "(Park", "et", "al.,", "2022)", "The", "first", "512", "tokens", "with", "the", "selected", "512", "tokens", "BERT+Random", "(Park", "et", "al.,", "2022)", "The", "first", "512", "tokens", "with", "the", "selected", "512", "tokens", "ChunkBERT", "(Jaiswal", "and", "Milios,", "2023)", "The", "first", "4096", "tokens", "GPT4o", "All", "input", "tokens", "with", "instruction", "Gemini1.5pro", "All", "input", "tokens", "with", "instruction"],
+  "name": "9",
+  "page": 14,
+  "regionBoundary": {
+    "x1": 152.88,
+    "x2": 442.08,
+    "y1": 70.56,
+    "y2": 161.04
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table9-1.png"
+}, {
+  "caption": "Table 10: The split and statistics of the datasets, including document classification task (HP, LUN, EURLEX57K, and Inverted EURLEX57K) and token classification task (GUM, CoNLL)",
+  "captionBoundary": {
+    "x1": 70.54752349853516,
+    "x2": 290.7903137207031,
+    "y1": 310.0950012207031,
+    "y2": 351.96453857421875
+  },
+  "figType": "Table",
+  "imageText": ["Datasets", "Train/Dev/Test", "#Classes", "Avg.", "Length", "HP", "516/64/65", "2", "705", "LUN", "12003/2992/2250", "3", "480", "EURLEX57k", "45000/6000/6000", "4271", "707", "-INVERTED", "45000/6000/6000", "4271", "707", "GUM", "179/26/26", "21", "972", "CoNLL", "120/20/20", "37", "5065"],
+  "name": "10",
+  "page": 14,
+  "regionBoundary": {
+    "x1": 69.84,
+    "x2": 292.08,
+    "y1": 239.28,
+    "y2": 298.08
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table10-1.png"
+}, {
+  "caption": "Table 4: Results on token classification tasks. The best performance for each dataset is bolded, and our model achieves the best on both datasets.",
+  "captionBoundary": {
+    "x1": 70.54752349853516,
+    "x2": 289.1368103027344,
+    "y1": 616.8553466796875,
+    "y2": 646.769287109375
+  },
+  "figType": "Table",
+  "imageText": ["Model", "CoNLL", "GUM", "Longformer", "(4096)", "0.5560", "0.9427", "BigBird", "(4096)", "0.5553", "0.9418", "GPT4o", "0.2290", "0.3231", "Gemini1.5", "0.3036", "0.3262", "Ours", "(All)", "0.9334", "0.9555"],
+  "name": "4",
+  "page": 6,
+  "regionBoundary": {
+    "x1": 73.92,
+    "x2": 286.08,
+    "y1": 553.68,
+    "y2": 605.04
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table4-1.png"
+}, {
+  "caption": "Table 5: NER results for comparison on documents of different lengths. >number represents the documents longer than the number, with the values in brackets indicating the corresponding counts for the documents. The best performance (Micro F1) is bolded and the second best is underscored, and our model consistently outperforms all the baselines for each document set.",
+  "captionBoundary": {
+    "x1": 305.8352966308594,
+    "x2": 526.1701049804688,
+    "y1": 630.6170043945312,
+    "y2": 708.3543701171875
+  },
+  "figType": "Table",
+  "imageText": ["(b)", "Results", "on", "GUM", "dataset.", "(a)", "Results", "on", "CoNLL", "dataset.", "GUM", "ALL", "(26)", "-", ">", "512", ">", "1000(8)", ">", "1042(6)", "Longformer", "0.9427", "0.9427", "0.9439", "BigBird", "0.9418", "0.9417", "0.9426", "GPT4o", "0.3231", "0.3018", "0.2808", "Gemini", "1.5", "0.3262", "0.3093", "0.3215", "Ours", "0.9555", "0.9558", "0.9574", "CoNLL", "ALL", "(20)", ">", "2048", "(17)", ">", "4096(6)", ">", "8192", "(2)", "Longformer", "0.5560", "0.5268", "0.3156", "0.3116", "BigBird", "0.5553", "0.5261", "0.3145", "0.3106", "GPT4o", "0.2290", "0.2217", "0.1252", "0.0282", "Gemini", "1.5", "0.3036", "0.2633", "0.1652", "0.0584", "Ours", "0.9334", "0.9325", "0.9287", "0.9206"],
+  "name": "5",
+  "page": 6,
+  "regionBoundary": {
+    "x1": 307.92,
+    "x2": 522.0,
+    "y1": 489.84,
+    "y2": 621.84
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table5-1.png"
+}, {
+  "caption": "Table 3: Document classification results for comparison on documents of different lengths: all documents in the test set, the subset of documents longer than 1024 tokens, and longer than 2048 tokens respectively. Values in brackets indicate the number of documents for each specific document set. The best performance (Accuracy) for each document set is bolded.",
+  "captionBoundary": {
+    "x1": 70.54752349853516,
+    "x2": 289.80078125,
+    "y1": 197.7773895263672,
+    "y2": 275.5147705078125
+  },
+  "figType": "Table",
+  "imageText": ["(b)", "HP", "dataset", "(a)", "LUN", "dataset", "HP", "All(65)", "1024(28)", "2048(9)", "Longformer", "0.9538", "0.8929", "1.000", "GPT4o", "-", "-", "0.8889", "Gemini1.5pro", "-", "-", "0.7778", "Ours", "0.9538", "0.9286", "1.000", "LUN", "All(2250)", "1024(243)", "2048(49)", "Longformer", "0.5552", "0.4062", "0.5306", "GPT4o", "-", "-", "0.7143", "Gemini1.5pro", "-", "-", "0.6531", "Ours", "0.6741", "0.5911", "0.7959"],
+  "name": "3",
+  "page": 6,
+  "regionBoundary": {
+    "x1": 73.92,
+    "x2": 286.08,
+    "y1": 70.56,
+    "y2": 186.72
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table3-1.png"
+}, {
+  "caption": "Figure 1: The Overall ChuLo Framework proposed in this paper. Each chunk is surrounded by a pink box. C1 ... Cn represents the chunk representation.",
+  "captionBoundary": {
+    "x1": 70.85653686523438,
+    "x2": 526.1657104492188,
+    "y1": 258.7664489746094,
+    "y2": 278.2188720703125
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "1",
+  "page": 2,
+  "regionBoundary": {
+    "x1": 69.84,
+    "x2": 525.12,
+    "y1": 62.879999999999995,
+    "y2": 240.95999999999998
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure1-1.png"
+}, {
+  "caption": "Figure 12: Prompt and output for a sample document of length 7474 in CoNLL dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.",
+  "captionBoundary": {
+    "x1": 306.144287109375,
+    "x2": 524.42431640625,
+    "y1": 338.3283996582031,
+    "y2": 380.19793701171875
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "12",
+  "page": 17,
+  "regionBoundary": {
+    "x1": 306.0,
+    "x2": 525.12,
+    "y1": 104.88,
+    "y2": 325.92
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure12-1.png"
+}, {
+  "caption": "Figure 13: Prompt and output for a sample document of length 9778 in CoNLL dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.",
+  "captionBoundary": {
+    "x1": 306.144287109375,
+    "x2": 524.42431640625,
+    "y1": 693.2021484375,
+    "y2": 735.0716552734375
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "13",
+  "page": 17,
+  "regionBoundary": {
+    "x1": 306.0,
+    "x2": 525.12,
+    "y1": 459.84,
+    "y2": 679.92
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure13-1.png"
+}, {
+  "caption": "Figure 11: Prompt and output for a sample document of length 1798 in CoNLL dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.",
+  "captionBoundary": {
+    "x1": 70.85653686523438,
+    "x2": 289.1368408203125,
+    "y1": 692.9121704101562,
+    "y2": 734.7816772460938
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "11",
+  "page": 17,
+  "regionBoundary": {
+    "x1": 69.84,
+    "x2": 290.15999999999997,
+    "y1": 458.88,
+    "y2": 679.92
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure11-1.png"
+}, {
+  "caption": "Figure 10: Prompt and output for a sample document of length 1281 in GUM dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.",
+  "captionBoundary": {
+    "x1": 70.85653686523438,
+    "x2": 289.1368408203125,
+    "y1": 337.412353515625,
+    "y2": 379.2829284667969
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "10",
+  "page": 17,
+  "regionBoundary": {
+    "x1": 69.84,
+    "x2": 290.15999999999997,
+    "y1": 104.88,
+    "y2": 324.96
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure10-1.png"
+}, {
+  "caption": "Table 6: The prompt we used for each dataset in our experiments.",
+  "captionBoundary": {
+    "x1": 305.8352966308594,
+    "x2": 524.5903930664062,
+    "y1": 602.99365234375,
+    "y2": 620.9530029296875
+  },
+  "figType": "Table",
+  "imageText": ["mation,", "for", "coarse-grained", "document", "classification", "and", "fine-grained", "token-level", "classification", "tasks", "like", "NER.", "The", "ability", "to", "maintain", "performance", "across", "varying", "document", "lengths", "highlights", "the", "impor-", "tance", "of", "incorporating", "global", "contextual", "informa-", "tion", "in", "NER", "tasks—a", "largely", "underexplored", "aspect.", "Additionally,", "off-the-shelf", "LLMs", "such", "as", "GPT-4o", "and", "Gemini", "1.5", "Pro", "show", "suboptimal", "performance", "on", "NER", "tasks", "without", "fine-tuning,", "and", "their", "per-", "formance", "deteriorates", "further", "as", "document", "length", "increases.", "This", "indicates", "that,", "despite", "their", "advance-", "ments,", "LLMs", "still", "require", "substantial", "optimization", "for", "effective", "long", "document", "understanding.", "5.5", "Prompt", "Method", "We", "employed", "zero-shot", "prompting", "with", "large", "lan-", "guage", "models", "(LLMs),", "specifically", "Gemini", "1.5", "Pro", "and", "GPT4o,", "in", "our", "experiments.", "The", "prompts", "used", "for", "each", "dataset", "are", "detailed", "in", "Table", "6", "and", "7:", "Dataset", "Prompt", "LUN", "Task", "Definition:", "You", "are", "provided", "with", "a", "news", "article.", "Your", "task", "is", "to", "classify", "the", "article", "into", "one", "of", "the", "following", "cate-", "gories:", "\"Satire”", "\"Hoax”", "or", "\"Propaganda”", "Respond", "only", "with", "the", "appropriate", "category.", "The", "news", "is:", "[{input}].", "HP", "Task", "Definition:", "You", "are", "provided", "with", "a", "news", "article.", "Your", "task", "is", "to", "classify", "whether", "the", "article", "is", "hyperpartisan.", "Respond", "only", "with", "\"True”", "if", "the", "news", "is", "hyperpartisan", "or", "\"False”", "if", "it", "is", "not.", "The", "news", "is:", "[{input}]."],
+  "name": "6",
+  "page": 7,
+  "regionBoundary": {
+    "x1": 305.52,
+    "x2": 526.56,
+    "y1": 238.32,
+    "y2": 591.12
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table6-1.png"
+}, {
+  "caption": "Figure 2: Comparison of performance in different length ranges for CoNLL and GUM datasets. Values of brackets includes the min and max length of each dataset.",
+  "captionBoundary": {
+    "x1": 70.85653686523438,
+    "x2": 524.4221801757812,
+    "y1": 203.34764099121094,
+    "y2": 221.3060302734375
+  },
+  "figType": "Figure",
+  "imageText": ["(a)", "CoNLL", "Performance", "(Range:", "1798", "to", "9778)", "(b)", "GUM", "Performance", "(Range:", "628", "to", "1281)"],
+  "name": "2",
+  "page": 7,
+  "regionBoundary": {
+    "x1": 69.84,
+    "x2": 525.12,
+    "y1": 69.84,
+    "y2": 189.84
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure2-1.png"
+}, {
+  "caption": "Figure 8: Prompt and output for a sample document of length 895 in GUM dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.",
+  "captionBoundary": {
+    "x1": 306.144287109375,
+    "x2": 524.4266357421875,
+    "y1": 337.7433166503906,
+    "y2": 379.6138610839844
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "8",
+  "page": 16,
+  "regionBoundary": {
+    "x1": 306.0,
+    "x2": 525.12,
+    "y1": 104.88,
+    "y2": 324.96
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure8-1.png"
+}, {
+  "caption": "Figure 6: Prompt and output for a sample document of length 6800 in Hyperpartisan dataset, where correct predictions are highlighted in green and the wrong prediction is highlighted in red. Compared to Gemini1.5pro, our model, GPT4o and Longformer can correctly classify the given document as False.",
+  "captionBoundary": {
+    "x1": 70.85653686523438,
+    "x2": 290.79315185546875,
+    "y1": 281.5495300292969,
+    "y2": 347.3313293457031
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "6",
+  "page": 16,
+  "regionBoundary": {
+    "x1": 69.84,
+    "x2": 290.15999999999997,
+    "y1": 129.84,
+    "y2": 270.0
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure6-1.png"
+}, {
+  "caption": "Figure 7: Prompt and output for a sample document of length 2445 in Hyperpartisan dataset, where correct predictions are highlighted in green and wrong predictions are highlighted in red. Compared to GPT4o and Gemini1.5pro, our model and Longformer can correctly classify the given document as False.",
+  "captionBoundary": {
+    "x1": 70.85653686523438,
+    "x2": 290.78973388671875,
+    "y1": 639.0274658203125,
+    "y2": 704.8092041015625
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "7",
+  "page": 16,
+  "regionBoundary": {
+    "x1": 69.84,
+    "x2": 290.15999999999997,
+    "y1": 486.71999999999997,
+    "y2": 627.12
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure7-1.png"
+}, {
+  "caption": "Figure 9: Prompt and output for a sample document of length 1029 in GUM dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.",
+  "captionBoundary": {
+    "x1": 306.144287109375,
+    "x2": 524.42431640625,
+    "y1": 692.8810424804688,
+    "y2": 734.7506103515625
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "9",
+  "page": 16,
+  "regionBoundary": {
+    "x1": 306.0,
+    "x2": 525.12,
+    "y1": 459.84,
+    "y2": 679.92
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure9-1.png"
+}, {
+  "caption": "Table 7: The prompt we used for each dataset in our experiments.",
+  "captionBoundary": {
+    "x1": 166.7853240966797,
+    "x2": 428.1871032714844,
+    "y1": 320.6965026855469,
+    "y2": 326.69927978515625
+  },
+  "figType": "Table",
+  "imageText": ["GUM", "In", "the", "task", "of", "Named", "Entity", "Recognition,", "the", "B-,", "I-,", "and", "O-", "prefixes", "are", "commonly", "used", "to", "annotate", "slot", "types,", "indicating", "the", "boundaries", "and", "types", "of", "slots.", "These", "labels", "typically", "represent:", "B-", "(Begin):", "Signifies", "the", "beginning", "of", "a", "slot,", "marking", "the", "start", "of", "a", "new", "slot.", "I-", "(Inside):", "Represents", "the", "interior", "of", "a", "slot,", "indicating", "a", "continuation", "of", "the", "slot.", "O", "(Outside):", "Denotes", "parts", "of", "the", "input", "that", "are", "not", "part", "of", "any", "slot.", "For", "instance,", "in", "a", "sentence", "where", "we", "want", "to", "label", "a", "\"date\"", "slot,", "words", "containing", "date", "information", "might", "be", "tagged", "as", "\"B-date\"", "(indicating", "the", "beginning", "of", "a", "date", "slot),", "followed", "by", "consecutive", "words", "carrying", "date", "information", "tagged", "as", "\"I-date\"", "(indicating", "the", "continuation", "of", "the", "date", "slot),", "while", "words", "not", "containing", "date", "information", "would", "be", "tagged", "as", "\"O\"", "(indicating", "they", "are", "outside", "any", "slot).", "Definition:", "In", "this", "task,", "you", "are", "given", "a", "conversation,", "where", "the", "words", "spoken", "by", "a", "person", "are", "shown", "as", "a", "list.", "Your", "job", "is", "to", "classify", "the", "words", "in", "the", "following", "conversation", "into", "one", "of", "the", "37", "different", "entities.", "The", "entities", "are:", "\"I-abstract\",", "\"B-object\",", "\"B-place\",", "\"I-substance\",", "\"I-time\",", "\"I-place\",", "\"B-time\",", "\"B-abstract\",", "\"I-person\",", "\"B-plant\",", "\"B-substance\",", "\"I-animal\",", "\"B-organization\",", "\"I-event\",", "\"B-person\",", "\"B-event\",", "\"I-plant\",", "\"I-organization\",", "\"O\",", "\"I-object\",", "\"B-animal\".", "Only", "output", "entities.", "And", "the", "entity", "types", "should", "be", "output", "as", "a", "list", "without", "any", "explanation.", "The", "input", "is", "[{input}].", "CoNLL", "In", "the", "task", "of", "Named", "Entity", "Recognition,", "the", "B-,", "I-,", "and", "O-", "prefixes", "are", "commonly", "used", "to", "annotate", "slot", "types,", "indicating", "the", "boundaries", "and", "types", "of", "slots.", "These", "labels", "typically", "represent:", "B-", "(Begin):", "Signifies", "the", "beginning", "of", "a", "slot,", "marking", "the", "start", "of", "a", "new", "slot.", "I-", "(Inside):", "Represents", "the", "interior", "of", "a", "slot,", "indicating", "a", "continuation", "of", "the", "slot.", "O", "(Outside):", "Denotes", "parts", "of", "the", "input", "that", "are", "not", "part", "of", "any", "slot.", "For", "instance,", "in", "a", "sentence", "where", "we", "want", "to", "label", "a", "\"date\"", "slot,", "words", "containing", "date", "information", "might", "be", "tagged", "as", "\"B-date\"", "(indicating", "the", "beginning", "of", "a", "date", "slot),", "followed", "by", "consecutive", "words", "carrying", "date", "information", "tagged", "as", "\"I-date\"", "(indicating", "the", "continuation", "of", "the", "date", "slot),", "while", "words", "not", "containing", "date", "information", "would", "be", "tagged", "as", "\"O\"", "(indicating", "they", "are", "outside", "any", "slot).", "Definition:", "In", "this", "task,", "you", "are", "given", "a", "conversation,", "where", "the", "words", "spoken", "by", "a", "person", "are", "shown", "as", "a", "list.", "Your", "job", "is", "to", "classify", "the", "words", "in", "the", "following", "conversation", "into", "one", "of", "the", "37", "different", "entities.", "The", "entities", "are:", "\"O\",", "\"B-PERSON\",", "\"I-PERSON\",", "\"B-NORP\",", "\"I-NORP\",", "\"B-FAC\",", "\"I-FAC\",", "\"B-ORG\",", "\"I-ORG\",", "\"B-GPE\",", "\"I-GPE\",", "\"B-LOC\",", "\"I-LOC\",", "\"B-", "PRODUCT\",", "\"I-PRODUCT\",", "\"B-DATE\",", "\"I-DATE\",", "\"B-TIME\",", "\"I-TIME\",", "\"B-PERCENT\",", "\"I-PERCENT\",", "\"B-MONEY\",", "\"I-MONEY\",", "\"B-QUANTITY\",", "\"I-QUANTITY\",", "\"B-ORDINAL\",", "\"I-ORDINAL\",", "\"B-CARDINAL\",", "\"I-CARDINAL\",", "\"B-EVENT\",", "\"I-EVENT\",", "\"B-WORK_OF_ART\",", "\"I-WORK_OF_ART\",", "\"B-LAW\",", "\"I-LAW\",", "\"B-LANGUAGE\",", "\"I-", "LANGUAGE\".", "Only", "output", "entities.", "And", "the", "entity", "types", "should", "be", "output", "as", "a", "list", "without", "any", "explanation.", "The", "input", "is", "[{input}].", "Dataset", "Prompt"],
+  "name": "7",
+  "page": 8,
+  "regionBoundary": {
+    "x1": 105.83999999999999,
+    "x2": 489.12,
+    "y1": 70.56,
+    "y2": 309.12
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table7-1.png"
+}, {
+  "caption": "Figure 3: Prompt and output for a sample document of length 3038 in CoNLL dataset for NER task, where correct predictions are highlighted in green and wrong predictions are highlighted in red.",
+  "captionBoundary": {
+    "x1": 70.85653686523438,
+    "x2": 289.1368408203125,
+    "y1": 653.4591674804688,
+    "y2": 695.3286743164062
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "3",
+  "page": 8,
+  "regionBoundary": {
+    "x1": 69.84,
+    "x2": 290.15999999999997,
+    "y1": 413.76,
+    "y2": 641.04
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure3-1.png"
+}, {
+  "caption": "Figure 4: Prompt and output for a sample document of length 3928 in LUN dataset, where the correct prediction is highlighted in green and wrong predictions are highlighted in red. Compared to GPT4o, Gemini1.5pro and Longformer, our model can correctly classify the given document as Hoax.",
+  "captionBoundary": {
+    "x1": 306.144287109375,
+    "x2": 526.0813598632812,
+    "y1": 440.978515625,
+    "y2": 506.75927734375
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "4",
+  "page": 15,
+  "regionBoundary": {
+    "x1": 306.0,
+    "x2": 525.12,
+    "y1": 288.71999999999997,
+    "y2": 429.12
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure4-1.png"
+}, {
+  "caption": "Figure 5: Prompt and output for a sample document of length 2410 in LUN dataset, where the correct prediction is highlighted in green and wrong predictions are highlighted in red. Compared to GPT4o, Gemini1.5pro and Longformer, our model can correctly classify the given document as Propaganda.",
+  "captionBoundary": {
+    "x1": 306.144287109375,
+    "x2": 526.0813598632812,
+    "y1": 685.4907836914062,
+    "y2": 751.2725219726562
+  },
+  "figType": "Figure",
+  "imageText": [],
+  "name": "5",
+  "page": 15,
+  "regionBoundary": {
+    "x1": 306.0,
+    "x2": 525.12,
+    "y1": 533.76,
+    "y2": 673.92
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Figure5-1.png"
+}, {
+  "caption": "Table 11: The optimal hyperparameters used in our experiments.",
+  "captionBoundary": {
+    "x1": 168.60342407226562,
+    "x2": 426.36865234375,
+    "y1": 201.53758239746094,
+    "y2": 207.54034423828125
+  },
+  "figType": "Table",
+  "imageText": ["Hyperparameter", "HP", "LUN", "EURLEX57K", "I-EURLEX57K", "CoNLL", "GUM", "Number", "of", "top-n", "phrases", "15", "15", "15", "15", "15", "15", "Chunk", "size", "n", "10", "50", "5", "5", "20", "50", "Weight", "for", "Tk", "0.8", "0.5", "0.8", "0.8", "0.8", "0.8", "Weight", "for", "Tnk", "0.1", "0.1", "0.1", "0.1", "0.1", "0.1", "Learning", "Rate", "5e-5", "5e-5", "5e-5", "5e-5", "5e-5", "5e-5", "Batch", "Size", "16", "32", "16", "16", "2", "8", "Warm-up", "Strategy", "Linear", "Linear", "Cosine", "Cosine", "Linear", "Linear", "Warm-up", "Steps", "10%", "10%", "5%", "5%", "10%", "10%", "Mex", "epoch", "100", "100", "100", "100", "100", "100", "Stop", "Patience", "10", "10", "10", "10", "10", "10", "Optimizer", "AdamW", "AdamW", "AdamW", "AdamW", "AdamW", "AdamW", "Optimizer", "Weight", "Decay", "1e-2", "1e-2", "1e-2", "1e-2", "1e-2", "1e-2", "Optimizer", "Betas", "0.9,", "0.999", "0.9,", "0.999", "0.9,", "0.999", "0.9,", "0.999", "0.9,", "0.999", "0.9,", "0.999"],
+  "name": "11",
+  "page": 15,
+  "regionBoundary": {
+    "x1": 73.92,
+    "x2": 521.04,
+    "y1": 71.75999999999999,
+    "y2": 189.12
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table11-1.png"
+}, {
+  "caption": "Table 13: Effect of sentence embedding, adding the sentence-level information to the chunk representations.",
+  "captionBoundary": {
+    "x1": 70.54752349853516,
+    "x2": 289.1368103027344,
+    "y1": 496.8203125,
+    "y2": 514.7786865234375
+  },
+  "figType": "Table",
+  "imageText": ["Sentence", "Embedding", "HP", "LUN", "w/o", "sentence", "emb.", "0.9538", "0.6440", "sentence", "emb.", "0.9076", "0.5537"],
+  "name": "13",
+  "page": 15,
+  "regionBoundary": {
+    "x1": 70.8,
+    "x2": 289.2,
+    "y1": 458.4,
+    "y2": 485.03999999999996
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table13-1.png"
+}, {
+  "caption": "Table 14: Effect of different backbone models for the chunk attention.",
+  "captionBoundary": {
+    "x1": 70.54752349853516,
+    "x2": 289.13995361328125,
+    "y1": 565.2367553710938,
+    "y2": 583.195068359375
+  },
+  "figType": "Table",
+  "imageText": ["Backbone", "HP", "LUN", "BERT", "(Ours)", "0.9538", "0.6440", "RoBERTa", "0.8615", "0.5906", "Longformer", "0.8923", "0.5600"],
+  "name": "14",
+  "page": 15,
+  "regionBoundary": {
+    "x1": 70.8,
+    "x2": 289.2,
+    "y1": 518.88,
+    "y2": 552.96
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table14-1.png"
+}, {
+  "caption": "Table 12: Effect of keyphrase extraction methods; Average: Average Chunk Representations",
+  "captionBoundary": {
+    "x1": 70.54752349853516,
+    "x2": 290.7873229980469,
+    "y1": 436.3742980957031,
+    "y2": 454.3326721191406
+  },
+  "figType": "Table",
+  "imageText": ["Keyphrase", "method", "HP", "LUN", "Average", "0.9538", "0.5951", "YAKE", "0.8769", "0.5951", "PromptRank", "0.9538", "0.6440"],
+  "name": "12",
+  "page": 15,
+  "regionBoundary": {
+    "x1": 70.8,
+    "x2": 289.2,
+    "y1": 389.76,
+    "y2": 424.08
+  },
+  "renderDpi": 300,
+  "renderURL": "sample_data/Chulo/parse_result/figChuLo-Table12-1.png"
+}]
