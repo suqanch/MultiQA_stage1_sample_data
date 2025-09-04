@@ -153,8 +153,8 @@ Algorithm:
     "evidences": [
       {
         "section_name": "related work",
-        "fuzzy_matched_section": "related work",
-        "true_category": "Introduction or background",
+        "original_section_name": "related work",
+        "fuzzy_matched_section": "Introduction or background",
         "content": "The Overall ChuLo Framework proposed ...",
         "gold_paragraph": "§ RELATED WORK §. § ...",
         "max_rougeL_score": 1.0,
@@ -171,7 +171,7 @@ Field notes for per question:
 - `avg_evidence_len`: average token length of evidences.
 - `evidence_length`: token length of an individual evidence.
 - `max_rougeL_score`: ROUGE-L recall between evidence and matched gold section.
-- `true_category`: fuzzy matched category for the matched section.
+- `fuzzy_matched_section`: fuzzy matched category for the matched section.
 
 
 ## Analysis result demo

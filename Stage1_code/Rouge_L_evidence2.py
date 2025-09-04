@@ -118,7 +118,8 @@ def rougeL_recall(evidence, document, debug=False):
         gold_content = gold_content.replace("\n", "").replace("\r", "")
         score = []
         for evidence_content_piece in evidence_content_lst:
-            sc = _SCORER.score(target=evidence_content_piece, prediction=gold_content)['rougeL'].recall
+            # sc = _SCORER.score(target=evidence_content_piece, prediction=gold_content)['rougeL'].recall
+            sc = _SCORER.score(target=gold_content, prediction=evidence_content_piece)['rougeL'].recall
             length = len(evidence_content_piece)
             score.append((sc, length))
         # score = max len evidence score
