@@ -1,0 +1,78 @@
+[
+    {
+        "question": "What are the main challenges faced by LVLMs when summarizing long and complex interleaved image-text documents, and how does M-DocSum-7B address these challenges?",
+        "avg_cos_score": 0.39904412627220154,
+        "lowest_cos_score": 0.27789944410324097,
+        "intent": [
+            "Causal",
+            "Procedural"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "The evaluation results reveal a significant gap between the document summarization capabilities of LVLMs and humans.",
+                "cosine_score": 0.6788797378540039
+            },
+            {
+                "section": "§ TRAINING",
+                "type": "paragraph",
+                "content": "We train the model for one epoch on the training set using 64 H800 GPUs, configuring all components except the ViT to be trainable.",
+                "cosine_score": 0.2983880639076233
+            },
+            {
+                "section": "§ TRAINING",
+                "type": "paragraph",
+                "content": "In this stage, we introduce a novel method for constructing preference data. By conducting a second-stage DPO training on this data, we can further enhance the performance and robustness of the model.",
+                "cosine_score": 0.27789944410324097
+            },
+            {
+                "section": "§ EXPERIMENTS & ANALYSIS",
+                "type": "paragraph",
+                "content": "Open-source models show that overall scores increase with model parameter size, with the Qwen2.5 series outperforming the Qwen2 series.",
+                "cosine_score": 0.341009259223938
+            }
+        ]
+    },
+    {
+        "question": "How does Docopilot improve upon existing RAG-based methods for document-level multimodal understanding, and what specific techniques contribute to its efficiency?",
+        "avg_cos_score": 0.5111385762691498,
+        "lowest_cos_score": 0.29847481846809387,
+        "intent": [
+            "Descriptive",
+            "Procedural"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "Building on the dataset, we develop a native multimodal model—Docopilot, which can accurately handle document-level dependencies without relying on RAG.",
+                "cosine_score": 0.8391894102096558
+            },
+            {
+                "section": "§ ENHANCED BASELINE FOR DOCUMENT-LEVEL MULTIMODAL UNDERSTANDING",
+                "type": "paragraph",
+                "content": "(1) Multimodal Data Packing. To balance the computational load between the vision model (ViT) and the language model (LLM) while minimizing resource waste caused by padding, we implement a multimodal data-packing strategy.",
+                "cosine_score": 0.4345783591270447
+            },
+            {
+                "section": "§ ENHANCED BASELINE FOR DOCUMENT-LEVEL MULTIMODAL UNDERSTANDING",
+                "type": "paragraph",
+                "content": "(2) Ring Attention. We implement the Ring Attention mechanism to alleviate memory constraints associated with processing long sequences.",
+                "cosine_score": 0.29847481846809387
+            },
+            {
+                "section": "§ ENHANCED BASELINE FOR DOCUMENT-LEVEL MULTIMODAL UNDERSTANDING",
+                "type": "paragraph",
+                "content": "(3) Liger Kernel. To further improve memory and computational efficiency, we integrate the Liger Kernel, a specialized kernel library optimized for large-scale model training.",
+                "cosine_score": 0.35406774282455444
+            },
+            {
+                "section": "§ EXPERIMENTS",
+                "type": "paragraph",
+                "content": "Our Docopilot demonstrates exceptional performance in both medium- and long-context scenarios, while maintaining high accuracy in short-context situations.",
+                "cosine_score": 0.6293825507164001
+            }
+        ]
+    }
+]

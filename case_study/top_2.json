@@ -1,0 +1,78 @@
+[
+    {
+        "question": "How does ChuLo’s performance compare to Longformer and off-the-shelf LLMs like GPT-4o and Gemini 1.5 Pro when handling longer documents?",
+        "avg_cos_score": 0.7141987919807434,
+        "lowest_cos_score": 0.5774117708206177,
+        "intent": [
+            "Comparative",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "As shown in Table [Ref id=\"tab:Accuracy length intervals\"], our model consistently outperforms others on longer documents in the LUN dataset.",
+                "cosine_score": 0.5774117708206177
+            },
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "On the HP dataset, ChuLo and Longformer achieve perfect accuracy (1.0) for documents longer than 2,048 tokens.",
+                "cosine_score": 0.7346099019050598
+            },
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "However, ChuLo achieved the highest accuracy of 0.7959, showcasing its superiority in handling long documents with diverse content.",
+                "cosine_score": 0.7148947715759277
+            },
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "This highlights ChuLo’s robustness and consistency in classifying documents with varying length, even compared to advanced language models.",
+                "cosine_score": 0.7881758213043213
+            },
+            {
+                "section": "§ CONCLUSION",
+                "type": "paragraph",
+                "content": "Extensive experiments demonstrate that ChuLo outperforms existing methods by maintaining both global context and high accuracy, even for lengthy inputs.",
+                "cosine_score": 0.7559016942977905
+            }
+        ]
+    },
+    {
+        "question": "How does the M-DocSum-Bench evaluate the performance of LVLMs in generating interleaved image-text summaries, and what are the key components of its evaluation framework?",
+        "avg_cos_score": 0.6574968695640564,
+        "lowest_cos_score": 0.6305146217346191,
+        "intent": [
+            "Descriptive",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "M-DocSum-Bench comprises 500 high-quality paper documents from arXiv primarily across six domains, created in or after April 2024, along with human-preference-aligned multimodal interleaved summaries.",
+                "cosine_score": 0.6305146217346191
+            },
+            {
+                "section": "§ M-DOCSUM-BENCH",
+                "type": "paragraph",
+                "content": "To facilitate this Benchmark, we develop an automated framework for constructing interleaved summaries which is subjected to a rigorous development process including cross-validation of human experts.",
+                "cosine_score": 0.6568547487258911
+            },
+            {
+                "section": "§ M-DOCSUM-BENCH",
+                "type": "paragraph",
+                "content": "Subsequently, we propose a fine-grained evaluation method namely M-DocEval. This method centers on three primary dimensions: (1) Textual Content: M-DocEval evaluates the completeness and accuracy of the textual summary. (2) Visual Reference: This dimension assesses the precision and overall effectiveness of image referencing. (3) Instruction Following: This metric evaluates how well the model follows instructions.",
+                "cosine_score": 0.7079839706420898
+            },
+            {
+                "section": "§ EXPERIMENTS & ANALYSIS",
+                "type": "paragraph",
+                "content": "Experiments with leading LVLMs reveal a significant performance gap compared to humans, highlighting challenges in maintaining coherence and integrating information in long interleaved contexts.",
+                "cosine_score": 0.6346341371536255
+            }
+        ]
+    }
+]

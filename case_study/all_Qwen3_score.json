@@ -1,0 +1,589 @@
+[
+    {
+        "question": "How does ChuLo's chunk representation method improve the performance of Transformer-based models on long document classification tasks compared to traditional methods?",
+        "avg_cos_score": 0.5501494526863098,
+        "lowest_cos_score": 0.40750324726104736,
+        "intent": [
+            "Descriptive",
+            "Comparative",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "Transformer-based models have achieved remarkable success in various Natural Language Processing (NLP) tasks, yet their ability to handle long documents is constrained by computational limitations.",
+                "cosine_score": 0.5080077052116394
+            },
+            {
+                "section": "§ CHULO",
+                "type": "paragraph",
+                "content": "Our ChuLo groups input tokens using unsupervised keyphrase extraction, emphasizing semantically important keyphrase based chunks to retain core document content while reducing input length.",
+                "cosine_score": 0.674701452255249
+            },
+            {
+                "section": "§ RELATED WORK",
+                "type": "paragraph",
+                "content": "Common approaches to long document processing, such as truncation and sparse attention, either disregard parts of the document or restrict the receptive field of individual tokens, resulting in potential information loss.",
+                "cosine_score": 0.5052803158760071
+            },
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "Our method demonstrates clear superiority on three of the four datasets, achieving a significant improvement of 6.43.",
+                "cosine_score": 0.40750324726104736
+            },
+            {
+                "section": "§ CONCLUSION",
+                "type": "paragraph",
+                "content": "By utilizing unsupervised keyphrase extraction, ChuLo effectively reduces input length while preserving critical information, addressing the limitations of truncation and sparse attention.",
+                "cosine_score": 0.6552545428276062
+            }
+        ]
+    },
+    {
+        "question": "What are the key steps involved in ChuLo’s chunk representation production, and how do they contribute to the model’s effectiveness in handling long documents?",
+        "avg_cos_score": 0.6036656856536865,
+        "lowest_cos_score": 0.46791958808898926,
+        "intent": [
+            "Procedural",
+            "Descriptive"
+        ],
+        "evidence": [
+            {
+                "section": "§ CHULO",
+                "type": "paragraph",
+                "content": "The method segments documents into non-overlapping chunks, integrates key semantic information using unsupervised keyphrase extraction, and assigns higher weights to keyphrase tokens in chunk representations.",
+                "cosine_score": 0.6396012306213379
+            },
+            {
+                "section": "§ CHULO",
+                "type": "paragraph",
+                "content": "To achieve this, we label the tokens corresponding to the extracted keyphrases in the original text as keyphrase tokens $T_k$, while other tokens are labelled as non-keyphrase tokens $T_{nk}$. Then, we feed these chunked tokens $t$ into the embedding layer to obtain their embeddings.",
+                "cosine_score": 0.5327194333076477
+            },
+            {
+                "section": "§ CHULO",
+                "type": "paragraph",
+                "content": "Here, $w_t$ represents the weight assigned to each token $t$ in the chunk, where $a$ and $b$ are hyperparameters with $a > b.$",
+                "cosine_score": 0.46791958808898926
+            },
+            {
+                "section": "§ CHULO",
+                "type": "paragraph",
+                "content": "Finally, the chunk embeddings are fed into the Transformer-based model, allowing it to effectively leverage the enhanced chunk representations during long document classification or token-level classification tasks.",
+                "cosine_score": 0.654832124710083
+            },
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "Overall, the results confirm that ChuLo consistently outperforms standard PLM baselines and existing chunking methods in long document classification tasks.",
+                "cosine_score": 0.7232560515403748
+            }
+        ]
+    },
+    {
+        "question": "How does ChuLo’s performance compare to Longformer and off-the-shelf LLMs like GPT-4o and Gemini 1.5 Pro when handling longer documents?",
+        "avg_cos_score": 0.7141987919807434,
+        "lowest_cos_score": 0.5774117708206177,
+        "intent": [
+            "Comparative",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "As shown in Table [Ref id=\"tab:Accuracy length intervals\"], our model consistently outperforms others on longer documents in the LUN dataset.",
+                "cosine_score": 0.5774117708206177
+            },
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "On the HP dataset, ChuLo and Longformer achieve perfect accuracy (1.0) for documents longer than 2,048 tokens.",
+                "cosine_score": 0.7346099019050598
+            },
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "However, ChuLo achieved the highest accuracy of 0.7959, showcasing its superiority in handling long documents with diverse content.",
+                "cosine_score": 0.7148947715759277
+            },
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "This highlights ChuLo’s robustness and consistency in classifying documents with varying length, even compared to advanced language models.",
+                "cosine_score": 0.7881758213043213
+            },
+            {
+                "section": "§ CONCLUSION",
+                "type": "paragraph",
+                "content": "Extensive experiments demonstrate that ChuLo outperforms existing methods by maintaining both global context and high accuracy, even for lengthy inputs.",
+                "cosine_score": 0.7559016942977905
+            }
+        ]
+    },
+    {
+        "question": "What are the main limitations of current methods for processing long documents, and how does ChuLo address these issues differently?",
+        "avg_cos_score": 0.5196884274482727,
+        "lowest_cos_score": 0.3282410502433777,
+        "intent": [
+            "Descriptive",
+            "Comparative",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "Traditional approaches, such as truncating inputs, sparse self-attention, and chunking, attempt to mitigate these issues, but they often lead to information loss and hinder the model's ability to capture long-range dependencies.",
+                "cosine_score": 0.41580450534820557
+            },
+            {
+                "section": "§ RELATED WORK",
+                "type": "paragraph",
+                "content": "Such approaches will lead to a certain level of information loss, unlike our chunking approach which can take all the content into consideration.",
+                "cosine_score": 0.47598713636398315
+            },
+            {
+                "section": "§ CHULO",
+                "type": "paragraph",
+                "content": "Our ChuLo groups input tokens using unsupervised keyphrase extraction, emphasizing semantically important keyphrase based chunks to retain core document content while reducing input length.",
+                "cosine_score": 0.6613433957099915
+            },
+            {
+                "section": "§ RESULTS",
+                "type": "paragraph",
+                "content": "Overall, the results confirm that ChuLo consistently outperforms standard PLM baselines and existing chunking methods in long document classification tasks.",
+                "cosine_score": 0.7170660495758057
+            },
+            {
+                "section": "§ LIMITATION",
+                "type": "paragraph",
+                "content": "However, the performance of the keyphrase extraction method poses a potential risk, as its quality directly affects the overall effectiveness of the approach.",
+                "cosine_score": 0.3282410502433777
+            }
+        ]
+    },
+    {
+        "question": "What insights can be drawn from the ablation studies conducted on ChuLo, particularly regarding keyphrase extraction methods and backbone models?",
+        "avg_cos_score": 0.5169014215469361,
+        "lowest_cos_score": 0.42258042097091675,
+        "intent": [
+            "Descriptive",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ APPENDIX",
+                "type": "paragraph",
+                "content": "As shown in Table [Ref id=\"tab:keyphrase ablation\"], the PromptRank-based method yields the highest performance across both datasets, outperforming alternatives like YAKE-based.",
+                "cosine_score": 0.5003278851509094
+            },
+            {
+                "section": "§ APPENDIX",
+                "type": "paragraph",
+                "content": "We hypothesize that adding sentence-level information at the initial representation stage may cause chunk embeddings within the same sentence to become too similar, hindering the model’s ability to learn distinctive patterns and reducing overall classification performance.",
+                "cosine_score": 0.4665376543998718
+            },
+            {
+                "section": "§ APPENDIX",
+                "type": "paragraph",
+                "content": "Table [Ref id=\"tab:backbone ablation\"] shows that BERT outperforms Longformer as the backbone.",
+                "cosine_score": 0.5520876049995422
+            },
+            {
+                "section": "§ APPENDIX",
+                "type": "paragraph",
+                "content": "This result suggests that, after document chunking, the input sequences become relatively short, making it difficult for Longformer to leverage its long-range attention capabilities fully.",
+                "cosine_score": 0.42258042097091675
+            },
+            {
+                "section": "§ CONCLUSION",
+                "type": "paragraph",
+                "content": "Our research results highlight the effectiveness of ChuLo as a robust solution for long document understanding, enabling processing of complex texts in NLP applications.",
+                "cosine_score": 0.6429735422134399
+            }
+        ]
+    },
+    {
+        "question": "How does Docopilot improve upon existing RAG-based methods for document-level multimodal understanding, and what specific techniques contribute to its efficiency?",
+        "avg_cos_score": 0.5111385762691498,
+        "lowest_cos_score": 0.29847481846809387,
+        "intent": [
+            "Descriptive",
+            "Procedural"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "Building on the dataset, we develop a native multimodal model—Docopilot, which can accurately handle document-level dependencies without relying on RAG.",
+                "cosine_score": 0.8391894102096558
+            },
+            {
+                "section": "§ ENHANCED BASELINE FOR DOCUMENT-LEVEL MULTIMODAL UNDERSTANDING",
+                "type": "paragraph",
+                "content": "(1) Multimodal Data Packing. To balance the computational load between the vision model (ViT) and the language model (LLM) while minimizing resource waste caused by padding, we implement a multimodal data-packing strategy.",
+                "cosine_score": 0.4345783591270447
+            },
+            {
+                "section": "§ ENHANCED BASELINE FOR DOCUMENT-LEVEL MULTIMODAL UNDERSTANDING",
+                "type": "paragraph",
+                "content": "(2) Ring Attention. We implement the Ring Attention mechanism to alleviate memory constraints associated with processing long sequences.",
+                "cosine_score": 0.29847481846809387
+            },
+            {
+                "section": "§ ENHANCED BASELINE FOR DOCUMENT-LEVEL MULTIMODAL UNDERSTANDING",
+                "type": "paragraph",
+                "content": "(3) Liger Kernel. To further improve memory and computational efficiency, we integrate the Liger Kernel, a specialized kernel library optimized for large-scale model training.",
+                "cosine_score": 0.35406774282455444
+            },
+            {
+                "section": "§ EXPERIMENTS",
+                "type": "paragraph",
+                "content": "Our Docopilot demonstrates exceptional performance in both medium- and long-context scenarios, while maintaining high accuracy in short-context situations.",
+                "cosine_score": 0.6293825507164001
+            }
+        ]
+    },
+    {
+        "question": "What are the key features of the Doc-750K dataset, and how do they support diverse document-level understanding tasks?",
+        "avg_cos_score": 0.4905074596405029,
+        "lowest_cos_score": 0.37135595083236694,
+        "intent": [
+            "Descriptive",
+            "Comparative"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "This dataset includes diverse document structures, extensive cross-page dependencies, and real question-answer pairs derived from the original documents.",
+                "cosine_score": 0.5965591669082642
+            },
+            {
+                "section": "§ MULTIMODAL DOCUMENT DATASET GENERATION",
+                "type": "paragraph",
+                "content": "(1) Large Scale. It includes a total of 758K question-answer samples, containing 5.2B text tokens and 3.1M images.",
+                "cosine_score": 0.5035392642021179
+            },
+            {
+                "section": "§ MULTIMODAL DOCUMENT DATASET GENERATION",
+                "type": "paragraph",
+                "content": "(2) High Quality. Unlike existing datasets that insert irrelevant questions into documents, we collect real, in-depth question-answer pairs and construct single-page and cross-page questions based on document structure.",
+                "cosine_score": 0.532480776309967
+            },
+            {
+                "section": "§ MULTIMODAL DOCUMENT DATASET GENERATION",
+                "type": "paragraph",
+                "content": "(3) Multimodal. For the document content, we provide not only the conventional interleaved text-image context but also purely rendered image inputs, catering to the needs of different models.",
+                "cosine_score": 0.4486021399497986
+            },
+            {
+                "section": "§ DETAILS OF DATA CONSTRUCTION",
+                "type": "paragraph",
+                "content": "Each format has its advantages and is suitable for different applications. By leveraging both formats, the model can develop complementary capabilities, enhancing its robustness across diverse input types.",
+                "cosine_score": 0.37135595083236694
+            }
+        ]
+    },
+    {
+        "question": "What challenges do current MLLMs face in handling long-context multimodal inputs, and how does Docopilot address these limitations?",
+        "avg_cos_score": 0.5201335191726685,
+        "lowest_cos_score": 0.42331933975219727,
+        "intent": [
+            "Causal",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ RELATED WORK",
+                "type": "paragraph",
+                "content": "Despite these advancements, current MLLMs still face challenges with long-context multimodal inputs. For instance, InternVL 2.0 performs optimally within a token range of up to 8192, constraining its effectiveness in document-level applications.",
+                "cosine_score": 0.639279842376709
+            },
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "Current research on long-content understanding primarily focuses on text-only models, targeting specific retrieval tasks such as 'Needle in a Haystack' (NIAH).",
+                "cosine_score": 0.42357760667800903
+            },
+            {
+                "section": "§ ENHANCED BASELINE FOR DOCUMENT-LEVEL MULTIMODAL UNDERSTANDING",
+                "type": "paragraph",
+                "content": "To address these issues, we have implemented the following strategies: (1) Multimodal Data Packing. (2) Ring Attention. (3) Liger Kernel.",
+                "cosine_score": 0.43483275175094604
+            },
+            {
+                "section": "§ EXPERIMENTS",
+                "type": "paragraph",
+                "content": "Our Docopilot demonstrates exceptional performance in both medium- and long-context scenarios, while maintaining high accuracy in short-context situations.",
+                "cosine_score": 0.679658055305481
+            },
+            {
+                "section": "§ LIMITATIONS",
+                "type": "paragraph",
+                "content": "A key limitation of Doc-750K is its current domain restriction to academic documents. We plan to expand the dataset’s coverage to a broader range of document types.",
+                "cosine_score": 0.42331933975219727
+            }
+        ]
+    },
+    {
+        "question": "How does the quality of the Doc-750K dataset compare to other datasets, and what measures ensure its reliability?",
+        "avg_cos_score": 0.4672700345516205,
+        "lowest_cos_score": 0.3181244730949402,
+        "intent": [
+            "Comparative",
+            "Verificative"
+        ],
+        "evidence": [
+            {
+                "section": "§ MULTIMODAL DOCUMENT DATASET GENERATION",
+                "type": "paragraph",
+                "content": "Compared to these datasets, Doc-750K exhibits greater diversity in proxy tasks and ranks among the largest datasets in terms of QA pair count.",
+                "cosine_score": 0.706764817237854
+            },
+            {
+                "section": "§ DETAILS OF DATA CONSTRUCTION",
+                "type": "paragraph",
+                "content": "(1) Human-Originated Data: QA pairs from OpenReview are derived from human-written discussions, providing high contextual quality.",
+                "cosine_score": 0.4560292959213257
+            },
+            {
+                "section": "§ DETAILS OF DATA CONSTRUCTION",
+                "type": "paragraph",
+                "content": "(2) Structured Tasks: Tasks like abstract writing and paper titling are constructed based on document metadata, following deterministic rules to ensure reliability.",
+                "cosine_score": 0.3181244730949402
+            },
+            {
+                "section": "§ DETAILS OF DATA CONSTRUCTION",
+                "type": "paragraph",
+                "content": "(3) Synthetic QA: We randomly sample and manually review 500 training QA pairs across tasks and 498 of 500 (over 99%) pass quality checks.",
+                "cosine_score": 0.44314202666282654
+            },
+            {
+                "section": "§ EVALUATION DETAILS",
+                "type": "paragraph",
+                "content": "For open-ended QA tasks in MMLongbench-Doc and DocGenome, we utilize GPT-4o to assess the correctness of answers and calculate GPT Accuracy.",
+                "cosine_score": 0.412289559841156
+            }
+        ]
+    },
+    {
+        "question": "What are the main contributions of this work, and how do they advance the field of multimodal document understanding?",
+        "avg_cos_score": 0.5845953941345214,
+        "lowest_cos_score": 0.4603986144065857,
+        "intent": [
+            "Descriptive",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "(1) We develop the first large-scale, high-quality dataset for document-level multimodal understanding, consisting of 758K QA pairs from 3 sources, supporting 9 types of proxy tasks.",
+                "cosine_score": 0.728266179561615
+            },
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "(2) Based on the dataset, we implement Docopilot, a native MLLM designed for document-level understanding without relying on retrieval mechanisms.",
+                "cosine_score": 0.5447133779525757
+            },
+            {
+                "section": "§ EXPERIMENTS",
+                "type": "paragraph",
+                "content": "Through extensive experiments on multiple document-level benchmarks, our method demonstrates performance significantly superior to existing approaches, proving its effectiveness and generality.",
+                "cosine_score": 0.5466824769973755
+            },
+            {
+                "section": "§ CONCLUSIONS",
+                "type": "paragraph",
+                "content": "This work introduced a diverse document-level question-answering dataset that covers complex structures and cross-page dependencies, providing a robust foundation for training and evaluating document understanding models.",
+                "cosine_score": 0.6429163217544556
+            },
+            {
+                "section": "§ LIMITATIONS",
+                "type": "paragraph",
+                "content": "We plan to expand the dataset’s coverage to a broader range of document types and enhance the generalizability of proxy tasks, ensuring wider applicability across diverse domains.",
+                "cosine_score": 0.4603986144065857
+            }
+        ]
+    },
+    {
+        "question": "How does the M-DocSum-Bench evaluate the performance of LVLMs in generating interleaved image-text summaries, and what are the key components of its evaluation framework?",
+        "avg_cos_score": 0.6574968695640564,
+        "lowest_cos_score": 0.6305146217346191,
+        "intent": [
+            "Descriptive",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "M-DocSum-Bench comprises 500 high-quality paper documents from arXiv primarily across six domains, created in or after April 2024, along with human-preference-aligned multimodal interleaved summaries.",
+                "cosine_score": 0.6305146217346191
+            },
+            {
+                "section": "§ M-DOCSUM-BENCH",
+                "type": "paragraph",
+                "content": "To facilitate this Benchmark, we develop an automated framework for constructing interleaved summaries which is subjected to a rigorous development process including cross-validation of human experts.",
+                "cosine_score": 0.6568547487258911
+            },
+            {
+                "section": "§ M-DOCSUM-BENCH",
+                "type": "paragraph",
+                "content": "Subsequently, we propose a fine-grained evaluation method namely M-DocEval. This method centers on three primary dimensions: (1) Textual Content: M-DocEval evaluates the completeness and accuracy of the textual summary. (2) Visual Reference: This dimension assesses the precision and overall effectiveness of image referencing. (3) Instruction Following: This metric evaluates how well the model follows instructions.",
+                "cosine_score": 0.7079839706420898
+            },
+            {
+                "section": "§ EXPERIMENTS & ANALYSIS",
+                "type": "paragraph",
+                "content": "Experiments with leading LVLMs reveal a significant performance gap compared to humans, highlighting challenges in maintaining coherence and integrating information in long interleaved contexts.",
+                "cosine_score": 0.6346341371536255
+            }
+        ]
+    },
+    {
+        "question": "What are the main challenges faced by LVLMs when summarizing long and complex interleaved image-text documents, and how does M-DocSum-7B address these challenges?",
+        "avg_cos_score": 0.39904412627220154,
+        "lowest_cos_score": 0.27789944410324097,
+        "intent": [
+            "Causal",
+            "Procedural"
+        ],
+        "evidence": [
+            {
+                "section": "§ INTRODUCTION",
+                "type": "paragraph",
+                "content": "The evaluation results reveal a significant gap between the document summarization capabilities of LVLMs and humans.",
+                "cosine_score": 0.6788797378540039
+            },
+            {
+                "section": "§ TRAINING",
+                "type": "paragraph",
+                "content": "We train the model for one epoch on the training set using 64 H800 GPUs, configuring all components except the ViT to be trainable.",
+                "cosine_score": 0.2983880639076233
+            },
+            {
+                "section": "§ TRAINING",
+                "type": "paragraph",
+                "content": "In this stage, we introduce a novel method for constructing preference data. By conducting a second-stage DPO training on this data, we can further enhance the performance and robustness of the model.",
+                "cosine_score": 0.27789944410324097
+            },
+            {
+                "section": "§ EXPERIMENTS & ANALYSIS",
+                "type": "paragraph",
+                "content": "Open-source models show that overall scores increase with model parameter size, with the Qwen2.5 series outperforming the Qwen2 series.",
+                "cosine_score": 0.341009259223938
+            }
+        ]
+    },
+    {
+        "question": "How does the two-stage training approach used in M-DocSum-7B contribute to its superior performance compared to other models, and what specific techniques were employed during each stage?",
+        "avg_cos_score": 0.6363940834999084,
+        "lowest_cos_score": 0.4246925711631775,
+        "intent": [
+            "Procedural",
+            "Comparative"
+        ],
+        "evidence": [
+            {
+                "section": "§ TRAINING",
+                "type": "paragraph",
+                "content": "During this stage, our primary goal is to enhance the accuracy and comprehensiveness of the model in extracting key points for summary generation, while ensuring that the referenced images are appropriate and well-structured.",
+                "cosine_score": 0.4246925711631775
+            },
+            {
+                "section": "§ TRAINING",
+                "type": "paragraph",
+                "content": "In this stage, we introduce a novel method for constructing preference data. By conducting a second-stage DPO training on this data, we can further enhance the performance and robustness of the model.",
+                "cosine_score": 0.5306638479232788
+            },
+            {
+                "section": "§ EXPERIMENTS & ANALYSIS",
+                "type": "paragraph",
+                "content": "M-DocSum-7B outperforms all open-source models in both text and image overall evaluations.",
+                "cosine_score": 0.770322322845459
+            },
+            {
+                "section": "§ CONCLUSION",
+                "type": "paragraph",
+                "content": "Finally, a strong summarization baseline, M-DocSum-7B, is developed using a progressive two-stage training approach (instruction-tuning and DPO).",
+                "cosine_score": 0.8198975920677185
+            }
+        ]
+    },
+    {
+        "question": "What insights do the ablation studies provide regarding the robustness of LVLMs in handling shuffled image orders and missing abstracts, and how does M-DocSum-7B perform under these conditions?",
+        "avg_cos_score": 0.46753472834825516,
+        "lowest_cos_score": 0.36969470977783203,
+        "intent": [
+            "Analytical",
+            "Evaluative"
+        ],
+        "evidence": [
+            {
+                "section": "§ ABLATION",
+                "type": "paragraph",
+                "content": "A fundamental hypothesis is that models should primarily rely on the semantic association between images and text rather than the positional arrangement of images.",
+                "cosine_score": 0.4131709635257721
+            },
+            {
+                "section": "§ ABLATION",
+                "type": "paragraph",
+                "content": "As shown in Figure [Ref id=\"fig:ablation\"](a), overall, closed-source models or larger models exhibit lower sensitivity to image position, with performance decline rates all below 17.7%.",
+                "cosine_score": 0.46659255027770996
+            },
+            {
+                "section": "§ ABLATION",
+                "type": "paragraph",
+                "content": "Furthermore, experimental results demonstrate that effective first-stage training is essential, if second-stage training is conducted directly, the model's decline rates actually increase.",
+                "cosine_score": 0.36969470977783203
+            },
+            {
+                "section": "§ ABLATION",
+                "type": "paragraph",
+                "content": "With the second stage of training, M-DocSum-7B exhibits even greater robustness.",
+                "cosine_score": 0.6206806898117065
+            }
+        ]
+    },
+    {
+        "question": "How does the M-DocSum-Bench dataset ensure the quality and reliability of its summaries, and what role do human experts play in this process?",
+        "avg_cos_score": 0.47746945172548294,
+        "lowest_cos_score": 0.3825860619544983,
+        "intent": [
+            "Descriptive",
+            "Verificative"
+        ],
+        "evidence": [
+            {
+                "section": "§ M-DOCSUM-BENCH",
+                "type": "paragraph",
+                "content": "We introduce Multi-roll Data Verification, a semi-automatic quality control process combining LLMs and human expertise to ensure high benchmark quality.",
+                "cosine_score": 0.5242410898208618
+            },
+            {
+                "section": "§ M-DOCSUM-BENCH",
+                "type": "paragraph",
+                "content": "Following LLM validation, domain experts conduct thorough reviews, spending at least 20 minutes on each document to correct any hallucinations or semantic distortions.",
+                "cosine_score": 0.47665634751319885
+            },
+            {
+                "section": "§ M-DOCSUM-BENCH",
+                "type": "paragraph",
+                "content": "Additionally, annotators cross-check each other’s work, with primary reviewer resolving any disagreements to maintain consistency.",
+                "cosine_score": 0.3825860619544983
+            },
+            {
+                "section": "§ CONCLUSION",
+                "type": "paragraph",
+                "content": "A fine-grained evaluation method M-DocEval is proposed to assess textual content, visual reference accuracy, and instruction following ability, leveraging a powerful LLM for reliable and consistent results.",
+                "cosine_score": 0.5263943076133728
+            }
+        ]
+    }
+]
